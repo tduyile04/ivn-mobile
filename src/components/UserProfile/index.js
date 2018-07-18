@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import { Container, Content } from 'native-base';
+import { StyleSheet } from 'react-native';
 
 import Listings from '../../shared-components/Listings';
-import CoverImage from './CoverImage';
+import CoverImage from '../../shared-components/CoverImage';
 import UserDetails from './UserDetails';
 import UserActions from './UserActions';
 import ScrollableTabs from './ScrollableTabs';
 
 export default class UserProfile extends Component {
-
   render() {
     return (
       <Container style={styles.container}>
         <Content>
-          <CoverImage />
+          <CoverImage 
+            sourceUri='http://www.signalng.com/wp-content/uploads/president-buhari-meets-president-francoise-hollande-at-elysee-1.jpg' 
+            coverImageStyle={styles.coverImageStyle} 
+          />
           <UserDetails />
-          <Listings />
+          <Listings followers={21098} following={50} endorsements={19205} />
           <UserActions />
           <ScrollableTabs />
         </Content>
@@ -24,8 +27,12 @@ export default class UserProfile extends Component {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  coverImageStyle: {
+    width: '100%',
+    height: 76,
   }
-}
+});

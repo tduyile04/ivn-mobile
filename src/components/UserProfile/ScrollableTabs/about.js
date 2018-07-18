@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, View, Text } from 'native-base';
+import { StyleSheet } from 'react-native';
 
 import HorizontalLine from '../../../shared-components/HorizontalLine';
 
@@ -47,7 +48,7 @@ const About = () => {
   );
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     marginTop: 30,
     paddingLeft: 25,
@@ -77,6 +78,6 @@ const styles = {
     fontFamily: 'raleway-regular',
     fontSize: 14,
   }
-}
+});
 
 export default About;

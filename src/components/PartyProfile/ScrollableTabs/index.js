@@ -1,8 +1,9 @@
 import React from 'react';
 import { Container, Text, Tab, Tabs } from 'native-base';
-import { StyleSheet } from 'react-native';
 
 import About from './about';
+import Manifesto from './manifesto';
+import Members from './members';
 
 const ScrollableTabs = () => {
   return (
@@ -11,18 +12,18 @@ const ScrollableTabs = () => {
         <Tab heading="About" activeTextStyle={styles.activeTextStyle} >
           <About />
         </Tab>
-        <Tab heading="Posts" activeTextStyle={styles.activeTextStyle}>
-          <Text>Hello there 2</Text>
+        <Tab heading="Maifesto" activeTextStyle={styles.activeTextStyle}>
+          <Manifesto />
         </Tab>
-        <Tab heading="Questions" activeTextStyle={styles.activeTextStyle}>
-          <Text>Hello there 3</Text>
+        <Tab heading="Members" activeTextStyle={styles.activeTextStyle}>
+          <Members />
         </Tab>
       </Tabs>
     </Container>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     marginTop: 30,
     backgroundColor: 'transparent'
@@ -35,6 +36,6 @@ const styles = StyleSheet.create({
     fontFamily: 'raleway-bold',
     backgroundColor: 'transparent'
   }
-});
+}
 
 export default ScrollableTabs;

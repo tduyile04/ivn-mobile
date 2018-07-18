@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Button, Icon } from 'native-base';
+import { StyleSheet } from 'react-native';
 
 const UserActions = () => {
   return (
@@ -16,9 +17,7 @@ const UserActions = () => {
   );
 }
 
-export default UserActions;
-
-const styles = {
+const styles = StyleSheet.create({
   actionSection: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -62,4 +61,6 @@ const styles = {
     marginRight: -11,
     fontSize: 18,
   }
-}
+});
+
+export default UserActions;

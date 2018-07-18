@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Font, AppLoading } from 'expo';
-import UserProfile from './src/components/UserProfile'
+import UserProfile from './src/components/UserProfile';
+import PartyProfile from './src/components/PartyProfile';
 
 export default class App extends React.Component {
   state = {
@@ -21,7 +22,7 @@ export default class App extends React.Component {
     if(!this.state.ready) return <AppLoading />;
     return (
         <View style={styles.container}>
-            <UserProfile />
+            <PartyProfile />
         </View> 
       )
   }
