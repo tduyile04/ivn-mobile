@@ -7,7 +7,7 @@ import UserDetails from './UserDetails';
 import UserActions from './UserActions';
 import ScrollableTabs from './ScrollableTabs';
 
-export default class Profile extends Component {
+export default class UserProfile extends Component {
 
   render() {
     return (
