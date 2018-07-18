@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Font, AppLoading } from 'expo';
+import Profile from './src/components/Profile'
 
 export default class App extends React.Component {
   state = {
@@ -20,7 +21,7 @@ export default class App extends React.Component {
     if(!this.state.ready) return <AppLoading />;
     return (
         <View style={styles.container}>
-            <Text style={{ fontFamily: 'raleway-bold', fontSize: 56 }}>Hello world</Text>
+            <Profile />
         </View> 
       )
   }
