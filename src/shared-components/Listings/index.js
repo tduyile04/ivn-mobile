@@ -1,30 +1,42 @@
 import React from 'react';
-import { View , Text } from 'react-native';
+import { View , Text } from 'native-base';
+import { StyleSheet } from 'react-native';
 
-const Listings = () => {
+const Listings = ({followers, following, endorsements, members}) => {
     return (
       <View style={styles.secondaryInfo}>
           <View>
-            <Text style={styles.count}>21,098</Text>
+            <Text style={styles.count}>{followers}</Text>
             <Text style={styles.countTitle}>Followers</Text>
           </View>
           <View>
-            <Text style={styles.count}>50</Text>
+            <Text style={styles.count}>{following}</Text>
             <Text style={styles.countTitle}>Following</Text>
           </View>
-          <View>
-            <Text style={styles.count}>19,205</Text>
-            <Text style={styles.countTitle}>Endorsements</Text>
-          </View>
+          {
+            endorsements && (
+              <View>
+                <Text style={styles.count}>{endorsements}</Text>
+                <Text style={styles.countTitle}>Endorsements</Text>
+              </View>
+            )
+          }
+          {
+            members && (
+              <View>
+                <Text style={styles.count}>{members}</Text>
+                <Text style={styles.countTitle}>Members</Text>
+              </View>
+            )
+          }
       </View>
     );
 }
 
-const styles = {
+const styles = StyleSheet.create({
     secondaryInfo: {
       flexDirection: 'row',
       justifyContent: 'space-around',
-      marginTop: 40,
       width: "90%"
     },
     count: {
@@ -37,6 +49,6 @@ const styles = {
       fontFamily: 'raleway-regular',
       color: "#3F3F3F",
     }
-}
+});
 
 export default Listings;

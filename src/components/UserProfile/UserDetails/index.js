@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { Text, View } from 'native-base';
 
 const UserDetails = () => {
@@ -30,9 +30,7 @@ const UserDetails = () => {
   );
 }
 
-export default UserDetails;
-
-const styles = {
+const styles = StyleSheet.create({
   content: {
     paddingLeft: 25,
     paddingRight: 25,
@@ -69,6 +67,7 @@ const styles = {
   },
   partyInfo: {
     marginLeft: 7,
+    marginBottom: 40,
   },
   partyName: {
     fontSize: 11,
@@ -82,4 +81,6 @@ const styles = {
     fontFamily: 'raleway-regular',
     color: "#3F3F3F",
   },
-}
+});
+
+export default UserDetails; 

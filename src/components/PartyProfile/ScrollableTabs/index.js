@@ -2,6 +2,8 @@ import React from 'react';
 import { Container, Text, Tab, Tabs } from 'native-base';
 
 import About from './about';
+import Manifesto from './manifesto';
+import Members from './members';
 
 const ScrollableTabs = () => {
   return (
@@ -10,11 +12,11 @@ const ScrollableTabs = () => {
         <Tab heading="About" activeTextStyle={styles.activeTextStyle} >
           <About />
         </Tab>
-        <Tab heading="Posts" activeTextStyle={styles.activeTextStyle}>
-          <Text>Hello there 2</Text>
+        <Tab heading="Maifesto" activeTextStyle={styles.activeTextStyle}>
+          <Manifesto />
         </Tab>
-        <Tab heading="Questions" activeTextStyle={styles.activeTextStyle}>
-          <Text>Hello there 3</Text>
+        <Tab heading="Members" activeTextStyle={styles.activeTextStyle}>
+          <Members />
         </Tab>
       </Tabs>
     </Container>
