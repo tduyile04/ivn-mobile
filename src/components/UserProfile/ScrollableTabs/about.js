@@ -6,8 +6,8 @@ import HorizontalLine from '../../../shared-components/HorizontalLine';
 
 const About = () => {
   return (
-    <Container style={styles.container}>
-      <View style={styles.bio}>
+    <Container>
+      <View style={styles.card}>
         <Text style={styles.title}>Bio</Text>
         <Text style={styles.description}>
           See what I’m getting at here? You have the right to take any piece 
@@ -49,21 +49,16 @@ const About = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 30,
-    paddingLeft: 25,
-    paddingRight: 25,
-  }, 
   title: {
     fontFamily: 'raleway-bold',
     fontSize: 14,
     color: '#628AFF',
     marginBottom: 15
   },
-  bio: {
-  },
   card: {
     marginTop: 20,
+    paddingLeft: 25,
+    paddingRight: 25,
   },
   position: {
     fontFamily: 'raleway-bold',

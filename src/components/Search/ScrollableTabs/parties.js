@@ -4,17 +4,18 @@ import { StyleSheet, Image } from 'react-native';
 import HorizontalLine from '../../../shared-components/HorizontalLine';
 import { UnfollowButton, FollowButton } from '../../../shared-components/Buttons';
 
-const Members = () => {
+const Parties = () => {
   return (
     <Container>
       <View style={styles.card}>
         <Image
           style={styles.profileImage}
-          source={{uri: 'https://78.media.tumblr.com/918336515ad76e6fbbb9f1b43a77433d/tumblr_ojqofutSn41rkih50o1_500.jpg'}}
+          source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
+          resizeMode='contain'
         />
         <View style={styles.items}>
-          <Text style={styles.title}>Anthony Franklin</Text>
-          <Text style={styles.handle}>@anthony_franklink</Text>
+          <Text style={styles.handle}>@pdp</Text>
+          <Text style={styles.title}>People’s Democratic Party</Text>
           <FollowButton />
         </View>
       </View>
@@ -22,11 +23,12 @@ const Members = () => {
       <View style={styles.card}>
         <Image
           style={styles.profileImage}
-          source={{uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg'}}
+          source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
+          resizeMode='contain'
         />
         <View style={styles.items}>
-          <Text style={styles.title}>Jessicca Alli</Text>
-          <Text style={styles.handle}>@jessicca_alli</Text>
+          <Text style={styles.handle}>@pdpofficial</Text>
+          <Text style={styles.title}>The official account of PDP</Text>
           <UnfollowButton />
         </View>
       </View>
@@ -34,12 +36,13 @@ const Members = () => {
       <View style={styles.card}>
         <Image
           style={styles.profileImage}
-          source={{uri: 'https://i.pinimg.com/736x/19/a8/6c/19a86c6673349bb21910dd4b3bb18e68.jpg'}}
+          source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
+          resizeMode='contain'
         />
         <View style={styles.items}>
-          <Text style={styles.title}>Daniel Smith</Text>
-          <Text style={styles.handle}>@daniel_smith</Text>
-          <FollowButton />
+          <Text style={styles.handle}>@pdpfanpage</Text>
+          <Text style={styles.title}>Fan page of PDP</Text>
+          <UnfollowButton />
         </View>
       </View>
       <HorizontalLine />
@@ -60,19 +63,18 @@ const styles = StyleSheet.create({
   profileImage: {
     width: 40,
     height: 40,
-    borderRadius: 20,
   },
   userIcon: {
     fontSize: 14,
     color: '#FFFFFF'
   },
-  followAction: {
+  followText: {
     fontFamily: 'raleway-bold',
     fontSize: 13,
     color: '#FFFFFF',
     marginLeft: -5
   },
-  followActionButton: {
+  followButton: {
     height: 30,
     width: 114,
     backgroundColor: '#628AFF',
@@ -82,17 +84,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 13,
   },
+  unfollowText: {
+    fontFamily: 'raleway-bold',
+    fontSize: 13,
+    color: '#4F5764',
+    textAlign: 'center'
+  },
+  unfollowButton: {
+    height: 30,
+    width: 114,
+    borderWidth: 1,
+    borderColor: '#E5E5E5',
+    justifyContent: 'center',
+    borderRadius: 3,
+    marginTop: 13,
+  },
   title: {
     fontFamily: 'raleway-bold',
-    fontSize: 16,
-    color: '#3F3F3F'
+    fontSize: 13,
+    color: '#3F3F3F',
+    marginTop: 8,
   },
   handle: {
     fontFamily: 'raleway-regular',
     fontSize: 13,
     color: '#3F3F3F',
-    marginTop: 3,
   }
 });
 
-export default Members;
+export default Parties;
