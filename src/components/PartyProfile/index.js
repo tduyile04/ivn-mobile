@@ -5,6 +5,7 @@ import { StyleSheet, Image } from 'react-native';
 import CoverImage from '../../shared-components/CoverImage';
 import Listings from '../../shared-components/Listings';
 import ScrollableTabs from './ScrollableTabs';
+import { FollowButton } from '../../shared-components/Buttons';
 
 const PartyProfile = () => {
   return (
@@ -26,10 +27,7 @@ const PartyProfile = () => {
           <Text style={styles.partyHandle}>@pdp</Text>
           <Listings followers={21098} following={50} members={1050} />
           <View style={styles.followActionView}>
-            <Button iconLeft style={styles.followActionButton}>
-              <Icon type="Feather" name='user-plus' style={styles.userIcon} />
-              <Text style={styles.followAction}>Follow</Text>
-            </Button>
+            <FollowButton />
           </View>
         </View>
         <ScrollableTabs />
@@ -81,25 +79,6 @@ const styles = StyleSheet.create({
   },
   followActionView: {
     marginTop: 32
-  },
-  followActionButton: {
-    height: 30,
-    width: 114,
-    backgroundColor: '#628AFF',
-    borderRadius: 3,
-    paddingLeft: 10,
-    paddingRight: 10,
-    alignItems: 'center'
-  },
-  userIcon: {
-    fontSize: 14,
-    color: '#FFFFFF'
-  },
-  followAction: {
-    fontFamily: 'raleway-bold',
-    fontSize: 13,
-    color: '#FFFFFF',
-    marginLeft: -5
   },
 });
 

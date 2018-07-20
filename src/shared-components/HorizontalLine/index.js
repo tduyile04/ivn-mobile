@@ -8,8 +8,7 @@ const styles = StyleSheet.create({
   line: {
     borderBottomColor: '#ECECEC',
     borderBottomWidth: 1,
-    marginLeft: -100,
-    marginRight: -100,
+    alignSelf: 'stretch',
     marginTop: 20,
   }
 });
