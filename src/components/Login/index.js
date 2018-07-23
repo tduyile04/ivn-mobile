@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Text, Icon, Form, Item, Input, Button, View } from 'native-base';
 import { StyleSheet } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 const Login = () => {
   return (
@@ -23,7 +24,7 @@ const Login = () => {
       <View style={styles.bottom}>
         <View style={{flexDirection: 'row'}}> 
           <Text style={styles.text}>Don't have an account? 
-            <Text style={[styles.text, styles.signUpText]} onPress={()=> alert('You clicked me')}> Sign up</Text>
+            <Text style={[styles.text, styles.signUpText]} onPress={()=> Actions.signup()}> Sign up</Text>
           </Text>
         </View>
         <Text style={[styles.text, styles.recover]}>Recover password</Text>
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 45,
     paddingRight: 45,
-    marginTop: 100,
+    paddingTop: 100,
   },
   title: {
     fontFamily: 'raleway-bold',

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon } from 'native-base';
+
 export default class FooterTabs extends Component {
   render() {
     return (
-      <Container style={{position: 'absolute', bottom: 200}}>
+      <Container>
         <Header />
         <Content />
         <Footer>

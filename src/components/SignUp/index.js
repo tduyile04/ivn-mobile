@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Text, Icon, Form, Item, Input, Button, View } from 'native-base';
 import { StyleSheet } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 
 const SignUp = () => {
@@ -23,7 +24,7 @@ const SignUp = () => {
       </Form>
       <View style={styles.bottom}>
         <Text style={styles.text}>Have an account? 
-          <Text style={[styles.text, styles.logInText]} onPress={()=> alert('You clicked me')}> Log in</Text>
+          <Text style={[styles.text, styles.logInText]} onPress={()=> Actions.login()}> Log in</Text>
         </Text>
       </View>
     </Container>
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 45,
     paddingRight: 45,
-    marginTop: 100,
+    paddingTop: 100,
   },
   title: {
     fontFamily: 'raleway-bold',
