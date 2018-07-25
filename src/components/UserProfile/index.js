@@ -7,6 +7,7 @@ import CoverImage from '../../shared-components/CoverImage';
 import UserDetails from './UserDetails';
 import UserActions from './UserActions';
 import ScrollableTabs from './ScrollableTabs';
+import Footer from '../../shared-components/Footer';
 
 export default class UserProfile extends Component {
   render() {
@@ -22,6 +23,7 @@ export default class UserProfile extends Component {
           <UserActions />
           <ScrollableTabs />
         </Content>
+        <Footer />
       </Container>
     );
   }

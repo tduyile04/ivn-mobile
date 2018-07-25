@@ -18,13 +18,13 @@ const SignUp = () => {
           <Icon active name='lock' />
           <Input placeholder='Password' />
         </Item>
-        <Button block dark style={styles.button}>
+        <Button block dark style={styles.button} onPress={() => Actions.home()}>
           <Text style={styles.buttonTitle}>Sign up</Text>
         </Button>
       </Form>
       <View style={styles.bottom}>
         <Text style={styles.text}>Have an account? 
-          <Text style={[styles.text, styles.logInText]} onPress={()=> Actions.login()}> Log in</Text>
+          <Text style={[styles.text, styles.logInText]} onPress={() => Actions.login()}> Log in</Text>
         </Text>
       </View>
     </Container>
