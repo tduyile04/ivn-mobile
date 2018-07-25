@@ -6,6 +6,7 @@ import Header from '../../shared-components/Header';
 import SideBar from '../../shared-components/SideBar';
 import Footer from '../../shared-components/Footer';
 import ScrollableTabs from './ScrollableTabs';
+import FloatingButton from '../../shared-components/FloatingButton';
 
 class Feed extends Component {
   render() {
@@ -14,6 +15,7 @@ class Feed extends Component {
         <Header />
         <ScrollableTabs />
         <Footer />
+        <FloatingButton />
       </Container>
     );
   };
