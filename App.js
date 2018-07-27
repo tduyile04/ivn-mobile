@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
 import { Font, AppLoading } from 'expo';
 import { Router, Scene } from 'react-native-router-flux';
 
@@ -9,6 +8,7 @@ import Search from './src/components/Search';
 import Login from './src/components/Login';
 import SignUp from './src/components/SignUp';
 import Home from './src/components/Home';
+import Post from './src/components/Post';
 
 export default class App extends React.Component {
   state = {
@@ -35,6 +35,7 @@ export default class App extends React.Component {
               key='login'
               component={Login}
               hideNavBar
+              initial
             />
             <Scene 
               key='signup'
@@ -59,9 +60,12 @@ export default class App extends React.Component {
             <Scene 
               key='home'
               component={Home}
-              title='Timeline'
               hideNavBar
-              initial
+            />
+            <Scene
+              key='post'
+              component={Post}
+              hideNavBar
             />
           </Scene>
         </Router>

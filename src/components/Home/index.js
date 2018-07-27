@@ -12,7 +12,7 @@ class Feed extends Component {
   render() {
     return (
       <Container> 
-        <Header />
+        <Header menu />
         <ScrollableTabs />
         <Footer />
         <FloatingButton />
