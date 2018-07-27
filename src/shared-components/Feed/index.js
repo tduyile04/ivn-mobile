@@ -1,7 +1,9 @@
 import React from 'react';
 import { Content, Card, View, Text, Button, Icon } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 import { StyleSheet, Image } from 'react-native';
 import HorizontalLine from '../HorizontalLine';
+import { LikeButton, LikedButton } from '../../shared-components/Buttons';
 
 const Feed = () => {
   return (
@@ -16,7 +18,7 @@ const Feed = () => {
             <View style={styles.info}>
               <Text style={styles.name}>Emma Simpson</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText}>PDP</Text>
+              <Text style={styles.blueText} onPress={() => Actions.partyProfile()}>PDP</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>12m</Text>
             </View>
@@ -39,15 +41,13 @@ const Feed = () => {
                   <Text style={styles.tagText}>RealChange</Text>
                 </Button>
               </View>
-              <View style={styles.likeSection}>
-                <Icon name='heart' type='MaterialCommunityIcons' style={styles.heart} />
-              </View>
+              <LikedButton />
             </View>
             <View style={styles.postInfo}>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>7,541 Likes</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText}>212 Comments</Text>
+              <Text style={styles.blueText} onPress={() => Actions.post()}>212 Comments</Text>
             </View>
           </View>
         </View>
@@ -65,7 +65,7 @@ const Feed = () => {
             <View style={styles.info}>
               <Text style={styles.name}>Juan Hansen</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText}>APC</Text>
+              <Text style={styles.blueText} onPress={() => Actions.partyProfile()}>APC</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>30m</Text>
             </View>
@@ -82,15 +82,13 @@ const Feed = () => {
                   <Text style={styles.tagText}>RealChange</Text>
                 </Button>
               </View>
-              <View style={styles.likeSection}>
-                <Icon name='heart-outline' type='MaterialCommunityIcons' style={styles.numbHeart} />
-              </View>
+              <LikeButton />
             </View>
             <View style={styles.postInfo}>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>7,541 Likes</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText}>212 Comments</Text>
+              <Text style={styles.blueText} onPress={() => Actions.post()}>212 Comments</Text>
             </View>
           </View>
         </View>
@@ -117,7 +115,8 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     width: null,
     height: 182,
-    marginTop: 12
+    marginTop: 12,
+    marginBottom: 8,
   },
   items: {
     marginLeft: 10,
@@ -144,7 +143,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 18,
     color: '#000',
-    marginTop: 8,
     fontFamily: 'SFProText-regular',
   },
   tagSection: {
@@ -171,7 +169,7 @@ const styles = StyleSheet.create({
     width: 30
   },
   numbHeart: {
-    color: '#555',
+    color: '#333',
     height: 30,
     width: 30
   },

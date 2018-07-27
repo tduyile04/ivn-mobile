@@ -5,7 +5,7 @@ import { StyleSheet } from 'react-native';
 const SearchBar = () => {
   return (
     <Item style={styles.SearchBar}> 
-      <Input style={styles.input} placeholder='Search' placeholderTextColor="#3F3F3F"/>
+      <Input style={styles.input} placeholder='Search' placeholderTextColor="#C7C7CB"/>
       <Icon active name='search' style={styles.icon} />
     </Item>
   );

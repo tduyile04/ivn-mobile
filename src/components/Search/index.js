@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 
 import SearchBar from './SearchBar';
 import ScrollableTabs from './ScrollableTabs';
+import Footer from '../../shared-components/Footer';
 
 const Search = () => {
   return (
@@ -12,6 +13,7 @@ const Search = () => {
         <SearchBar />
         <ScrollableTabs />
       </Content>
+      <Footer />
     </Container>
   )
 }

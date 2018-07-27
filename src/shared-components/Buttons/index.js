@@ -4,27 +4,31 @@ import { Button, Text, View, Icon } from 'native-base';
 
 // Pass in a buttonStyle props to override the existing button style
 
-export const UnfollowButton = ({buttonStyle}) => {
-  return (
-    <View>
-      <Button bordered style={[styles.unfollowButton, buttonStyle]} >
-        <Text style={styles.unfollowText}>Unfollow</Text>
-      </Button>
-    </View>
-  );
-}
+export const UnfollowButton = ({buttonStyle}) => 
+  <View>
+    <Button bordered style={[styles.unfollowButton, buttonStyle]} >
+      <Text style={styles.unfollowText}>Unfollow</Text>
+    </Button>
+  </View>;
 
-export const FollowButton = ({buttonStyle}) => {
-  return (
-    <View>
-      <Button iconLeft style={[styles.followButton, buttonStyle]} >
-        <Icon type="Feather" name='user-plus' style={styles.userIcon} />
-        <Text style={styles.followText}>Follow</Text>
-      </Button>
-    </View>
-  );
-}
+export const FollowButton = ({buttonStyle}) => 
+  <View>
+    <Button iconLeft style={[styles.followButton, buttonStyle]} >
+      <Icon type="Feather" name='user-plus' style={styles.userIcon} />
+      <Text style={styles.followText}>Follow</Text>
+    </Button>
+  </View>;
 
+export const LikedButton = () => 
+  <View style={styles.likeSection}>
+    <Icon name='heart' type='MaterialCommunityIcons' style={styles.heart} />
+  </View>;
+
+export const LikeButton = () => 
+  <View style={styles.likeSection}>
+    <Icon name='heart-outline' type='MaterialCommunityIcons' style={styles.numbHeart} />
+  </View>;
+   
 const styles = StyleSheet.create({
   unfollowText: {
     fontFamily: 'raleway-bold',
@@ -60,5 +64,19 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     alignItems: 'center',
     marginTop: 13,
+  },
+  likeSection:{
+    width: '10%',
+    marginTop: 20,
+  },
+  heart: {
+    color: '#FF6D6D',
+    height: 30,
+    width: 30
+  },
+  numbHeart: {
+    color: '#333',
+    height: 30,
+    width: 30
   },
 });

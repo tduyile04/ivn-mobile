@@ -6,6 +6,7 @@ import CoverImage from '../../shared-components/CoverImage';
 import Listings from '../../shared-components/Listings';
 import ScrollableTabs from './ScrollableTabs';
 import { FollowButton } from '../../shared-components/Buttons';
+import Footer from '../../shared-components/Footer';
 
 const PartyProfile = () => {
   return (
@@ -32,6 +33,7 @@ const PartyProfile = () => {
         </View>
         <ScrollableTabs />
       </Content>
+      <Footer />
     </Container>
   );
 }
