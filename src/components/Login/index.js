@@ -1,36 +1,74 @@
-import React from 'react';
-import { Container, Text, Icon, Form, Item, Input, Button, View } from 'native-base';
-import { StyleSheet } from 'react-native';
+import React, { Component } from 'react';
+import { Container, Text, Icon, Button } from 'native-base';
+import { StyleSheet, TextInput, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-const Login = () => {
-  return (
-    <Container style={styles.container}>
-      <Text style={[styles.text, styles.title]}>Welcome Back!</Text>
-      <Text style={[styles.text, styles.description]}>Sign in to continue</Text>
-      <Form style={styles.form}>
-        <Item>
-          <Icon active name='person' style={styles.icon}/>
-          <Input placeholder='Email or username' placeholderTextColor='#4F5764' style={styles.input}/>
-        </Item>
-        <Item style={styles.passwordSection}>
-          <Icon active name='lock'/>
-          <Input placeholder='Password' type='password' placeholderTextColor='#4F5764' style={styles.input} secureTextEntry />
-        </Item>
-        <Button block dark style={styles.button} onPress={() => Actions.home()}>
-          <Text style={styles.buttonTitle}>Login</Text>
-        </Button>
-      </Form>
-      <View style={styles.bottom}>
-        <View style={{flexDirection: 'row'}}> 
-          <Text style={styles.text}>Don't have an account? 
-            <Text style={[styles.text, styles.signUpText]} onPress={()=> Actions.signup()}> Sign up</Text>
-          </Text>
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: ''
+    }
+    this.input = {}
+  }
+
+  handleLogin = async () => {
+    const { email, password } = this.state;
+    await this.props.login({ email, password });
+    return this.setState(() => ({ email: '', password: '' }))
+  }
+
+  updateInputField = (value, field)  => {
+    return this.setState(() => ({ [field]: value }));
+  }
+
+  render() {
+    return (
+      <Container style={styles.container}>
+        <Text style={[styles.text, styles.title]}>Welcome Back!</Text>
+        <Text style={[styles.text, styles.description]}>Sign in to continue</Text>
+
+        <View style={styles.form}>
+          <View>
+            <Icon active name='person' style={styles.icon}/>
+            <TextInput 
+              ref={value => this.input["email"] = value}
+              placeholder='Email or username'
+              name="email" 
+              placeholderTextColor='#4F5764' 
+              style={styles.input}
+              value={this.state.email}
+              onChangeText={text => this.updateInputField(text, 'email')} />
+          </View>
+          <View style={styles.passwordSection}>
+            <Icon active name='lock'/>
+            <TextInput
+              ref={value => this.input["password"] = value}
+              placeholder='Password' 
+              type='password'
+              name="password"
+              placeholderTextColor='#4F5764' 
+              style={styles.input}
+              value={this.state.password}
+              onChangeText={text => this.updateInputField(text, 'password')} />
+              />
+          </View>
+          <Button block dark style={styles.button} onPress={this.handleLogin}>
+            <Text style={styles.buttonTitle}>Login</Text>
+          </Button>
         </View>
-        <Text style={[styles.text, styles.recover]}>Recover password</Text>
-      </View>
-    </Container>
-  );
+        <View style={styles.bottom}>
+          <View style={{flexDirection: 'row'}}> 
+            <Text style={styles.text}>Don't have an account? 
+              <Text style={[styles.text, styles.signUpText]} onPress={()=> Actions.signup()}> Sign up</Text>
+            </Text>
+          </View>
+          <Text style={[styles.text, styles.recover]}>Recover password</Text>
+        </View>
+      </Container>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
