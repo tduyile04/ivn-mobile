@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'native-base';
 import { StyleSheet } from 'react-native';
 
-const HorizontalLine = () => <View  style={styles.line}/>;
+const HorizontalLine = ({lineStyle}) => <View  style={[styles.line, lineStyle]}/>;
 
 const styles = StyleSheet.create({
   line: {

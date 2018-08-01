@@ -16,7 +16,7 @@ const SignUp = () => {
         </Item>
         <Item style={styles.passwordSection}>
           <Icon active name='lock' />
-          <Input placeholder='Password' />
+          <Input placeholder='Password' secureTextEntry />
         </Item>
         <Button block dark style={styles.button} onPress={() => Actions.home()}>
           <Text style={styles.buttonTitle}>Sign up</Text>

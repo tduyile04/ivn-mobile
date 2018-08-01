@@ -1,6 +1,6 @@
 import React from 'react';
 import { Font, AppLoading } from 'expo';
-import { Router, Scene } from 'react-native-router-flux';
+import { Router, Scene, Drawer } from 'react-native-router-flux';
 
 import UserProfile from './src/components/UserProfile';
 import PartyProfile from './src/components/PartyProfile';
@@ -9,6 +9,7 @@ import Login from './src/components/Login';
 import SignUp from './src/components/SignUp';
 import Home from './src/components/Home';
 import Post from './src/components/Post';
+import SideBar from './src/shared-components/SideBar';
 
 export default class App extends React.Component {
   state = {
@@ -22,6 +23,9 @@ export default class App extends React.Component {
       'raleway-medium': require('./assets/fonts/Raleway-Regular.ttf'),
       'museosans-500': require('./assets/fonts/MuseoSans_500.ttf'),
       'SFProText-regular': require('./assets/fonts/SF-Pro-Text-Regular.ttf'),
+      'Roboto': require("native-base/Fonts/Roboto.ttf"),
+      'Roboto_medium': require("native-base/Fonts/Roboto_medium.ttf"),
+      'Ionicons': require("@expo/vector-icons/fonts/Ionicons.ttf"),
     });
     this.setState({ ready: true });
   }
@@ -35,12 +39,12 @@ export default class App extends React.Component {
               key='login'
               component={Login}
               hideNavBar
-              initial
             />
             <Scene 
               key='signup'
               component={SignUp}
               hideNavBar
+              initial
             />
             <Scene 
               key='search'
@@ -57,16 +61,25 @@ export default class App extends React.Component {
               component={PartyProfile}
               hideNavBar
             />
-            <Scene 
-              key='home'
-              component={Home}
-              hideNavBar
-            />
             <Scene
               key='post'
               component={Post}
               hideNavBar
             />
+             <Drawer
+                hideNavBar
+                key="drawer"
+                contentComponent={SideBar}
+                drawerWidth={300}
+                drawerPosition="left"
+                open={false}
+            >
+              <Scene 
+                key='home'
+                component={Home}
+                hideNavBar
+              />
+             </Drawer>
           </Scene>
         </Router>
       );
