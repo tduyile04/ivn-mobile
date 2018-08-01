@@ -15,9 +15,9 @@ const Login = () => {
         </Item>
         <Item style={styles.passwordSection}>
           <Icon active name='lock'/>
-          <Input placeholder='Password' type='password' placeholderTextColor='#4F5764' style={styles.input}/>
+          <Input placeholder='Password' type='password' placeholderTextColor='#4F5764' style={styles.input} secureTextEntry />
         </Item>
-        <Button block dark style={styles.button}>
+        <Button block dark style={styles.button} onPress={() => Actions.home()}>
           <Text style={styles.buttonTitle}>Login</Text>
         </Button>
       </Form>

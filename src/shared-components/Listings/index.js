@@ -2,30 +2,30 @@ import React from 'react';
 import { View , Text } from 'native-base';
 import { StyleSheet } from 'react-native';
 
-const Listings = ({followers, following, endorsements, members}) => {
+const Listings = ({followers, following, endorsements, members, countStyle}) => {
     return (
       <View style={styles.secondaryInfo}>
           <View>
-            <Text style={styles.count}>{followers}</Text>
-            <Text style={styles.countTitle}>Followers</Text>
+            <Text style={[styles.count, countStyle]}>{followers}</Text>
+            <Text style={styles.title}>Followers</Text>
           </View>
           <View>
-            <Text style={styles.count}>{following}</Text>
-            <Text style={styles.countTitle}>Following</Text>
+            <Text style={[styles.count, countStyle]}>{following}</Text>
+            <Text style={styles.title}>Following</Text>
           </View>
           {
             endorsements && (
               <View>
-                <Text style={styles.count}>{endorsements}</Text>
-                <Text style={styles.countTitle}>Endorsements</Text>
+                <Text style={[styles.count, countStyle]}>{endorsements}</Text>
+                <Text style={styles.title}>Endorsements</Text>
               </View>
             )
           }
           {
             members && (
               <View>
-                <Text style={styles.count}>{members}</Text>
-                <Text style={styles.countTitle}>Members</Text>
+                <Text style={[styles.count, countStyle]}>{members}</Text>
+                <Text style={styles.title}>Members</Text>
               </View>
             )
           }
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
       fontFamily: 'raleway-bold',
       color: "#3F3F3F",
     },
-    countTitle: {
+    title: {
       fontSize: 12,
       fontFamily: 'raleway-regular',
       color: "#3F3F3F",
