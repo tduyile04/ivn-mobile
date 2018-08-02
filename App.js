@@ -1,17 +1,21 @@
 import React from 'react';
 import { Font, AppLoading } from 'expo';
 import { Router, Scene, Drawer } from 'react-native-router-flux';
+import { Provider } from 'react-redux';
 
 import UserProfile from './src/components/UserProfile';
 import PartyProfile from './src/components/PartyProfile';
 import Search from './src/components/Search';
-import Login from './src/components/Login';
 import SignUp from './src/components/SignUp';
 import Home from './src/components/Home';
 import Post from './src/components/Post';
 import SideBar from './src/shared-components/SideBar';
 
-export default class App extends React.Component {
+import Login from './src/containers/Login';
+
+import store from './src/store';
+
+class App extends React.Component {
   state = {
     ready: false,
   };
@@ -33,6 +37,7 @@ export default class App extends React.Component {
   render() {
     if(!this.state.ready) return <AppLoading />;
     return (
+      <Provider store={store}>
         <Router>
           <Scene key='root'>
             <Scene 
@@ -66,7 +71,7 @@ export default class App extends React.Component {
               component={Post}
               hideNavBar
             />
-             <Drawer
+            <Drawer
                 hideNavBar
                 key="drawer"
                 contentComponent={SideBar}
@@ -79,9 +84,13 @@ export default class App extends React.Component {
                 component={Home}
                 hideNavBar
               />
-             </Drawer>
+            </Drawer>
           </Scene>
         </Router>
-      );
+      </Provider>
+    );
   }
 }
+
+
+export default App;
