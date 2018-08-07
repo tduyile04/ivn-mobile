@@ -20,7 +20,7 @@ export const login = ({ email, password }) => (dispatch) => {
       dispatch(loginFailure(err.message))
     })
     .catch(err => {
-      dispatch(loginFailure(err.message))
+      dispatch(loginFailure(err))
     })
 }
 

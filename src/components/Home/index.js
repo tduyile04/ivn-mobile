@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { Container, Text, Drawer, View } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { Container } from 'native-base';
+import { connect } from 'react-redux';
 
 import Header from '../../shared-components/Header';
-import SideBar from '../../shared-components/SideBar';
 import Footer from '../../shared-components/Footer';
 import ScrollableTabs from './ScrollableTabs';
 import FloatingButton from '../../shared-components/FloatingButton';
 
-class Feed extends Component {
+class Home extends Component {
+
   render() {
+    const { user } = this.props;
     return (
       <Container> 
         <Header menu />
@@ -21,8 +22,5 @@ class Feed extends Component {
   };
 }
 
-const styles = StyleSheet.create({
+export default Home;
 
-});
-
-export default Feed;
