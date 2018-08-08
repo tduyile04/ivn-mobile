@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Text, Icon, Button } from 'native-base';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { Container, Text, Icon, Form, Item, Input, Button, View } from 'native-base';
+import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 class Login extends Component {
@@ -28,36 +28,31 @@ class Login extends Component {
       <Container style={styles.container}>
         <Text style={[styles.text, styles.title]}>Welcome Back!</Text>
         <Text style={[styles.text, styles.description]}>Sign in to continue</Text>
-
-        <View style={styles.form}>
-          <View>
-            <Icon active name='person' style={styles.icon}/>
-            <TextInput 
-              ref={value => this.input["email"] = value}
-              placeholder='Email or username'
-              name="email" 
-              placeholderTextColor='#4F5764' 
-              style={styles.input}
+        <Form style={styles.form}>
+          <Item>
+            <Icon active name='person-outline' type='MaterialIcons' style={styles.icon} />
+            <Input 
+              placeholder='Email or username' 
+              style={styles.text}
               value={this.state.email}
-              onChangeText={text => this.updateInputField(text, 'email')} />
-          </View>
-          <View style={styles.passwordSection}>
-            <Icon active name='lock'/>
-            <TextInput
-              ref={value => this.input["password"] = value}
+              onChangeText={text => this.updateInputField(text, 'email')}
+            />
+          </Item>
+          <Item style={styles.passwordSection}>
+          <Icon active name='lock-open' type='MaterialIcons' style={styles.icon} />
+            <Input 
               placeholder='Password' 
-              type='password'
-              name="password"
-              placeholderTextColor='#4F5764' 
-              style={styles.input}
+              type='password' 
+              style={styles.text}
               value={this.state.password}
-              onChangeText={text => this.updateInputField(text, 'password')} />
-              />
-          </View>
+              onChangeText={text => this.updateInputField(text, 'password')}
+              secureTextEntry
+            />
+          </Item>
           <Button block dark style={styles.button} onPress={this.handleLogin}>
-            <Text style={styles.buttonTitle}>Login</Text>
+            <Text style={styles.buttonTitle}>LOGIN</Text>
           </Button>
-        </View>
+        </Form>
         <View style={styles.bottom}>
           <View style={{flexDirection: 'row'}}> 
             <Text style={styles.text}>Don't have an account? 
@@ -112,8 +107,8 @@ const styles = StyleSheet.create({
   passwordSection: {
     marginTop: 20
   },
-  input: {
-    color: '#4F5764',
+  icon: {
+    color: '#97A1B3',
   },
   signUpText: {
     fontFamily: 'raleway-bold',
