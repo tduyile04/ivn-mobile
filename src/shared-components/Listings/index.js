@@ -14,7 +14,7 @@ const Listings = ({followers, following, endorsements, members, countStyle}) => 
             <Text style={styles.title}>Following</Text>
           </View>
           {
-            endorsements && (
+            (endorsements || endorsements === 0) && (
               <View>
                 <Text style={[styles.count, countStyle]}>{endorsements}</Text>
                 <Text style={styles.title}>Endorsements</Text>
@@ -22,7 +22,7 @@ const Listings = ({followers, following, endorsements, members, countStyle}) => 
             )
           }
           {
-            members && (
+            (members || members === 0) && (
               <View>
                 <Text style={[styles.count, countStyle]}>{members}</Text>
                 <Text style={styles.title}>Members</Text>
