@@ -12,21 +12,23 @@ export default handleActions({
   [loginPending](state = defaultState) {
     return {
       ...state,
-      loading: true
+      loading: true,
+      error: ''
     }
   },
   [loginSuccess](state = defaultState, { payload: { data } }) {
     return {
       ...state,
       loading: false,
-      user: data.user
+      user: data.data.user,
+      error: ''
     }
   },
-  [loginFailure](state = defaultState, { payload: { error } }) {
+  [loginFailure](state = defaultState, { payload }) {
     return {
       ...state,
       loading: false,
-      error
+      error: payload 
     }
   }
 }, defaultState);

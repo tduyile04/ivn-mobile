@@ -8,7 +8,9 @@ import { login } from '../../actions';
 
 const mapStateToProps = state => ({
   token: state.auth.token,
-  data: state.auth.data
+  data: state.auth.data,
+  error: state.auth.error,
+  loading: state.auth.loading
 })
 
 const mapDispatchToProps = dispatch => ({

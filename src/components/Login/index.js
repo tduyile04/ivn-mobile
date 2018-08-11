@@ -1,33 +1,44 @@
 import React, { Component } from 'react';
 import { Container, Text, Icon, Form, Item, Input, Button, View } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { ActivityIndicator, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-
+import { isLoginCredentialsValid } from '../../utils/Validation';
+import Error from '../../utils/Error'
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      error: []
     }
     this.input = {}
   }
 
   handleLogin = async () => {
     const { email, password } = this.state;
-    await this.props.login({ email, password });
-    return this.setState(() => ({ email: '', password: '' }))
+    const error = isLoginCredentialsValid(email, password)
+    if (error.length > 0) {
+      return this.setState(() => ({ error }))
+    }
+    await this.props.login({ email, password })
+    if (!this.props.error) {
+      return this.setState(() => ({ email: '', password: '' }))
+    }
   }
 
   updateInputField = (value, field)  => {
-    return this.setState(() => ({ [field]: value }));
+    return this.setState(() => ({ [field]: value, error: [] }));
   }
 
   render() {
+    const { error } = this.state;
+    const { loading, error: apiError } = this.props;
     return (
       <Container style={styles.container}>
         <Text style={[styles.text, styles.title]}>Welcome Back!</Text>
         <Text style={[styles.text, styles.description]}>Sign in to continue</Text>
+        <Error validationError={error} apiError={apiError} />
         <Form style={styles.form}>
           <Item>
             <Icon active name='person-outline' type='MaterialIcons' style={styles.icon} />
@@ -50,7 +61,9 @@ class Login extends Component {
             />
           </Item>
           <Button block dark style={styles.button} onPress={this.handleLogin}>
-            <Text style={styles.buttonTitle}>LOGIN</Text>
+            {loading 
+            ? <View><ActivityIndicator size="small" color="#FFF" /></View>
+            : <Text style={styles.buttonTitle}>LOGIN</Text>}
           </Button>
         </Form>
         <View style={styles.bottom}>

@@ -44,12 +44,12 @@ class App extends React.Component {
               key='login'
               component={Login}
               hideNavBar
+              initial
             />
             <Scene 
               key='signup'
               component={SignUp}
-              hideNavBar
-              initial
+              hideNavBar 
             />
             <Scene 
               key='search'
