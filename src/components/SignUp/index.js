@@ -25,11 +25,6 @@ class SignUp extends Component {
 
           { step1 ? <Step1 styles={styles} handleNextButtonClick={this.handleNextButtonClick}/> : <Step2 styles={styles}/> }
 
-          {/* <View style={styles.bottom}>
-            <Text style={styles.text}>Have an account? 
-              <Text style={[styles.text, styles.logInText]} onPress={() => Actions.login()}> Log in</Text>
-            </Text>
-          </View> */}
         </Content>
       </Container>
     );

@@ -53,21 +53,32 @@ const isRequired = (input, fieldName) => {
   return true;
 }
 
-
 // handleLoginValidation
 
 export const isLoginCredentialsValid = (email, password) => {
-  const error = []
+  const error = { messages: [], key: {}};
   const isEmailEmpty = isRequired(email, "email");
   const isPasswordEmpty = isRequired(password, "password")
   const isEmail = validateEmail(email, "email");
   const isPasswordLength = validatePasswordLength(password, "password")
 
   //Checks
-  if (typeof isEmailEmpty === "string") { error.push(isEmailEmpty); }
-  if (typeof isEmail === "string") { error.push(isEmail); }
-  if (typeof isPasswordEmpty === "string") { error.push(isPasswordEmpty) }
-  if (typeof isPasswordLength === "string") { error.push(isPasswordLength); }
-  return error.length > 0 ? error : true;
+  if (typeof isEmailEmpty === "string") { 
+    error.messages.push(isEmailEmpty);
+    error.key.email = true;
+  }
+  if (typeof isEmail === "string") { 
+    error.messages.push(isEmail);
+    error.key.email = true;
+  }
+  if (typeof isPasswordEmpty === "string") {
+    error.messages.push(isPasswordEmpty);
+    error.key.password = true;
+  }
+  if (typeof isPasswordLength === "string") { 
+    error.messages.push(isPasswordLength);
+    error.key.password = true;
+  }
+  return error.messages.length > 0 ? error : true;
 }
 

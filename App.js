@@ -2,6 +2,7 @@ import React from 'react';
 import { Font, AppLoading } from 'expo';
 import { Router, Scene, Drawer } from 'react-native-router-flux';
 import { Provider } from 'react-redux';
+import { Root } from "native-base";
 
 import UserProfile from './src/components/UserProfile';
 import PartyProfile from './src/components/PartyProfile';
@@ -37,57 +38,59 @@ class App extends React.Component {
   render() {
     if(!this.state.ready) return <AppLoading />;
     return (
-      <Provider store={store}>
-        <Router>
-          <Scene key='root'>
-            <Scene 
-              key='login'
-              component={Login}
-              hideNavBar
-              initial
-            />
-            <Scene 
-              key='signup'
-              component={SignUp}
-              hideNavBar 
-            />
-            <Scene 
-              key='search'
-              component={Search}
-              hideNavBar
-            />
-            <Scene 
-              key='userProfile'
-              component={UserProfile}
-              hideNavBar
-            />
-            <Scene 
-              key='partyProfile'
-              component={PartyProfile}
-              hideNavBar
-            />
-            <Scene
-              key='post'
-              component={Post}
-              hideNavBar
-            />
-            <Drawer
-                hideNavBar
-                key="drawer"
-                contentComponent={SideBar}
-                drawerWidth={300}
-                drawerPosition="left"
-                open={false}
-            >
+      <Root>
+        <Provider store={store}>
+          <Router>
+            <Scene key='root'>
               <Scene 
-                key='home'
-                component={Home}
+                key='login'
+                component={Login}
+                hideNavBar
+                initial
+              />
+              <Scene 
+                key='signup'
+                component={SignUp}
+                hideNavBar 
+              />
+              <Scene 
+                key='search'
+                component={Search}
                 hideNavBar
               />
-            </Drawer>
-          </Scene>
-        </Router>
-      </Provider>
+              <Scene 
+                key='userProfile'
+                component={UserProfile}
+                hideNavBar
+              />
+              <Scene 
+                key='partyProfile'
+                component={PartyProfile}
+                hideNavBar
+              />
+              <Scene
+                key='post'
+                component={Post}
+                hideNavBar
+              />
+              <Drawer
+                  hideNavBar
+                  key="drawer"
+                  contentComponent={SideBar}
+                  drawerWidth={300}
+                  drawerPosition="left"
+                  open={false}
+              >
+                <Scene 
+                  key='home'
+                  component={Home}
+                  hideNavBar
+                />
+              </Drawer>
+            </Scene>
+          </Router>
+        </Provider>
+      </Root>
     );
   }
 }
