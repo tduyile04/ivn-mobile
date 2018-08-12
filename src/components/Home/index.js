@@ -13,7 +13,7 @@ class Home extends Component {
     const { user } = this.props;
     return (
       <Container> 
-        <Header menu />
+        <Header menu title='Timeline' />
         <ScrollableTabs />
         <Footer />
         <FloatingButton />

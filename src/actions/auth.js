@@ -16,11 +16,10 @@ export const login = ({ email, password }) => (dispatch) => {
   return axios.post(BASE_URL + 'users/login', { email, password })
     .then(result => {
       dispatch(loginSuccess(result))
-    }, err => {
-      dispatch(loginFailure(err.message))
     })
-    .catch(err => {
-      dispatch(loginFailure(err))
+    .catch(({ response: { data } }) => {
+      const errorMessage = data && data.error ? data.error.message : 'Please try again';
+      dispatch(loginFailure(errorMessage))
     })
 }
 

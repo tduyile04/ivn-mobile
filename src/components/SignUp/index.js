@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 import { Container, Content, Text, View } from 'native-base';
 import { StyleSheet } from 'react-native';
+import Header from '../../shared-components/Header';
 import Step1 from './step_1';
 import Step2 from './step_2';
 
@@ -16,8 +17,9 @@ class SignUp extends Component {
   render() {
     const { step1 } = this.state;
     return (
-      <Container style={styles.container}>
-        <Content>
+      <Container>
+        <Header back />
+        <Content style={styles.content}>
           <View styles={styles.header}>
             <Text style={[styles.text, styles.title]}>Welcome!</Text>
             <Text style={[styles.text, styles.description]}>Let’s get you setup quickly</Text>
@@ -25,11 +27,6 @@ class SignUp extends Component {
 
           { step1 ? <Step1 styles={styles} handleNextButtonClick={this.handleNextButtonClick}/> : <Step2 styles={styles}/> }
 
-          {/* <View style={styles.bottom}>
-            <Text style={styles.text}>Have an account? 
-              <Text style={[styles.text, styles.logInText]} onPress={() => Actions.login()}> Log in</Text>
-            </Text>
-          </View> */}
         </Content>
       </Container>
     );
@@ -37,11 +34,11 @@ class SignUp extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  content: {
     flex: 1,
     paddingLeft: 40,
     paddingRight: 40,
-    paddingTop: 80,
+    paddingTop: 20,
   },
   title: {
     fontFamily: 'raleway-bold',

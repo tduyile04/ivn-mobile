@@ -23,3 +23,12 @@ export const get = async (key) => {
    }
 }
 
+export const mapSet = details => {
+  if (Array.isArray(details)) {
+    details.forEach(detail => {
+      const [ detailKey, detailValue ] = Object.entries(detail)[0];
+      set({ key: detailKey, value: detailValue });
+    });
+  }
+}
+

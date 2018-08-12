@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
+import React from 'react';
+import { Header, Left, Body, Right, Button, Icon, Title , Text } from 'native-base';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-const HeaderTab = ({menu, back}) => 
+const HeaderTab = ({menu, back, title}) => 
   <Header style={styles.header} hasTabs>
     <Left>
       { menu && 
@@ -16,7 +16,7 @@ const HeaderTab = ({menu, back}) =>
       </Button> }
     </Left>
     <Body>
-      <Title style={styles.title}>Timeline</Title>
+      <Title style={styles.title}>{title}</Title>
     </Body>
     <Right>
     </Right>
@@ -26,11 +26,10 @@ export default HeaderTab;
 
 const styles = StyleSheet.create({
   header: {
-    // backgroundColor: 'white',
+    backgroundColor: 'white',
     borderBottomWidth:0
   },
   title: {
     color: '#3F3F3F',
-    // fontFamily: 'raleway-regular',
-  }
+  },
 });
