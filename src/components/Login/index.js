@@ -33,7 +33,8 @@ class Login extends Component {
     if (this.props.error) Toaster.show(this.props.error);
     if (!this.props.error) {
       mapSet([{ "email": email}, {"token": this.props.token}])
-      return this.setState(() => ({ email: '', password: '' }))
+      this.setState(() => ({ email: '', password: '' }))
+      return Actions.home();
     }
   }
 
