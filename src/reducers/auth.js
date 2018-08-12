@@ -21,6 +21,7 @@ export default handleActions({
       ...state,
       loading: false,
       user: data.data.user,
+      token: data.data.user.token,
       error: ''
     }
   },

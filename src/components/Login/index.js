@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Text, Icon, Form, Item, Input, Button, View } from 'native-base';
 import { ActivityIndicator, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { mapSet, get } from '../../modules/cache';
 import { isLoginCredentialsValid } from '../../utils/Validation';
 import Error from '../../utils/Error'
 class Login extends Component {
@@ -23,6 +24,7 @@ class Login extends Component {
     }
     await this.props.login({ email, password })
     if (!this.props.error) {
+      mapSet([{ "email": email}, {"token": this.props.token}])
       return this.setState(() => ({ email: '', password: '' }))
     }
   }
