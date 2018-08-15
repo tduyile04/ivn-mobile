@@ -7,11 +7,12 @@ import { Root } from "native-base";
 import UserProfile from './src/components/UserProfile';
 import PartyProfile from './src/components/PartyProfile';
 import Search from './src/components/Search';
-import SignUp from './src/components/SignUp';
+// import SignUp from './src/components/SignUp';
 import Home from './src/components/Home';
 import Post from './src/components/Post';
 import SideBar from './src/shared-components/SideBar';
 
+import SignUp from './src/containers/SignUp'
 import Login from './src/containers/Login';
 
 import store from './src/store';
