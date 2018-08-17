@@ -44,7 +44,6 @@ const Feed = () =>
 
 const styles = StyleSheet.create({
   card: {
-    marginTop: 20,
     paddingLeft: 16,
     paddingRight: 16,
   },

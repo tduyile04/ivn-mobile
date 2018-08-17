@@ -15,10 +15,12 @@ import SideBar from './src/shared-components/SideBar';
 import Login from './src/containers/Login';
 
 import store from './src/store';
+import { get, remove } from './src/modules/cache';
 
 class App extends React.Component {
   state = {
     ready: false,
+    loggedIn: false,
   };
 
   async componentDidMount() {
@@ -28,11 +30,13 @@ class App extends React.Component {
       'raleway-medium': require('./assets/fonts/Raleway-Regular.ttf'),
       'museosans-500': require('./assets/fonts/MuseoSans_500.ttf'),
       'SFProText-regular': require('./assets/fonts/SF-Pro-Text-Regular.ttf'),
+      'SFProText-SemiBold': require('./assets/fonts/SFProText-SemiBold.ttf'),
       'Roboto': require("native-base/Fonts/Roboto.ttf"),
       'Roboto_medium': require("native-base/Fonts/Roboto_medium.ttf"),
       'Ionicons': require("@expo/vector-icons/fonts/Ionicons.ttf"),
     });
-    this.setState({ ready: true });
+    const loggedIn = await get("token");
+    this.setState({ ready: true, loggedIn });
   }
 
   render() {
@@ -46,32 +50,12 @@ class App extends React.Component {
                 key='login'
                 component={Login}
                 hideNavBar
-                initial
+                initial={!this.state.loggedIn}
               />
               <Scene 
                 key='signup'
                 component={SignUp}
                 hideNavBar 
-              />
-              <Scene 
-                key='search'
-                component={Search}
-                hideNavBar
-              />
-              <Scene 
-                key='userProfile'
-                component={UserProfile}
-                hideNavBar
-              />
-              <Scene 
-                key='partyProfile'
-                component={PartyProfile}
-                hideNavBar
-              />
-              <Scene
-                key='post'
-                component={Post}
-                hideNavBar
               />
               <Drawer
                   hideNavBar
@@ -80,6 +64,7 @@ class App extends React.Component {
                   drawerWidth={300}
                   drawerPosition="left"
                   open={false}
+                  initial={this.state.loggedIn}
               >
                 <Scene 
                   key='home'
