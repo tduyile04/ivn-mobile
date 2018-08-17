@@ -5,7 +5,6 @@ export const set = async ({key, value}) => {
     await AsyncStorage.setItem(key, value);
     return true;
   } catch (error) {
-    // Error saving data - Do something with error
     return false;
   }
 }
@@ -13,12 +12,18 @@ export const set = async ({key, value}) => {
 export const get = async (key) => {
   try {
     const value = await AsyncStorage.getItem(key);
-    if (value !== null) {
-      console.log(value);
-      return value;
-    }
+    if (value === null) return false;
+    return value;
    } catch (error) {
-     // Error saving data - Do something with error
+     return false;
+   }
+}
+
+export const remove = async (key) => {
+  try {
+    await AsyncStorage.removeItem(key);
+    return true;
+   } catch (error) {
      return false;
    }
 }

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Content, Card, View, Text, Button, Icon } from 'native-base';
-import { Actions } from 'react-native-router-flux';
 import { StyleSheet, Image } from 'react-native';
 import HorizontalLine from '../HorizontalLine';
 import { LikeButton, LikedButton } from '../../shared-components/Buttons';
 
-const Feed = () => {
+import { VIEWS } from '../../components/Home/constants';
+
+const Feed = ({setActive}) => {
   return (
     <Content>
       <Card transparent style={styles.card}>
@@ -18,7 +19,7 @@ const Feed = () => {
             <View style={styles.info}>
               <Text style={styles.name}>Emma Simpson</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText} onPress={() => Actions.partyProfile()}>PDP</Text>
+              <Text style={styles.blueText} onPress={() => setActive(VIEWS.partyProfile)}>PDP</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>12m</Text>
             </View>
@@ -47,7 +48,7 @@ const Feed = () => {
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>7,541 Likes</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText} onPress={() => Actions.post()}>212 Comments</Text>
+              <Text style={styles.blueText} onPress={() => setActive(VIEWS.post)}>212 Comments</Text>
             </View>
           </View>
         </View>
@@ -65,7 +66,7 @@ const Feed = () => {
             <View style={styles.info}>
               <Text style={styles.name}>Juan Hansen</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText} onPress={() => Actions.partyProfile()}>APC</Text>
+              <Text style={styles.blueText} onPress={() => setActive(VIEWS.partyProfile)}>APC</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>30m</Text>
             </View>
@@ -88,7 +89,7 @@ const Feed = () => {
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>7,541 Likes</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText} onPress={() => Actions.post()}>212 Comments</Text>
+              <Text style={styles.blueText} onPress={() => setActive(VIEWS.post)}>212 Comments</Text>
             </View>
           </View>
         </View>

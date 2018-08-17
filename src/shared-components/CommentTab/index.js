@@ -11,7 +11,12 @@ export default class CommentTab extends Component {
             <View style={styles.center}>  
               <View style={styles.container}>
                 <Item rounded style={styles.comment}>
-                  <Input placeholder='Write a comment' placeholderTextColor="#C7C7CB" style={styles.input} />
+                  <Input 
+                    placeholder='Write a comment' 
+                    placeholderTextColor="#C7C7CB" 
+                    multiline 
+                    style={styles.input} 
+                  />
                 </Item>
                 <Button style={styles.button}>
                   <Icon name='send' />
@@ -52,6 +57,7 @@ const styles = StyleSheet.create({
     color:"#3F3F3F", 
     fontFamily:"museosans-500", 
     fontSize: 13,
-    paddingLeft: 18
+    paddingLeft: 18,
+    marginTop: -10
   },
 });

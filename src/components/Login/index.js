@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Content, Text, Icon, Form, Item, Input, Button, View, Spinner } from 'native-base';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { mapSet, get } from '../../modules/cache';
+import { mapSet } from '../../modules/cache';
 import Toaster from '../../modules/Toaster';
 import { isLoginCredentialsValid } from '../../utils/Validation';
 
@@ -32,7 +32,7 @@ class Login extends Component {
     await this.props.login({ email, password });
     if (this.props.error) Toaster.show(this.props.error);
     if (!this.props.error) {
-      mapSet([{ "email": email}, {"token": this.props.token}])
+      mapSet([{ "email": email}, {"token": this.props.token}, {"user_id": this.props.user.id}])
       this.setState(() => ({ email: '', password: '' }))
       return Actions.home();
     }
@@ -60,13 +60,14 @@ class Login extends Component {
                 style={styles.text}
                 value={this.state.email}
                 onChangeText={text => this.updateInputField(text, 'email')}
+                autoCapitalize = 'none'
               />
             </Item>
             <Item error={error && this.state.error.key.password} style={styles.passwordSection}>
             <Icon active name='lock-open' type='MaterialIcons' style={styles.icon} />
               <Input 
                 placeholder='Password' 
-                type='password' 
+                autoCapitalize = 'none' 
                 style={styles.text}
                 value={this.state.password}
                 onChangeText={text => this.updateInputField(text, 'password')}
@@ -79,7 +80,7 @@ class Login extends Component {
             </Item>
             <Button block dark style={styles.button} onPress={this.handleLogin}>
               {loading 
-              ? <View><Spinner size="small" color="#FFF" /></View>
+              ? <Spinner size="small" color="#FFF" />
               : <Text style={styles.buttonTitle}>LOGIN</Text>}
             </Button>
           </Form>

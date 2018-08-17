@@ -6,35 +6,31 @@ import CoverImage from '../../shared-components/CoverImage';
 import Listings from '../../shared-components/Listings';
 import ScrollableTabs from './ScrollableTabs';
 import { FollowButton } from '../../shared-components/Buttons';
-import Footer from '../../shared-components/Footer';
 
 const PartyProfile = () => {
   return (
-    <Container style={styles.container}>
-      <Content>
-        <CoverImage 
-          sourceUri='http://www.signalng.com/wp-content/uploads/president-buhari-meets-president-francoise-hollande-at-elysee-1.jpg'
-          coverImageStyle={styles.coverImageStyle}
-        />
-        <View style={styles.partyDetailsContainer}>
-          <View style={styles.partyFlagContainer}>
-            <Image
-              style={styles.partyFlag}
-              source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
-              resizeMode="contain"
-            />
-          </View>
-          <Text style={styles.partyName}>People's Democratic Party</Text>
-          <Text style={styles.partyHandle}>@pdp</Text>
-          <Listings followers={21098} following={50} members={1050} />
-          <View style={styles.followActionView}>
-            <FollowButton />
-          </View>
+    <View>
+      <CoverImage 
+        sourceUri='http://www.signalng.com/wp-content/uploads/president-buhari-meets-president-francoise-hollande-at-elysee-1.jpg'
+        coverImageStyle={styles.coverImageStyle}
+      />
+      <View style={styles.partyDetailsContainer}>
+        <View style={styles.partyFlagContainer}>
+          <Image
+            style={styles.partyFlag}
+            source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
+            resizeMode="contain"
+          />
         </View>
-        <ScrollableTabs />
-      </Content>
-      <Footer />
-    </Container>
+        <Text style={styles.partyName}>People's Democratic Party</Text>
+        <Text style={styles.partyHandle}>@pdp</Text>
+        <Listings followers={21098} following={50} members={1050} />
+        <View style={styles.followActionView}>
+          <FollowButton />
+        </View>
+      </View>
+      <ScrollableTabs />
+    </View>
   );
 }
 

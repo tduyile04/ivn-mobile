@@ -2,8 +2,9 @@ import React from 'react';
 import { Header, Left, Body, Right, Button, Icon, Title , Text } from 'native-base';
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { VIEWS } from '../../components/Home/constants';
 
-const HeaderTab = ({menu, back, title}) => 
+const HeaderTab = ({menu, back, title, setActive}) => 
   <Header style={styles.header} hasTabs>
     <Left>
       { menu && 
@@ -11,7 +12,7 @@ const HeaderTab = ({menu, back, title}) =>
           <Icon name='menu' type='MaterialCommunityIcons' style={{color: '#3F3F3F', marginLeft: 10 }}/> 
         </Button> }
       { back && 
-      <Button transparent onPress={() => Actions.pop()}>
+      <Button transparent onPress={() => setActive(VIEWS.feed)}>
          <Icon name='chevron-left' type='MaterialCommunityIcons' style={{color: '#3F3F3F', marginLeft: 10 }}/>
       </Button> }
     </Left>
