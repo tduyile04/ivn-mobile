@@ -14,6 +14,12 @@ const Step2 = (props) => {
         </View>
       </View>
       <Form style={styles.form}>
+        <Item error={errorCheck && error.key.phoneNumber} style={styles.section}>
+          <Input 
+            placeholder='Phone'
+            onChangeText={text => updateInputField(text, 'phoneNumber')}
+            style={styles.text} />
+        </Item>
         <Item error={errorCheck && error.key.country}>
           <Input 
             placeholder='Country' 

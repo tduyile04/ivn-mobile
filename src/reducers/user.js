@@ -23,7 +23,6 @@ export default handleActions({
     }
   },
   [getUserFailure](state = defaultState, { payload: { message } }) {
-    console.log(message, 'message ')
     return {
       ...state,
       loading: false,

@@ -38,7 +38,7 @@ const validateNumber = (number, fieldName) => {
 
 const validatePasswordLength = (password, fieldName) => {
   const { minlength } = defaultRules;
-  const limit = 6;
+  const limit = 8;
   if (!minlength(password, limit)) {
     return defaultMessages.minlength(fieldName, limit);
   }
@@ -89,8 +89,6 @@ export const isSignupCredentialsValid_stepOne = fields => {
   const isLastNameEmpty = isRequired(lastName, "lastName")
   const isEmailEmpty = isRequired(email, "email");
   const isEmail = validateEmail(email, "email");
-  const isPhoneNumberEmpty = isRequired(phoneNumber, "phoneNumber")
-  const isValidPhoneNumber = validateNumber(phoneNumber, "phoneNumber")
   const isPasswordEmpty = isRequired(password, "password")
   const isPasswordLength = validatePasswordLength(password, "password")
 
@@ -110,14 +108,6 @@ export const isSignupCredentialsValid_stepOne = fields => {
     error.messages.push(isEmail);
     error.key.email = true;
   }
-  if (typeof isPhoneNumberEmpty === "string") {
-    error.messages.push(isPhoneNumberEmpty);
-    error.key.phoneNumber = true;
-  }
-  if (typeof isValidPhoneNumber === "string") {
-    error.messages.push(isValidPhoneNumber);
-    error.key.phoneNumber = true;
-  }
   if (typeof isPasswordEmpty === "string") {
     error.messages.push(isPasswordEmpty);
     error.key.password = true;
@@ -131,11 +121,21 @@ export const isSignupCredentialsValid_stepOne = fields => {
 
 export const isSignupCredentialsValid_stepTwo = fields => {
   const error = { messages: [], key: {}}
-  const { country, state, localGovernment } = fields;
+  const { country, state, localGovernment, phoneNumber } = fields;
+  const isPhoneNumberEmpty = isRequired(phoneNumber, "phoneNumber")
+  const isValidPhoneNumber = validateNumber(phoneNumber, "phoneNumber")
   const isCountryEmpty = isRequired(country, "country")
   const isStateEmpty = isRequired(state, 'state');
   const islocalGovernmentEmpty = isRequired(localGovernment, 'localGovernment');
 
+  if (typeof isPhoneNumberEmpty === "string") {
+    error.messages.push(isPhoneNumberEmpty);
+    error.key.phoneNumber = true;
+  }
+  if (typeof isValidPhoneNumber === "string") {
+    error.messages.push(isValidPhoneNumber);
+    error.key.phoneNumber = true;
+  }
   if (typeof isCountryEmpty === 'string') {
     error.messages.push(isCountryEmpty);
     error.key.phoneNumber = true;

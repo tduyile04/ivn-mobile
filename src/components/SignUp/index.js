@@ -49,7 +49,6 @@ class SignUp extends Component {
       }
       const { key, ...data } = fields;
       const signUpData = {...data, gender: data.gender.toLowerCase()};
-      console.log("the sign upd data", signUpData)
       await this.props.signup(signUpData)
       if (this.props.error) Toaster.show(this.props.error);
       if (!this.props.error) {
@@ -103,7 +102,6 @@ class SignUp extends Component {
                 firstName={firstName}
                 lastName={lastName}
                 password={password}
-                phoneNumber={phoneNumber}
                 styles={styles}
                 selected={selected}
                 gender={gender}
@@ -129,7 +127,6 @@ class SignUp extends Component {
                 gender={gender} 
                 handleNextButtonClick={this.handleNextButtonClick}
                 updateInputField={this.updateInputField} /> }
-              
         </Content>
       </Container>
     );

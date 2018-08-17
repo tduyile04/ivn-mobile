@@ -14,11 +14,10 @@ const Step1 = ({
   errorCheck,
   firstName,
   lastName,
-  phoneNumber,
   password,
   gender
 }) => {
-  const field = { key: 1, email, firstName, lastName, phoneNumber, password, phoneNumber, gender }
+  const field = { key: 1, email, firstName, lastName, password, gender }
   return (
     <View>
       <View style={styles.row}>
@@ -52,14 +51,6 @@ const Step1 = ({
             style={styles.text}
             value={email} 
             onChangeText={text => updateInputField(text, 'email')} />
-        </Item>
-        <Item error={errorCheck && error.key.phoneNumber} style={styles.section}>
-          <Icon active name='phone' type='Feather' style={styles.icon} />
-          <Input 
-            placeholder='Phone'
-            value={phoneNumber}
-            onChangeText={text => updateInputField(text, 'phoneNumber')}
-            style={styles.text} />
         </Item>
         <Item error={errorCheck && error.key.password} style={styles.section}>
           <Icon active name='lock-open' type='MaterialIcons' style={styles.icon} />
