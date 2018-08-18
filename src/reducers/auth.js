@@ -1,5 +1,12 @@
 import { handleActions } from "redux-actions";
-import { loginPending, loginSuccess, loginFailure } from '../actions'
+import { 
+  loginPending,
+  loginSuccess, 
+  loginFailure,
+  signupPending, 
+  signupSuccess, 
+  signupFailure
+} from '../actions'
 
 const defaultState = {
   token: '',
@@ -26,6 +33,29 @@ export default handleActions({
     }
   },
   [loginFailure](state = defaultState, { payload }) {
+    return {
+      ...state,
+      loading: false,
+      error: payload 
+    }
+  },
+  [signupPending](state = defaultState) {
+    return {
+      ...state,
+      loading: true,
+      error: ''
+    }
+  },
+  [signupSuccess](state = defaultState, { payload: { data } }) {
+    return {
+      ...state,
+      loading: false,
+      user: data.data.user,
+      token: data.data.user.token,
+      error: ''
+    }
+  },
+  [signupFailure](state = defaultState, { payload }) {
     return {
       ...state,
       loading: false,

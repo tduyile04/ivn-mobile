@@ -19,7 +19,6 @@ class Login extends Component {
         messages: []
       }
     }
-    this.input = {}
   }
 
   handleLogin = async () => {

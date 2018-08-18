@@ -7,11 +7,11 @@ import { Root } from "native-base";
 import UserProfile from './src/components/UserProfile';
 import PartyProfile from './src/components/PartyProfile';
 import Search from './src/components/Search';
-import SignUp from './src/components/SignUp';
 import Home from './src/components/Home';
 import Post from './src/components/Post';
 import SideBar from './src/shared-components/SideBar';
 
+import SignUp from './src/containers/SignUp'
 import Login from './src/containers/Login';
 
 import store from './src/store';
@@ -50,7 +50,8 @@ class App extends React.Component {
                 key='login'
                 component={Login}
                 hideNavBar
-                initial={!this.state.loggedIn}
+                initial
+                // initial={!this.state.loggedIn}
               />
               <Scene 
                 key='signup'
@@ -64,7 +65,7 @@ class App extends React.Component {
                   drawerWidth={300}
                   drawerPosition="left"
                   open={false}
-                  initial={this.state.loggedIn}
+                  // initial={this.state.loggedIn}
               >
                 <Scene 
                   key='home'

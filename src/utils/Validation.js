@@ -38,7 +38,7 @@ const validateNumber = (number, fieldName) => {
 
 const validatePasswordLength = (password, fieldName) => {
   const { minlength } = defaultRules;
-  const limit = 6;
+  const limit = 8;
   if (!minlength(password, limit)) {
     return defaultMessages.minlength(fieldName, limit);
   }
@@ -78,6 +78,76 @@ export const isLoginCredentialsValid = (email, password) => {
   if (typeof isPasswordLength === "string") { 
     error.messages.push(isPasswordLength);
     error.key.password = true;
+  }
+  return error.messages.length > 0 ? error : true;
+}
+
+export const isSignupCredentialsValid_stepOne = fields => {
+  const error = { messages: [], key: {}}
+  const { firstName, lastName, email, phoneNumber, password } = fields;
+  const isFirstNameEmpty = isRequired(firstName, "firstName")
+  const isLastNameEmpty = isRequired(lastName, "lastName")
+  const isEmailEmpty = isRequired(email, "email");
+  const isEmail = validateEmail(email, "email");
+  const isPasswordEmpty = isRequired(password, "password")
+  const isPasswordLength = validatePasswordLength(password, "password")
+
+  if (typeof isFirstNameEmpty === "string") {
+    error.messages.push(isFirstNameEmpty);
+    error.key.firstName = true;
+  }
+  if (typeof isLastNameEmpty === "string") {
+    error.messages.push(isLastNameEmpty);
+    error.key.lastName = true;
+  }
+  if (typeof isEmailEmpty === "string") { 
+    error.messages.push(isEmailEmpty);
+    error.key.email = true;
+  }
+  if (typeof isEmail === "string") { 
+    error.messages.push(isEmail);
+    error.key.email = true;
+  }
+  if (typeof isPasswordEmpty === "string") {
+    error.messages.push(isPasswordEmpty);
+    error.key.password = true;
+  }
+  if (typeof isPasswordLength === "string") { 
+    error.messages.push(isPasswordLength);
+    error.key.password = true;
+  }
+  return error.messages.length > 0 ? error : true;
+}
+
+export const isSignupCredentialsValid_stepTwo = fields => {
+  const error = { messages: [], key: {}}
+  const { country, state, localGovernment, phoneNumber } = fields;
+  const isPhoneNumberEmpty = isRequired(phoneNumber, "phoneNumber")
+  const isValidPhoneNumber = validateNumber(phoneNumber, "phoneNumber")
+  const isCountryEmpty = isRequired(country, "country")
+  const isStateEmpty = isRequired(state, 'state');
+  const islocalGovernmentEmpty = isRequired(localGovernment, 'localGovernment');
+
+  if (typeof isPhoneNumberEmpty === "string") {
+    error.messages.push(isPhoneNumberEmpty);
+    error.key.phoneNumber = true;
+  }
+  if (typeof isValidPhoneNumber === "string") {
+    error.messages.push(isValidPhoneNumber);
+    error.key.phoneNumber = true;
+  }
+  if (typeof isCountryEmpty === 'string') {
+    error.messages.push(isCountryEmpty);
+    error.key.phoneNumber = true;
+  }
+  if (typeof isStateEmpty === 'string') {
+    error.messages.push(isStateEmpty);
+    error.key.phoneNumber = true;
+  }
+
+  if (typeof islocalGovernmentEmpty === 'string') {
+    error.messages.push(islocalGovernmentEmpty);
+    error.key.phoneNumber = true;
   }
   return error.messages.length > 0 ? error : true;
 }
