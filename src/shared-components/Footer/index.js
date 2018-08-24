@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import { Footer, FooterTab, Button, Icon, Badge, Text } from 'native-base';
 
-import { VIEWS } from '../../components/Home/constants';
+import { Actions } from 'react-native-router-flux';
 
-const FooterTabs = ({setActive}) => 
+const FooterTabs = () => 
   <Footer>
     <FooterTab>
-      <Button onPress={() => setActive(VIEWS.feed)}>
+      <Button onPress={() => Actions.home()}>
         <Icon name="home" type='SimpleLineIcons' />
       </Button>
-      <Button onPress={() => setActive(VIEWS.search)}>
+      <Button onPress={() => Actions.search()}>
         <Icon name="magnifier" type='SimpleLineIcons' />
       </Button>
-      <Button badge onPress={() => setActive(VIEWS.notifications)}>
+      <Button badge onPress={() => Actions.notifications()}>
         <Badge><Text>2</Text></Badge>
         <Icon name="bell" type='SimpleLineIcons' />
       </Button>
-      <Button onPress={() => setActive(VIEWS.userProfile)}>
+      <Button onPress={() => Actions.userProfile()}>
         <Icon name="people" type='SimpleLineIcons' />
       </Button>
     </FooterTab>

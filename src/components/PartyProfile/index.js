@@ -9,35 +9,37 @@ import { FollowButton } from '../../shared-components/Buttons';
 
 const PartyProfile = () => {
   return (
-    <View>
-      <CoverImage 
-        sourceUri='http://www.signalng.com/wp-content/uploads/president-buhari-meets-president-francoise-hollande-at-elysee-1.jpg'
-        coverImageStyle={styles.coverImageStyle}
-      />
-      <View style={styles.partyDetailsContainer}>
-        <View style={styles.partyFlagContainer}>
-          <Image
-            style={styles.partyFlag}
-            source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
-            resizeMode="contain"
+    <Container>
+      <Content>
+        <CoverImage 
+          sourceUri='http://www.signalng.com/wp-content/uploads/president-buhari-meets-president-francoise-hollande-at-elysee-1.jpg'
+          coverImageStyle={styles.coverImageStyle}
           />
+        <View style={styles.partyDetailsContainer}>
+          <View style={styles.partyFlagContainer}>
+            <Image
+              style={styles.partyFlag}
+              source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
+              resizeMode="contain"
+              />
+          </View>
+          <Text style={styles.partyName}>People's Democratic Party</Text>
+          <Text style={styles.partyHandle}>@pdp</Text>
+          <Listings followers={21098} following={50} members={1050} />
+          <View style={styles.followActionView}>
+            <FollowButton />
+          </View>
         </View>
-        <Text style={styles.partyName}>People's Democratic Party</Text>
-        <Text style={styles.partyHandle}>@pdp</Text>
-        <Listings followers={21098} following={50} members={1050} />
-        <View style={styles.followActionView}>
-          <FollowButton />
-        </View>
-      </View>
-      <ScrollableTabs />
-    </View>
+        <ScrollableTabs />
+      </Content>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%'
+    backgroundColor: 'white'
   },
   coverImageStyle: {
     width: '100%',

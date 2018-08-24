@@ -25,7 +25,6 @@ const ScrollableTabs = () => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 30,
-    backgroundColor: 'transparent'
   },
   tabsStyle: {
     backgroundColor: '#628AFF',

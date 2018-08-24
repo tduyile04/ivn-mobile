@@ -12,7 +12,7 @@ class Post extends Component {
   render () {
     return (
       <Container>
-        <Header back setActive={this.props.setActive} />
+        <Header back title='Comments' />
           <Content>
             <Feed />
             <HorizontalLine />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Font, AppLoading } from 'expo';
-import { Router, Scene, Drawer } from 'react-native-router-flux';
+import { Router, Scene, Drawer, Tabs } from 'react-native-router-flux';
 import { Provider } from 'react-redux';
 import { Root } from "native-base";
 
@@ -9,7 +9,9 @@ import PartyProfile from './src/components/PartyProfile';
 import Search from './src/components/Search';
 import Home from './src/components/Home';
 import Post from './src/components/Post';
+import Notifications from './src/components/Notifications';
 import SideBar from './src/shared-components/SideBar';
+import Footer from './src/shared-components/Footer';
 
 import SignUp from './src/containers/SignUp'
 import Login from './src/containers/Login';
@@ -50,29 +52,58 @@ class App extends React.Component {
                 key='login'
                 component={Login}
                 hideNavBar
-                initial
-                // initial={!this.state.loggedIn}
+                initial={!this.state.loggedIn}
               />
               <Scene 
                 key='signup'
                 component={SignUp}
                 hideNavBar 
               />
-              <Drawer
-                  hideNavBar
-                  key="drawer"
-                  contentComponent={SideBar}
-                  drawerWidth={300}
-                  drawerPosition="left"
-                  open={false}
-                  // initial={this.state.loggedIn}
+              <Scene
+                key='post'
+                component={Post}
+                hideNavBar
+              />
+              <Tabs
+                key='tabs'
+                tabBarComponent={Footer}
+                initial={this.state.loggedIn}
               >
+                <Drawer
+                    hideNavBar
+                    key="drawer"
+                    contentComponent={SideBar}
+                    drawerWidth={300}
+                    drawerPosition="left"
+                    open={false}
+                >
+                  <Scene 
+                    key='home'
+                    component={Home}
+                    hideNavBar
+                  />
+                </Drawer>
                 <Scene 
-                  key='home'
-                  component={Home}
+                  key='notifications'
+                  component={Notifications}
+                  hideNavBar 
+                />
+                <Scene 
+                  key='search'
+                  component={Search}
                   hideNavBar
                 />
-              </Drawer>
+                <Scene 
+                  key='userProfile'
+                  component={UserProfile}
+                  hideNavBar
+                />
+                <Scene 
+                  key='partyProfile'
+                  component={PartyProfile}
+                  hideNavBar
+                />
+              </Tabs>
             </Scene>
           </Router>
         </Provider>
