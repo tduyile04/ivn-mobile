@@ -3,6 +3,9 @@ import {
   getPostsPending,
   getPostsSuccess,
   getPostsFailure,
+  createPostsPending,
+  createPostsSuccess,
+  createPostsFailure
 } from '../actions';
 
 const defaultState = {
@@ -36,5 +39,27 @@ export default handleActions({
       loading: false,
       error: payload
     }
-  }
+  },
+  [createPostsPending](state = {}) {
+    return {
+      ...state,
+      loading: true,
+      error: ''
+    }
+  },
+  [createPostsSuccess](state = defaultState, { payload: { post } }) {
+    return {
+      ...state,
+      posts: [ ...state.posts, post ],
+      loading: false,
+      error: ''
+    }
+  },
+  [createPostsFailure](state = defaultState, { payload }) {
+    return {
+      ...state,
+      loading: false,
+      error: payload
+    }
+  },
 }, defaultState);

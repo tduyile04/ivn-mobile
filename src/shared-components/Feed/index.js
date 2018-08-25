@@ -84,7 +84,6 @@ class Feed extends Component {
   }
 
   handleRefresh = () => {
-    console.log("are you refreshing")
     this.setState(() => ({
       refreshing: true
     }), () => {
@@ -96,35 +95,20 @@ class Feed extends Component {
     const { setActive, posts, loading } = this.props;
     return (
       <Content>
-        {/* <Post 
-          userAvatar={'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg'}
-          userFullName={'Emma Simpson'}
-          userParty={'PDP'}
-          postTimePosted={12}
-          userPosition={'Former. Minister for Women Affairs'}
-          postTitle={'President Buhari meets Vancoise'}
-          postImageSrc={'http://www.signalng.com/wp-content/uploads/president-buhari-meets-president-francoise-hollande-at-elysee-1.jpg'}
-          postContent={'Mauris non tempor quam, et lacinia sapien. \
-            Mauris accumsan eros eget libero posuere vulputate.'}
-          postTags={['Change2019', 'RealChange']}
-          postLikes={7541}
-          postComments={212}
-          setActive={setActive}
-        /> */}
 
         <FlatList
           data={posts}
-          renderItem={({ item: post }) => (
+          renderItem={({ item: post }) => console.log("the post", post) || (
             <Post
               key={post.id} 
-              userAvatar={post.author.avatar}
-              userFullName={`${post.author.firstName} ${post.author.lastName}`}
+              userAvatar={post.author && post.author.avatar}
+              userFullName={`${post.author && post.author.firstName} ${post.author && post.author.lastName}`}
               userParty={'APC'}
               postTimePosted={10}
               postContent={post.content}
               postTags={['Change2019', 'RealChange']}
-              postLikes={post.comments.length}
-              postComments={post.likes.length}
+              postLikes={post.comments && post.comments.length}
+              postComments={post.likes && post.likes.length}
               setActive={setActive}
             />
           )}
