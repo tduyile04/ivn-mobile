@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Feed from '../../components/Feeds/ScrollableTabs'
+import Feed from '../../components/Home/ScrollableTabs/feed';
 
 import { getPosts } from '../../actions';
 
