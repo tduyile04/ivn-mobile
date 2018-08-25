@@ -38,7 +38,7 @@ const validateNumber = (number, fieldName) => {
 
 const validatePasswordLength = (password, fieldName) => {
   const { minlength } = defaultRules;
-  const limit = 6;
+  const limit = 7;
   if (!minlength(password, limit)) {
     return defaultMessages.minlength(fieldName, limit);
   }

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container, Text, Tab, Tabs } from 'native-base';
 import Trending from './trending';
-import Feed from './feed';
+import Feed from '../../../containers/ScrollableTabs/feed';
 
-const ScrollableTabs = () => 
+const ScrollableTabs = () =>
   <Container style={styles.container}>
     <Tabs tabBarUnderlineStyle={styles.tabsStyle}>
       <Tab heading="Feed" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white}>

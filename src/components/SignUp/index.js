@@ -52,7 +52,7 @@ class SignUp extends Component {
       await this.props.signup(signUpData)
       if (this.props.error) Toaster.show(this.props.error);
       if (!this.props.error) {
-        mapSet([{ "email": this.props.user.email}, {"token": this.props.token}])
+        mapSet([{"user_id": this.props.user.id}, {"token": this.props.token}])
         return Actions.home();
       }
     }

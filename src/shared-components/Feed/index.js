@@ -1,100 +1,143 @@
-import React from 'react';
-import { Content, Card, View, Text, Button, Icon } from 'native-base';
+import React, { Component } from 'react';
+import { Content, Card, View, Text, Button, Icon, Spinner } from 'native-base';
+import { StyleSheet, Image, FlatList } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { StyleSheet, Image } from 'react-native';
-import HorizontalLine from '../HorizontalLine';
 import { LikeButton, LikedButton } from '../../shared-components/Buttons';
+import HorizontalLine from '../HorizontalLine';
 
-const Feed = () => {
+const Post = ({ 
+  userAvatar, 
+  userFullName, 
+  userParty,
+  postTimePosted,
+  userPosition,
+  postTitle,
+  postImageSrc,
+  postContent,
+  postTags,
+  postLikes,
+  postComments,
+  setActive
+ }) => {
   return (
-    <Content>
+    <View>
       <Card transparent style={styles.card}>
         <View style={styles.row}>
           <Image
             style={styles.profileImage}
-            source={{uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg'}}
+            source={{ uri: userAvatar || 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg' }}
           />
           <View style={styles.items}>
             <View style={styles.info}>
-              <Text style={styles.name}>Emma Simpson</Text>
+              <Text style={styles.name}>{userFullName}</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText} onPress={() => Actions.partyProfile()}>PDP</Text>
+              <Text style={styles.blueText} onPress={() => Actions.partyProfile()}>{userParty}</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText}>12m</Text>
+              <Text style={styles.blueText}>{postTimePosted}m</Text>
             </View>
-            <Text style={styles.position}>Former. Minister for Women Affairs</Text>
-            <Text style={styles.title}>President Buhari meets Vancoise</Text>
-            <Image
-              style={styles.image}
-              source={{uri: 'http://www.signalng.com/wp-content/uploads/president-buhari-meets-president-francoise-hollande-at-elysee-1.jpg'}}
-            />
-            <Text style={styles.description}>
-              Mauris non tempor quam, et lacinia sapien. 
-              Mauris accumsan eros eget libero posuere vulputate.
-            </Text>
+            { userPosition && <Text style={styles.position}>{userPosition}</Text> }
+            { postTitle && <Text style={styles.title}>{postTitle}</Text> }
+            { postImageSrc && <Image style={styles.image} source={{ uri: postImageSrc }} /> }
+            <Text style={styles.description}>{postContent}</Text>
             <View style={styles.row}>
               <View style={styles.tagSection}>
-                <Button bordered small rounded style={styles.tagBtn}>
-                  <Text style={styles.tagText}>Change2019</Text>
-                </Button>
-                <Button bordered small rounded style={styles.tagBtn}>
-                  <Text style={styles.tagText}>RealChange</Text>
-                </Button>
+                { postTags.length > 0 && postTags.map(tag => {
+                  return (
+                    <Button bordered small rounded style={styles.tagBtn} key={tag}>
+                      <Text style={styles.tagText}>{tag}</Text>
+                    </Button>
+                  )
+                })}
               </View>
               <LikedButton />
             </View>
             <View style={styles.postInfo}>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText}>7,541 Likes</Text>
+              <Text style={styles.blueText}>{postLikes} Likes</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText}  onPress={() => Actions.post()}>212 Comments</Text>
+              <Text style={styles.blueText}  onPress={() => Actions.post()}>{postComments} Comments</Text>
             </View>
           </View>
         </View>
       </Card>
-
       <HorizontalLine />
+    </View>
+  )
+}
 
-      <Card transparent style={styles.card}>
-        <View style={styles.row}>
-          <Image
-            style={styles.profileImage}
-            source={{uri: 'https://i.pinimg.com/736x/19/a8/6c/19a86c6673349bb21910dd4b3bb18e68.jpg'}}
-          />
-          <View style={styles.items}>
-            <View style={styles.info}>
-              <Text style={styles.name}>Juan Hansen</Text>
-              <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText} onPress={() => Actions.partyProfile()}>APC</Text>
-              <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText}>30m</Text>
-            </View>
-            <Text style={styles.description}>
-              <Text style={[styles.description, styles.bold]}>@minister-marquis</Text> Mauris non tempor quam, et lacinia sapien. 
-            Mauris accumsan eros eget libero posuere vulputate...
-            </Text>
-            <View style={styles.row}>
-              <View style={styles.tagSection}>
-                <Button bordered small rounded style={styles.tagBtn}>
-                  <Text style={styles.tagText}>Change2019</Text>
-                </Button>
-                <Button bordered small rounded style={styles.tagBtn}>
-                  <Text style={styles.tagText}>RealChange</Text>
-                </Button>
-              </View>
-              <LikeButton />
-            </View>
-            <View style={styles.postInfo}>
-              <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText}>7,541 Likes</Text>
-              <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText} onPress={() => Actions.post()}>212 Comments</Text>
-            </View>
-          </View>
-        </View>
-      </Card>
-    </Content>
-  );
+class Feed extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      refreshing: false,
+    }
+  }
+
+  async componentDidMount() {
+    await this.props.getPosts(this.props.page, this.props.limit) 
+  }
+
+  fetchMorePosts = async () => {
+    await this.props.getPosts(this.props.page, this.props.limit) 
+    this.setState(() => ({ refreshing: false }))
+  }
+
+  handleRefresh = () => {
+    console.log("are you refreshing")
+    this.setState(() => ({
+      refreshing: true
+    }), () => {
+      this.props.getPosts(this.props.page, this.props.limit) 
+    })
+  }
+
+  render() {
+    const { setActive, posts, loading } = this.props;
+    return (
+      <Content>
+        {/* <Post 
+          userAvatar={'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg'}
+          userFullName={'Emma Simpson'}
+          userParty={'PDP'}
+          postTimePosted={12}
+          userPosition={'Former. Minister for Women Affairs'}
+          postTitle={'President Buhari meets Vancoise'}
+          postImageSrc={'http://www.signalng.com/wp-content/uploads/president-buhari-meets-president-francoise-hollande-at-elysee-1.jpg'}
+          postContent={'Mauris non tempor quam, et lacinia sapien. \
+            Mauris accumsan eros eget libero posuere vulputate.'}
+          postTags={['Change2019', 'RealChange']}
+          postLikes={7541}
+          postComments={212}
+          setActive={setActive}
+        /> */}
+
+        <FlatList
+          data={posts}
+          renderItem={({ item: post }) => (
+            <Post
+              key={post.id} 
+              userAvatar={post.author.avatar}
+              userFullName={`${post.author.firstName} ${post.author.lastName}`}
+              userParty={'APC'}
+              postTimePosted={10}
+              postContent={post.content}
+              postTags={['Change2019', 'RealChange']}
+              postLikes={post.comments.length}
+              postComments={post.likes.length}
+              setActive={setActive}
+            />
+          )}
+          keyExtractor={item => item.id}
+          refreshing={this.state.refreshing}
+          onRefresh={this.handleRefresh}
+          onEndReached={this.fetchMorePosts}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={ () => <Spinner size="small" color="#000" /> }
+        />
+      </Content>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
