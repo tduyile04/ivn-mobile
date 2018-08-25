@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Text, Tab, Tabs } from 'native-base';
 import Trending from './trending';
-import Feed from '../../../containers/ScrollableTabs/feed';
+import Feed from './feed';
 
 const ScrollableTabs = () =>
   <Container style={styles.container}>

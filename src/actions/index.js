@@ -19,5 +19,9 @@ export {
   getPostsPending,
   getPostsSuccess,
   getPostsFailure,
-  getPosts
+  getPosts,
+  createPostsPending,
+  createPostsSuccess,
+  createPostsFailure,
+  createPosts
 } from './posts';
