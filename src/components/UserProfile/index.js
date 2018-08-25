@@ -13,16 +13,21 @@ import { get } from '../../modules/cache';
 
 class UserProfile extends Component {
 
+  state = {
+    loading: true,
+  }
+
   async componentDidMount() {
     const userId = await get('user_id');
     await this.props.getUserDetails(userId);
+    this.setState({loading: false});
   }
 
   render() {
-    const { user, loading } = this.props.user;
+    const { user } = this.props.user;
+    const { loading } = this.state;
     const { followings=[], followers=[], endorsements=[] } = user;
-
-    if(loading) return <Spinner color='black' />;
+    if(loading) return <Spinner color='black' style={styles.container} />;
     return (
       <Container style={styles.container}>
         <Content>

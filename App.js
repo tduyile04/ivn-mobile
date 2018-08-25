@@ -12,6 +12,7 @@ import Post from './src/components/Post';
 import Notifications from './src/components/Notifications';
 import SideBar from './src/shared-components/SideBar';
 import Footer from './src/shared-components/Footer';
+import TextEditor from './src/components/TextEditor';
 
 import SignUp from './src/containers/SignUp'
 import Login from './src/containers/Login';
@@ -59,11 +60,6 @@ class App extends React.Component {
                 component={SignUp}
                 hideNavBar 
               />
-              <Scene
-                key='post'
-                component={Post}
-                hideNavBar
-              />
               <Tabs
                 key='tabs'
                 tabBarComponent={Footer}
@@ -83,6 +79,18 @@ class App extends React.Component {
                     hideNavBar
                   />
                 </Drawer>
+                <Scene
+                  key='textEditor'
+                  component={TextEditor}
+                  hideTabBar
+                  hideNavBar
+                />
+                <Scene
+                  key='post'
+                  component={Post}
+                  hideNavBar
+                  hideTabBar
+                />
                 <Scene 
                   key='notifications'
                   component={Notifications}

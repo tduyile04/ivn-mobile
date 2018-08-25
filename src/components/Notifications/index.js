@@ -10,7 +10,7 @@ export default class Notifications extends Component {
   render() {
     return (
       <Container style={styles.container}>
-        <Header title='Notifications' />
+        <Header back title='Notifications' />
         <Content>
           <Card transparent style={styles.card}>
             <View style={styles.row}>
