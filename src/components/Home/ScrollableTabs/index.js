@@ -3,11 +3,11 @@ import { Container, Text, Tab, Tabs } from 'native-base';
 import Trending from './trending';
 import Feed from './feed';
 
-const ScrollableTabs = ({setActive}) => 
+const ScrollableTabs = () => 
   <Container style={styles.container}>
     <Tabs tabBarUnderlineStyle={styles.tabsStyle}>
       <Tab heading="Feed" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white}>
-        <Feed setActive={setActive} />
+        <Feed />
       </Tab>
       <Tab heading="Trending" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white}>
         <Trending />

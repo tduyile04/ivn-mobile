@@ -1,82 +1,90 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image  } from 'react-native';
+import { Content, Container } from 'native-base';
 import { Card, Icon } from 'native-base';
 import HorizontalLine from '../../shared-components/HorizontalLine';
+import Header from '../../shared-components/Header';
 
 export default class Notifications extends Component {
 
   render() {
     return (
-      <View>
-        <Card transparent style={styles.card}>
-          <View style={styles.row}>
-            <Image
-              style={styles.profileImage}
-              source={{uri: 'https://i.pinimg.com/736x/19/a8/6c/19a86c6673349bb21910dd4b3bb18e68.jpg'}}
-            />
-            <View style={styles.right}>
-              <View style={[styles.row, styles.user]}>
-                  <Text style={styles.name}>Emma Simpson</Text>
-                  <Icon name='dot-single' type='Entypo' style={styles.dots} />
-                  <Text style={styles.blueText}>12m</Text>
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.notify}>Asked <Text style={styles.notifyBold}>Michelle Morgan</Text> a question</Text>
-              </View>
-            </View>
-          </View>
-        </Card>
-        
-        <HorizontalLine />
-
-        <Card transparent style={styles.card}>
-          <View style={styles.row}>
-            <Image
-              style={styles.profileImage}
-              source={{uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg'}}
-            />
-            <View style={styles.right}>
-              <View style={[styles.row, styles.user]}>
-                  <Text style={styles.name}>Michelld Morgan</Text>
-                  <Icon name='dot-single' type='Entypo' style={styles.dots} />
-                  <Text style={styles.blueText}>12m</Text>
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.notify}>Asked <Text style={styles.notifyBold}>Michelle Morgan</Text> a question</Text>
+      <Container style={styles.container}>
+        <Header back title='Notifications' />
+        <Content>
+          <Card transparent style={styles.card}>
+            <View style={styles.row}>
+              <Image
+                style={styles.profileImage}
+                source={{uri: 'https://i.pinimg.com/736x/19/a8/6c/19a86c6673349bb21910dd4b3bb18e68.jpg'}}
+              />
+              <View style={styles.right}>
+                <View style={[styles.row, styles.user]}>
+                    <Text style={styles.name}>Emma Simpson</Text>
+                    <Icon name='dot-single' type='Entypo' style={styles.dots} />
+                    <Text style={styles.blueText}>12m</Text>
+                </View>
+                <View style={styles.row}>
+                  <Text style={styles.notify}>Asked <Text style={styles.notifyBold}>Michelle Morgan</Text> a question</Text>
+                </View>
               </View>
             </View>
-          </View>
-        </Card>
+          </Card>
+          
+          <HorizontalLine />
 
-        <HorizontalLine />
-
-        <Card transparent style={styles.card}>
-          <View style={styles.row}>
-            <Image
-              style={styles.profileImage}
-              source={{uri: 'https://i.pinimg.com/736x/19/a8/6c/19a86c6673349bb21910dd4b3bb18e68.jpg'}}
-            />
-            <View style={styles.right}>
-              <View style={[styles.row, styles.user]}>
-                  <Text style={styles.name}>Emma Simpson</Text>
-                  <Icon name='dot-single' type='Entypo' style={styles.dots} />
-                  <Text style={styles.blueText}>12m</Text>
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.notify}>Asked <Text style={styles.notifyBold}>Michelle Morgan</Text> a question</Text>
+          <Card transparent style={styles.card}>
+            <View style={styles.row}>
+              <Image
+                style={styles.profileImage}
+                source={{uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg'}}
+              />
+              <View style={styles.right}>
+                <View style={[styles.row, styles.user]}>
+                    <Text style={styles.name}>Michelld Morgan</Text>
+                    <Icon name='dot-single' type='Entypo' style={styles.dots} />
+                    <Text style={styles.blueText}>12m</Text>
+                </View>
+                <View style={styles.row}>
+                  <Text style={styles.notify}>Asked <Text style={styles.notifyBold}>Michelle Morgan</Text> a question</Text>
+                </View>
               </View>
             </View>
-          </View>
-        </Card>
+          </Card>
 
-        <HorizontalLine />
+          <HorizontalLine />
 
-      </View>
+          <Card transparent style={styles.card}>
+            <View style={styles.row}>
+              <Image
+                style={styles.profileImage}
+                source={{uri: 'https://i.pinimg.com/736x/19/a8/6c/19a86c6673349bb21910dd4b3bb18e68.jpg'}}
+              />
+              <View style={styles.right}>
+                <View style={[styles.row, styles.user]}>
+                    <Text style={styles.name}>Emma Simpson</Text>
+                    <Icon name='dot-single' type='Entypo' style={styles.dots} />
+                    <Text style={styles.blueText}>12m</Text>
+                </View>
+                <View style={styles.row}>
+                  <Text style={styles.notify}>Asked <Text style={styles.notifyBold}>Michelle Morgan</Text> a question</Text>
+                </View>
+              </View>
+            </View>
+          </Card>
+
+          <HorizontalLine />
+        </Content>
+      </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
   card: {
     marginTop: 25,
     marginBottom: 15,

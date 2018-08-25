@@ -12,8 +12,8 @@ class Post extends Component {
   render () {
     return (
       <Container>
-        <Header back setActive={this.props.setActive} />
-          <Content>
+        <Header back title='Comments' />
+          <Content style={styles.content}>
             <Feed />
             <HorizontalLine />
             <Comment />
@@ -31,7 +31,9 @@ class Post extends Component {
 }
 
 const styles = StyleSheet.create({
-
+  content: {
+    marginTop: 20,
+  }
 });
 
 export default  Post;
