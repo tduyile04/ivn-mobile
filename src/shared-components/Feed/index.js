@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Content, Card, View, Text, Button, Icon, Spinner } from 'native-base';
-import { StyleSheet, Image, FlatList } from 'react-native';
+import { StyleSheet, Image, FlatList, Animated } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { LikeButton, LikedButton } from '../../shared-components/Buttons';
+import { Heart } from '../../shared-components/Buttons';
 import HorizontalLine from '../HorizontalLine';
 
 
 const Post = ({ 
+  userId,
   userAvatar, 
   userFullName, 
   userParty,
@@ -19,7 +20,10 @@ const Post = ({
   postContent,
   postTags,
   postLikes,
-  postComments
+  postComments,
+  liked,
+  triggerLike,
+  heartButtonStyle,
  }) => {
   return (
     <View>
@@ -31,7 +35,7 @@ const Post = ({
           />
           <View style={styles.items}>
             <View style={styles.info}>
-              <Text style={styles.name}>{userFullName}</Text>
+              <Text style={styles.name} onPress={() => Actions.userProfile({id: userId})}>{userFullName}</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText} onPress={() => Actions.partyProfile()}>{userParty}</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
@@ -51,7 +55,11 @@ const Post = ({
                   )
                 })}
               </View>
-              <LikedButton />
+              <Button transparent onPress={triggerLike}>
+                <Animated.View style={heartButtonStyle}>
+                  <Heart filled={liked} />
+                </Animated.View>
+              </Button>
             </View>
             <View style={styles.postInfo}>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
@@ -87,7 +95,29 @@ class Feed extends Component {
 
     this.state = {
       refreshing: false,
+      liked: false,
+      scale: new Animated.Value(0),
+      animations: [
+        new Animated.Value(0),
+        new Animated.Value(0),
+        new Animated.Value(0),
+        new Animated.Value(0),
+        new Animated.Value(0),
+        new Animated.Value(0),
+      ],
     }
+  }
+
+  triggerLike = () => {
+    this.setState({
+      liked: !this.state.liked
+    })
+    Animated.spring(this.state.scale, {
+      toValue: 2,
+      friction: 3
+    }).start(() => {
+      this.state.scale.setValue(0);
+    });
   }
 
   async componentDidMount() {
@@ -108,7 +138,18 @@ class Feed extends Component {
   }
 
   render() {
-    const { posts, loading } = this.props;
+    const { setActive, posts, loading } = this.props;
+    const { liked } = this.state;
+    const bouncyHeart = this.state.scale.interpolate({
+      inputRange: [0, 1, 2],
+      outputRange: [1, .8, 1]
+    })
+    const heartButtonStyle = {
+      transform: [
+        { scale: bouncyHeart }
+      ]
+    }
+
     return (
       <Content>
         <FlatList
@@ -116,6 +157,7 @@ class Feed extends Component {
           renderItem={({ item: post }) => (
             <Post
               id={post.id} 
+              userId={post.author.id}
               userAvatar={post.author && post.author.avatar}
               userFullName={`${post.author && post.author.firstName} ${post.author && post.author.lastName}`}
               userParty={'APC'}
@@ -123,8 +165,12 @@ class Feed extends Component {
               postTimePosted={10}
               postContent={post.content}
               postTags={['Change2019', 'RealChange']}
-              postComments={post.comments && post.comments.length}
-              postLikes={post.likes && post.likes.length}
+              postLikes={post.comments && post.comments.length}
+              postComments={post.likes && post.likes.length}
+              setActive={setActive}
+              liked={liked}
+              triggerLike={this.triggerLike}
+              heartButtonStyle={heartButtonStyle}
             />
           )}
           keyExtractor={item => item.id}

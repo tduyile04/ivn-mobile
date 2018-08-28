@@ -33,12 +33,12 @@ const SideBar = () => {
             </Button>
             <Text style={styles.text}>Timeline</Text>
           </View>
-          <View style={[styles.rowCenter]}>
+          {/* <View style={[styles.rowCenter]}>
             <Button badge transparent>
               <Icon name="people" type='SimpleLineIcons' style={styles.icon} />
             </Button>
             <Text style={styles.text}>People</Text>
-          </View>
+          </View> */}
           <View style={[styles.rowCenter]}>
             <Button transparent>
               <Icon name="bell" type='SimpleLineIcons'style={styles.icon} />
@@ -53,8 +53,9 @@ const SideBar = () => {
           </View>
           <View style={[styles.rowCenter]}>
             <Button transparent onPress={() => Actions.partyList()}>
-              <Icon name="people" type='SimpleLineIcons' style={styles.icon} />  <Text style={styles.text}>Parties</Text>
+              <Icon name="people" type='SimpleLineIcons' style={styles.icon} />  
             </Button>
+            <Text style={styles.text}>Parties</Text>
           </View>
         </View>
       </View>

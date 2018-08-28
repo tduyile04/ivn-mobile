@@ -8,13 +8,13 @@ const ScrollableTabs = () => {
   return (
     <Container style={styles.container}>
       <Tabs tabBarUnderlineStyle={styles.tabsStyle}>
-        <Tab heading="About" activeTextStyle={styles.activeTextStyle} >
+        <Tab heading="About" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle}>
           <About />
         </Tab>
-        <Tab heading="Posts" activeTextStyle={styles.activeTextStyle}>
+        <Tab heading="Posts" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle}>
           <Text>Hello there 2</Text>
         </Tab>
-        <Tab heading="Questions" activeTextStyle={styles.activeTextStyle}>
+        <Tab heading="Questions" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle}>
           <Text>Hello there 3</Text>
         </Tab>
       </Tabs>
@@ -25,14 +25,23 @@ const ScrollableTabs = () => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 30,
+    backgroundColor: 'transparent'
   },
   tabsStyle: {
     backgroundColor: '#628AFF',
+    borderBottomWidth:0
+  },
+  white: {
+    backgroundColor: '#fff',
   },
   activeTextStyle: {
     color: '#628AFF',
     fontFamily: 'raleway-bold',
     backgroundColor: 'transparent'
+  },
+  textStyle: {
+    color: '#3F3F3F',
+    fontFamily: 'raleway-regular'
   }
 });
 

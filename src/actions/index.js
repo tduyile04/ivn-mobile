@@ -9,10 +9,22 @@ export {
   signup
 } from './auth';
 
-export {
-  getUserPending,
-  getUserSuccess,
-  getUserFailure
+export { 
+  getUserPending, 
+  getUserSuccess, 
+  getUserFailure, 
+  endorseUserPending, 
+  endorseUserSuccess, 
+  endorseUserFailure,
+  withdrawEndorsementPending, 
+  withdrawEndorsementSuccess, 
+  withdrawEndorsementFailure, 
+  followUserPending, 
+  followUserSuccess, 
+  followUserFailure, 
+  unfollowUserPending, 
+  unfollowUserSuccess, 
+  unfollowUserFailure,
 } from './user';
 
 export {

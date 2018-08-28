@@ -57,8 +57,9 @@ const styles = StyleSheet.create({
   },
   card: {
     marginTop: 20,
-    paddingLeft: 25,
-    paddingRight: 25,
+    width: '90%',
+    marginLeft: '5%',
+    marginRight: '5%',
   },
   position: {
     fontFamily: 'raleway-bold',

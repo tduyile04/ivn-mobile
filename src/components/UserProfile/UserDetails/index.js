@@ -1,9 +1,9 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
-import { Text, View } from 'native-base';
+import { Text, View, Button } from 'native-base';
 
-const UserDetails = ({user}) => {
-  const avatar = user.avatar || 'http://marydupriestudio.com/wordpress/wp-content/uploads/2016/04/Detroit_Mi_Actors_Headshot_Photographers_105-2.jpg';
+const UserDetails = ({user, editProfileButton}) => {
+  const avatar = user.avatar || 'https://forumine.com/download/file.php?avatar=86_1519467243.jpg';
   return (
     <View style={styles.content}>
       <View style={styles.profileImageSection}>
@@ -26,6 +26,9 @@ const UserDetails = ({user}) => {
             <Text style={styles.partyName}>People's Democratic Party</Text>
           </View>
         </View>
+        { editProfileButton && <Button small bordered block style={styles.button} onPress={() => alert('Editing My Profile...')}>
+          <Text style={styles.text}>Edit Profile</Text>
+        </Button>}
       </View>
     </View>
   );
@@ -57,10 +60,12 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: "#3F3F3F",
     fontFamily: "raleway-regular",
+    marginBottom: 10
   },
   partyDetails: {
     flexDirection: 'row',
     marginTop: 10,
+    // marginBottom: 10
   },
   partyFlag: {
     width: 39,
@@ -68,7 +73,7 @@ const styles = StyleSheet.create({
   },
   partyInfo: {
     marginLeft: 7,
-    marginBottom: 40,
+    marginBottom: 20,
   },
   partyName: {
     fontSize: 11,
@@ -82,6 +87,15 @@ const styles = StyleSheet.create({
     fontFamily: 'raleway-regular',
     color: "#3F3F3F",
   },
+  button: {
+    width: '105%',
+    borderColor: '#aaa',
+    marginBottom: 30,
+  },
+  text: {
+    fontFamily: 'raleway-bold',
+    color: '#444'
+  }
 });
 
 export default UserDetails; 

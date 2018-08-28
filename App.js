@@ -4,7 +4,8 @@ import { Router, Scene, Drawer, Tabs } from 'react-native-router-flux';
 import { Provider } from 'react-redux';
 import { Root } from "native-base";
 
-import UserProfile from './src/components/UserProfile';
+import MyProfile from './src/components/UserProfile/me';
+import UserProfile from './src/components/UserProfile/others';
 import PartyProfile from './src/components/PartyProfile';
 import PartyList from './src/components/PartyList';
 import Search from './src/components/Search';
@@ -61,63 +62,68 @@ class App extends React.Component {
                 component={SignUp}
                 hideNavBar
               />
-              <Tabs
-                key='tabs'
-                tabBarComponent={Footer}
-                initial={this.state.loggedIn}
+              <Drawer
+                  hideNavBar
+                  key="drawer"
+                  contentComponent={SideBar}
+                  drawerWidth={300}
+                  drawerPosition="left"
+                  open={false}
+                  initial={this.state.loggedIn}
               >
-                <Drawer
-                    hideNavBar
-                    key="drawer"
-                    contentComponent={SideBar}
-                    drawerWidth={300}
-                    drawerPosition="left"
-                    open={false}
+                <Tabs
+                  key='tabs'
+                  tabBarComponent={Footer}
                 >
                   <Scene
                     key='home'
                     component={Home}
                     hideNavBar
                   />
-                </Drawer>
-                <Scene
-                  key='textEditor'
-                  component={TextEditor}
-                  hideTabBar
-                  hideNavBar
-                />
-                <Scene
-                  key='comments'
-                  component={Comments}
-                  hideNavBar
-                  hideTabBar
-                />
-                <Scene
-                  key='notifications'
-                  component={Notifications}
-                  hideNavBar
-                />
-                <Scene
-                  key='search'
-                  component={Search}
-                  hideNavBar
-                />
-                <Scene
-                  key='userProfile'
-                  component={UserProfile}
-                  hideNavBar
-                />
-                <Scene
-                  key='partyProfile'
-                  component={PartyProfile}
-                  hideNavBar
-                />
-                <Scene
-                  key='partyList'
-                  component={PartyList}
-                  hideNavBar
-                />
-              </Tabs>
+                  <Scene
+                    key='textEditor'
+                    component={TextEditor}
+                    hideTabBar
+                    hideNavBar
+                  />
+                  <Scene
+                    key='comments'
+                    component={Comments}
+                    hideNavBar
+                    hideTabBar
+                  />
+                  <Scene 
+                    key='notifications'
+                    component={Notifications}
+                    hideNavBar 
+                  />
+                  <Scene 
+                    key='search'
+                    component={Search}
+                    hideNavBar
+                  />
+                  <Scene 
+                    key='myProfile'
+                    component={MyProfile}
+                    hideNavBar
+                  />
+                  <Scene 
+                    key='userProfile'
+                    component={UserProfile}
+                    hideNavBar
+                  />
+                  <Scene
+                    key='partyList'
+                    component={PartyList}
+                    hideNavBar
+                  />
+                  <Scene 
+                    key='partyProfile'
+                    component={PartyProfile}
+                    hideNavBar
+                  />
+                </Tabs>
+              </Drawer>
             </Scene>
           </Router>
         </Provider>
