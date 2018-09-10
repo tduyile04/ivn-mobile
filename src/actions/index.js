@@ -23,7 +23,15 @@ export {
   createPostsPending,
   createPostsSuccess,
   createPostsFailure,
-  createPosts
+  createPosts,
+  getPostPending,
+  getPostSuccess,
+  getPostFailure,
+  getPost,
+  createCommentsPending,
+  createCommentsSuccess,
+  createCommentsFailure,
+  createComments
 } from './posts';
 
 export {

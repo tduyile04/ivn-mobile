@@ -3,27 +3,25 @@ import { View, Text, Icon, Button } from 'native-base';
 import { StyleSheet, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-const Comment = () => 
+const Comment = ({ item }) => 
   <View style={styles.container}>
     <View>
       <Image
         style={styles.profileImage}
-        source={{uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg'}}
+        source={{uri: item.user && item.user.avatar || 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg'}}
       />
       <Icon style={{ fontSize: 18, color: '#97A1B3', marginTop: 5 }} name="subdirectory-arrow-right" type="MaterialCommunityIcons" />
     </View>
     <View style={styles.contents}>
       <View style={styles.items}>
         <View style={styles.info}>
-          <Text style={styles.name}>Emma Simpson</Text>
+          <Text style={styles.name}>{item.user && item.user.firstName} {item.user && item.user.lastName}</Text>
           <Icon name='dot-single' type='Entypo' style={styles.dots} />
           <Text style={[styles.text, styles.blueText]} onPress={() => Actions.partyProfile()}>PDP</Text>
           <Icon name='dot-single' type='Entypo' style={styles.dots} />
-          <Text style={[styles.text, styles.blueText]}>5m</Text>
+          <Text style={[styles.text, styles.blueText]}>{item.createdAt} m</Text>
         </View>
-        <Text style={styles.description}>Do you know what could beat the exciting 
-          feeling of having a new computer? Make your own PC!     
-        </Text>
+        <Text style={styles.description}>{item.comment}</Text>
         <Button small bordered iconLeft style={styles.button}>
           <Icon name='triangle-up' type='Entypo' style={styles.icon} />
           <Text style={[styles.text, styles.darkText]}>178</Text>

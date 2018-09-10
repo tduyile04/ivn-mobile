@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Footer, FooterTab, Text, Button, Icon, Item, Input, rounded, View, Content } from 'native-base';
 import { StyleSheet } from 'react-native';
 
-export default class CommentTab extends Component {
+import { createComments } from '../../actions';
+
+class CommentTab extends Component {
+  state = {
+    comment: ''
+  }
+
+  handleComment = async () => {
+    await this.props.createComments(this.state.comment, this.props.postId)
+    this.setState({ comment: '' })
+  }
+
   render() {
     return (
       <Footer>
@@ -13,12 +25,14 @@ export default class CommentTab extends Component {
                 <Item rounded style={styles.comment}>
                   <Input 
                     placeholder='Write a comment' 
-                    placeholderTextColor="#C7C7CB" 
+                    placeholderTextColor="#C7C7CB"
                     multiline 
-                    style={styles.input} 
+                    style={styles.input}
+                    value={this.state.comment}
+                    onChangeText={comment => this.setState({ comment })}
                   />
                 </Item>
-                <Button style={styles.button}>
+                <Button style={styles.button} onPress={this.handleComment}>
                   <Icon name='send' />
                 </Button>
               </View>
@@ -61,3 +75,9 @@ const styles = StyleSheet.create({
     marginTop: -10
   },
 });
+
+const mapDispatchToProps = dispatch => ({
+  createComments: (comment, postId) => dispatch(createComments(comment, postId))
+})
+
+export default connect(null, mapDispatchToProps)(CommentTab);
