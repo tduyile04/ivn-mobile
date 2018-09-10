@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Content, Card, View, Text, Button, Icon, Spinner } from 'native-base';
 import { StyleSheet, Image, FlatList } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { LikeButton, LikedButton } from '../../shared-components/Buttons';
 import HorizontalLine from '../HorizontalLine';
+
 
 const Post = ({ 
   userAvatar, 
@@ -11,13 +13,13 @@ const Post = ({
   userParty,
   postTimePosted,
   userPosition,
+  postId,
   postTitle,
   postImageSrc,
   postContent,
   postTags,
   postLikes,
-  postComments,
-  setActive
+  postComments
  }) => {
   return (
     <View>
@@ -55,7 +57,21 @@ const Post = ({
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>{postLikes} Likes</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText}  onPress={() => Actions.post()}>{postComments} Comments</Text>
+              <Text 
+                style={styles.blueText}  
+                onPress={() => Actions.comments({
+                  userAvatar, 
+                  userFullName, 
+                  userParty,
+                  postTimePosted,
+                  userPosition,
+                  postId,
+                  postTitle,
+                  postContent,
+                  postTags,
+                  postLikes,
+                  postComments
+                })}>{postComments} Comments</Text>
             </View>
           </View>
         </View>
@@ -92,24 +108,23 @@ class Feed extends Component {
   }
 
   render() {
-    const { setActive, posts, loading } = this.props;
+    const { posts, loading } = this.props;
     return (
       <Content>
-
         <FlatList
           data={posts}
-          renderItem={({ item: post }) => console.log("the post", post) || (
+          renderItem={({ item: post }) => (
             <Post
-              key={post.id} 
+              id={post.id} 
               userAvatar={post.author && post.author.avatar}
               userFullName={`${post.author && post.author.firstName} ${post.author && post.author.lastName}`}
               userParty={'APC'}
+              postId={post.id}
               postTimePosted={10}
               postContent={post.content}
               postTags={['Change2019', 'RealChange']}
-              postLikes={post.comments && post.comments.length}
-              postComments={post.likes && post.likes.length}
-              setActive={setActive}
+              postComments={post.comments && post.comments.length}
+              postLikes={post.likes && post.likes.length}
             />
           )}
           keyExtractor={item => item.id}

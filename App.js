@@ -8,7 +8,7 @@ import UserProfile from './src/components/UserProfile';
 import PartyProfile from './src/components/PartyProfile';
 import Search from './src/components/Search';
 import Home from './src/components/Home';
-import Post from './src/components/Post';
+import Comments from './src/components/Comments';
 import Notifications from './src/components/Notifications';
 import SideBar from './src/shared-components/SideBar';
 import Footer from './src/shared-components/Footer';
@@ -86,8 +86,8 @@ class App extends React.Component {
                   hideNavBar
                 />
                 <Scene
-                  key='post'
-                  component={Post}
+                  key='comments'
+                  component={Comments}
                   hideNavBar
                   hideTabBar
                 />
