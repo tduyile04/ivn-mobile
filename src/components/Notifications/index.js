@@ -1,79 +1,74 @@
 import React, { Component } from 'react';
+import moment from 'moment'
 import { View, Text, StyleSheet, Image  } from 'react-native';
+import { connect } from 'react-redux';
 import { Content, Container } from 'native-base';
 import { Card, Icon } from 'native-base';
 import HorizontalLine from '../../shared-components/HorizontalLine';
 import Header from '../../shared-components/Header';
+import { getNotifications, clearUnread } from '../../actions/notification'
 
-export default class Notifications extends Component {
+class Notifications extends Component {
+
+  async componentDidMount() {
+    await this.props.getNotifications(this.props.page, this.props.limit)
+    this.props.clearUnread()
+  }
+
+  renderNotificationCard() {
+    const adminAction = {
+      'role_upgrade': 'Role Upgrade!!!',
+      'party_member_add': 'You\'ve been added to a party!',
+      'party_member_remove': 'You\'ve been removed from a party!',
+      'role_downgrade': 'Revoked role access!'
+    }
+    return this.props.notifications.map(notification => (
+      <View key={notification.id}>
+        <Card transparent style={styles.card}>
+          <View style={styles.row}>
+            {Object.keys(adminAction).includes(notification.context)
+              ? <Image
+                  style={styles.profileImage}
+                  source={{
+                    uri: '' }}
+                />
+              :
+                <Image
+                  style={styles.profileImage}
+                  source={{
+                    uri: notification.sender[0].avatar || 'https://i.pinimg.com/736x/19/a8/6c/19a86c6673349bb21910dd4b3bb18e68.jpg'}}
+                />
+            }
+            <View style={styles.right}>
+              <View style={[styles.row, styles.user]}>
+                  <Text style={styles.name}>
+                    {Object.keys(adminAction).includes(notification.context)
+                        ? adminAction[notification.context]
+                        : `${notification.sender[0].firstName} ${notification.sender[0].lastName}`
+                    }
+                  </Text>
+                  <Icon name='dot-single' type='Entypo' style={styles.dots} />
+                  <Text style={styles.blueText}>
+                    {moment(notification.created_at).fromNow()}
+                  </Text>
+              </View>
+              <View style={styles.row}>
+                <Text style={styles.notify}>{notification.note}</Text>
+              </View>
+            </View>
+          </View>
+        </Card>
+        <HorizontalLine />
+      </View>
+    ))
+  }
 
   render() {
     return (
       <Container style={styles.container}>
         <Header back title='Notifications' />
         <Content>
-          <Card transparent style={styles.card}>
-            <View style={styles.row}>
-              <Image
-                style={styles.profileImage}
-                source={{uri: 'https://i.pinimg.com/736x/19/a8/6c/19a86c6673349bb21910dd4b3bb18e68.jpg'}}
-              />
-              <View style={styles.right}>
-                <View style={[styles.row, styles.user]}>
-                    <Text style={styles.name}>Emma Simpson</Text>
-                    <Icon name='dot-single' type='Entypo' style={styles.dots} />
-                    <Text style={styles.blueText}>12m</Text>
-                </View>
-                <View style={styles.row}>
-                  <Text style={styles.notify}>Asked <Text style={styles.notifyBold}>Michelle Morgan</Text> a question</Text>
-                </View>
-              </View>
-            </View>
-          </Card>
-          
-          <HorizontalLine />
-
-          <Card transparent style={styles.card}>
-            <View style={styles.row}>
-              <Image
-                style={styles.profileImage}
-                source={{uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg'}}
-              />
-              <View style={styles.right}>
-                <View style={[styles.row, styles.user]}>
-                    <Text style={styles.name}>Michelld Morgan</Text>
-                    <Icon name='dot-single' type='Entypo' style={styles.dots} />
-                    <Text style={styles.blueText}>12m</Text>
-                </View>
-                <View style={styles.row}>
-                  <Text style={styles.notify}>Asked <Text style={styles.notifyBold}>Michelle Morgan</Text> a question</Text>
-                </View>
-              </View>
-            </View>
-          </Card>
-
-          <HorizontalLine />
-
-          <Card transparent style={styles.card}>
-            <View style={styles.row}>
-              <Image
-                style={styles.profileImage}
-                source={{uri: 'https://i.pinimg.com/736x/19/a8/6c/19a86c6673349bb21910dd4b3bb18e68.jpg'}}
-              />
-              <View style={styles.right}>
-                <View style={[styles.row, styles.user]}>
-                    <Text style={styles.name}>Emma Simpson</Text>
-                    <Icon name='dot-single' type='Entypo' style={styles.dots} />
-                    <Text style={styles.blueText}>12m</Text>
-                </View>
-                <View style={styles.row}>
-                  <Text style={styles.notify}>Asked <Text style={styles.notifyBold}>Michelle Morgan</Text> a question</Text>
-                </View>
-              </View>
-            </View>
-          </Card>
-
-          <HorizontalLine />
+          {this.renderNotificationCard()}
         </Content>
       </Container>
     );
@@ -133,3 +128,18 @@ const styles = StyleSheet.create({
     fontFamily: 'SFProText-SemiBold'
   }
 });
+
+const mapStateToProps = state => ({
+  notifications: state.notification.notifications,
+  page: state.notification.page,
+  limit: state.notification.limit,
+  error: state.notification.error,
+  loading: state.notification.loading
+})
+
+const mapDispatchToProps = dispatch => ({
+  getNotifications: (page, limit) => dispatch(getNotifications(page, limit)),
+  clearUnread: () => dispatch(clearUnread())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Notifications)
