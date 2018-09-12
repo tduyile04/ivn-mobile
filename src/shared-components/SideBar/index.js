@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, View, Container, Button, Icon, Badge, Left, Body, Right } from 'native-base';
 import { StyleSheet, Image } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+
 import HorizontalLine from '../../shared-components/HorizontalLine';
 import Listings from '../../shared-components/Listings';
 
@@ -25,29 +27,34 @@ const SideBar = () => {
           <HorizontalLine lineStyle={styles.lineStyle} />
         </View>
         <View style={[styles.box, styles.main]}>
-          <View style={[styles.rowCenter]}> 
+          <View style={[styles.rowCenter]}>
             <Button transparent>
               <Icon name="home" type='SimpleLineIcons' style={styles.icon} />
             </Button>
             <Text style={styles.text}>Timeline</Text>
           </View>
-          <View style={[styles.rowCenter]}> 
+          <View style={[styles.rowCenter]}>
             <Button badge transparent>
               <Icon name="people" type='SimpleLineIcons' style={styles.icon} />
             </Button>
             <Text style={styles.text}>People</Text>
           </View>
-          <View style={[styles.rowCenter]}> 
+          <View style={[styles.rowCenter]}>
             <Button transparent>
               <Icon name="bell" type='SimpleLineIcons'style={styles.icon} />
             </Button>
             <Text style={styles.text}>Notifications</Text>
           </View>
-          <View style={[styles.rowCenter]}> 
+          <View style={[styles.rowCenter]}>
             <Button transparent>
               <Icon name="comment-question-outline" type='MaterialCommunityIcons' style={styles.icon} />
             </Button>
             <Text style={styles.text}>Questions</Text>
+          </View>
+          <View style={[styles.rowCenter]}>
+            <Button transparent onPress={() => Actions.partyList()}>
+              <Icon name="people" type='SimpleLineIcons' style={styles.icon} />  <Text style={styles.text}>Parties</Text>
+            </Button>
           </View>
         </View>
       </View>
@@ -55,13 +62,13 @@ const SideBar = () => {
       <View style={styles.footer}>
         <HorizontalLine lineStyle={styles.lineStyle} />
         <View style={styles.box}>
-          <View style={[styles.rowCenter]}> 
+          <View style={[styles.rowCenter]}>
             <Button transparent>
               <Icon name="settings" type='SimpleLineIcons' style={styles.icon} />
             </Button>
             <Text style={styles.text}>Account Settings</Text>
           </View>
-          <View style={[styles.rowCenter]}> 
+          <View style={[styles.rowCenter]}>
             <Button transparent>
               <Icon name="help-circle-outline" type='MaterialCommunityIcons' style={styles.icon} />
             </Button>
@@ -81,7 +88,7 @@ const SideBar = () => {
   );
 };
 
-const styles = StyleSheet.create({ 
+const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     flex: 1,
@@ -127,7 +134,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   footer: {
-    flex: 1, 
+    flex: 1,
     justifyContent: 'flex-end',
     paddingBottom: 10,
   },
