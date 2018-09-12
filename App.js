@@ -6,6 +6,7 @@ import { Root } from "native-base";
 
 import UserProfile from './src/components/UserProfile';
 import PartyProfile from './src/components/PartyProfile';
+import PartyList from './src/components/PartyList';
 import Search from './src/components/Search';
 import Home from './src/components/Home';
 import Comments from './src/components/Comments';
@@ -49,16 +50,16 @@ class App extends React.Component {
         <Provider store={store}>
           <Router>
             <Scene key='root'>
-              <Scene 
+              <Scene
                 key='login'
                 component={Login}
                 hideNavBar
                 initial={!this.state.loggedIn}
               />
-              <Scene 
+              <Scene
                 key='signup'
                 component={SignUp}
-                hideNavBar 
+                hideNavBar
               />
               <Tabs
                 key='tabs'
@@ -73,7 +74,7 @@ class App extends React.Component {
                     drawerPosition="left"
                     open={false}
                 >
-                  <Scene 
+                  <Scene
                     key='home'
                     component={Home}
                     hideNavBar
@@ -91,24 +92,29 @@ class App extends React.Component {
                   hideNavBar
                   hideTabBar
                 />
-                <Scene 
+                <Scene
                   key='notifications'
                   component={Notifications}
-                  hideNavBar 
+                  hideNavBar
                 />
-                <Scene 
+                <Scene
                   key='search'
                   component={Search}
                   hideNavBar
                 />
-                <Scene 
+                <Scene
                   key='userProfile'
                   component={UserProfile}
                   hideNavBar
                 />
-                <Scene 
+                <Scene
                   key='partyProfile'
                   component={PartyProfile}
+                  hideNavBar
+                />
+                <Scene
+                  key='partyList'
+                  component={PartyList}
                   hideNavBar
                 />
               </Tabs>

@@ -9,10 +9,14 @@ const Listings = ({followers, following, endorsements, members, countStyle}) => 
             <Text style={[styles.count, countStyle]}>{followers}</Text>
             <Text style={styles.title}>Followers</Text>
           </View>
-          <View>
-            <Text style={[styles.count, countStyle]}>{following}</Text>
-            <Text style={styles.title}>Following</Text>
-          </View>
+          {
+            (following || following === 0) && (
+              <View>
+                <Text style={[styles.count, countStyle]}>{following}</Text>
+                <Text style={styles.title}>Following</Text>
+              </View>
+            )
+          }
           {
             (endorsements || endorsements === 0) && (
               <View>

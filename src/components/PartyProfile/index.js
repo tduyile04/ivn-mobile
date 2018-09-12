@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, Content, View, Text, Button, Icon } from 'native-base';
+import { connect } from 'react-redux';
+import { Container, Content, View, Text, Button, Icon, Spinner } from 'native-base';
 import { StyleSheet, Image } from 'react-native';
 
 import CoverImage from '../../shared-components/CoverImage';
@@ -7,33 +8,48 @@ import Listings from '../../shared-components/Listings';
 import ScrollableTabs from './ScrollableTabs';
 import { FollowButton } from '../../shared-components/Buttons';
 
-const PartyProfile = () => {
-  return (
-    <Container>
-      <Content>
-        <CoverImage 
-          sourceUri='http://www.signalng.com/wp-content/uploads/president-buhari-meets-president-francoise-hollande-at-elysee-1.jpg'
-          coverImageStyle={styles.coverImageStyle}
-          />
-        <View style={styles.partyDetailsContainer}>
-          <View style={styles.partyFlagContainer}>
-            <Image
-              style={styles.partyFlag}
-              source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
-              resizeMode="contain"
-              />
-          </View>
-          <Text style={styles.partyName}>People's Democratic Party</Text>
-          <Text style={styles.partyHandle}>@pdp</Text>
-          <Listings followers={21098} following={50} members={1050} />
-          <View style={styles.followActionView}>
-            <FollowButton />
-          </View>
-        </View>
-        <ScrollableTabs />
-      </Content>
-    </Container>
-  );
+import { getParty, unSelectParty } from '../../actions/party';
+
+class PartyProfile extends React.Component {
+  componentDidMount () {
+    this.props.getParty(this.props.data);
+  }
+  componentWillUnmount () {
+    this.props.unSelectParty();
+  }
+
+  render () {
+    return (
+      <Container>
+        <Content>
+          <CoverImage
+            sourceUri='http://www.signalng.com/wp-content/uploads/president-buhari-meets-president-francoise-hollande-at-elysee-1.jpg'
+            coverImageStyle={styles.coverImageStyle}
+            />
+          {this.props.selected
+            ? (
+              <View style={styles.partyDetailsContainer}>
+                <View style={styles.partyFlagContainer}>
+                  <Image
+                    style={styles.partyFlag}
+                    source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
+                    resizeMode="contain"
+                    />
+                </View>
+                <Text style={styles.partyName}>{this.props.selected.name}</Text>
+                <Text style={styles.partyHandle}>@{this.props.selected.abbr}</Text>
+                <Listings followers={21098} members={1050} />
+                <View style={styles.followActionView}>
+                  <FollowButton />
+                </View>
+              </View>
+            ) : <Spinner size="small" color="#000" />
+          }
+          <ScrollableTabs />
+        </Content>
+      </Container>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -82,4 +98,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PartyProfile;
+
+const mapStateToProps = state => ({
+  selected: state.party.selected,
+  error: state.party.error,
+  loading: state.party.loading
+})
+
+const mapDispatchToProps = dispatch => ({
+  getParty: id => dispatch(getParty(id)),
+  unSelectParty: () => dispatch(unSelectParty())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PartyProfile)
