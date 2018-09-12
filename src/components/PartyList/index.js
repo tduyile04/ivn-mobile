@@ -27,7 +27,7 @@ class PartyList extends React.Component {
     return (
       <Container style={styles.container}>
         <Content style={styles.content}>
-          <Header title='Parties' />
+          <Header back title='Parties' />
           <FlatList
             data={this.props.parties}
             renderItem={({ item }) => {

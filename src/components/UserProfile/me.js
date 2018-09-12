@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import { Spinner, Content, Container } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { Spinner, Content, Container, Button } from 'native-base';
+import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getUserDetails } from '../../actions/user';
 import Listings from '../../shared-components/Listings';
 import CoverImage from '../../shared-components/CoverImage';
 import UserDetails from './UserDetails';
-import UserActions from './UserActions';
 import ScrollableTabs from './ScrollableTabs';
 import { get } from '../../modules/cache';
 
-class UserProfile extends Component {
+class MyProfile extends Component {
 
   state = {
     loading: true,
@@ -35,26 +34,24 @@ class UserProfile extends Component {
             sourceUri='http://www.signalng.com/wp-content/uploads/president-buhari-meets-president-francoise-hollande-at-elysee-1.jpg' 
             coverImageStyle={styles.coverImageStyle} 
           />
-          <UserDetails user={user} />
-          <Listings followers={followers.length} following={followings.length} endorsements={endorsements.length} />
-          <UserActions />
+          <UserDetails user={user} editProfileButton />
+          <Listings followers={followers.length} following={followings.length} posts />
           <ScrollableTabs />
         </Content>
       </Container>
     );
   }
 }
-;
 
 const mapStateToProps = ({user}) => ({
   user
 })
 
 const mapDispatchToProps = dispatch => ({
-  getUserDetails: (userId) => dispatch(getUserDetails(userId))
+  getUserDetails: userId => dispatch(getUserDetails(userId))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(MyProfile);
 
 const styles = StyleSheet.create({
   container: {
@@ -63,6 +60,6 @@ const styles = StyleSheet.create({
   },
   coverImageStyle: {
     width: '100%',
-    height: 76,
-  }
+    height: 76, 
+  },
 });

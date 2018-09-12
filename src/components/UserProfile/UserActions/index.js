@@ -2,20 +2,40 @@ import React from 'react';
 import { View, Text, Button, Icon } from 'native-base';
 import { StyleSheet } from 'react-native';
 
-const UserActions = () => {
+const UserActions = ({id, endorseUser, followUser, unfollowUser, withdrawEndorsement, endorsed, following}) => {
   return (
     <View style={styles.actionSection}>
-      <Button style={styles.endorseActionView}>
-        <Icon type="MaterialIcons" name='plus-one' style={styles.plusIcon} />
-        <Text style={styles.endorseAction}>Endorse</Text>
-      </Button>
-      <Button style={styles.followActionView} light>
-        <Icon type="Feather" name='user-plus' style={styles.userIcon} />
-        <Text style={styles.followAction}>Follow</Text>
-      </Button>
+      { !endorsed &&
+          <Button style={styles.endorseActionView} onPress={() => endorseUser(id)}>
+            <Icon type="MaterialIcons" name='plus-one' style={styles.plusIcon} />
+            <Text style={styles.endorseAction}>Endorse</Text>
+          </Button> 
+      }
+      {
+        endorsed && 
+        <Button style={styles.unendorseActionView} onPress={() => withdrawEndorsement(id)}>
+          {/* <Icon type="MaterialCommunityIcons" name='cancel' style={styles.plusIcon} /> */}
+          <Text style={styles.endorseAction}>Unendorse</Text>
+        </Button> 
+      }
+      {
+        !following &&
+        <Button style={styles.followActionView} light onPress={() => followUser(id)}>
+          <Icon type="Feather" name='user-plus' style={styles.userIcon} />
+          <Text style={styles.followAction}>Follow</Text> 
+        </Button>
+      }
+      {
+        following &&
+        <Button style={styles.followActionView} light onPress={() => unfollowUser(id)}>
+          <Icon type="Feather" name='user-minus' style={styles.userIcon} />
+          <Text style={styles.followAction}>Unfollow</Text>
+        </Button>
+      }
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   actionSection: {
@@ -39,6 +59,17 @@ const styles = StyleSheet.create({
   },
   endorseActionView: {
     backgroundColor: '#628AFF',
+    // backgroundColor: '#ff6277',
+    flex: 3,
+    height: 60,
+    justifyContent: 'center',
+    borderTopRightRadius: 30,
+    borderBottomRightRadius: 30,
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
+  },
+  unendorseActionView: {
+    backgroundColor: '#ff6277',
     flex: 3,
     height: 60,
     justifyContent: 'center',

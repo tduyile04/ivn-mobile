@@ -1,5 +1,20 @@
 import { handleActions } from "redux-actions";
-import { getUserPending, getUserSuccess, getUserFailure } from '../actions';
+import { getUserPending, 
+        getUserSuccess, 
+        getUserFailure,
+        endorseUserPending,
+        endorseUserSuccess,
+        endorseUserFailure,
+        withdrawEndorsementPending,
+        withdrawEndorsementSuccess,
+        withdrawEndorsementFailure,
+        followUserPending,
+        followUserSuccess,
+        followUserFailure,
+        unfollowUserPending,
+        unfollowUserSuccess,
+        unfollowUserFailure
+} from '../actions';
 
 const defaultState = {
   user: {},
@@ -29,5 +44,89 @@ export default handleActions({
       error: true,
       message
     }
-  }
+  },
+  [endorseUserPending](state = defaultState) {
+    return {
+      ...state,
+      loading: true
+    }
+  },
+  [endorseUserSuccess](state = defaultState, { payload: { message } }) {
+    return {
+      ...state,
+      loading: false,
+      message,
+    }
+  },
+  [endorseUserFailure](state = defaultState, { payload: { message } }) {
+    return {
+      ...state,
+      loading: false,
+      error: true,
+      message
+    }
+  },
+  [withdrawEndorsementPending](state = defaultState) {
+    return {
+      ...state,
+      loading: true
+    }
+  },
+  [withdrawEndorsementSuccess](state = defaultState, { payload: { message } }) {
+    return {
+      ...state,
+      loading: false,
+      message,
+    }
+  },
+  [withdrawEndorsementFailure](state = defaultState, { payload: { message } }) {
+    return {
+      ...state,
+      loading: false,
+      error: true,
+      message
+    }
+  },
+  [followUserPending](state = defaultState) {
+    return {
+      ...state,
+      loading: true
+    }
+  },
+  [followUserSuccess](state = defaultState, { payload: { message } }) {
+    return {
+      ...state,
+      loading: false,
+      message,
+    }
+  },
+  [followUserFailure](state = defaultState, { payload: { message } }) {
+    return {
+      ...state,
+      loading: false,
+      error: true,
+      message
+    }
+  },
+  [unfollowUserPending](state = defaultState) {
+    return {
+      ...state,
+      loading: true
+    }
+  },
+  [unfollowUserSuccess](state = defaultState, { payload: { message } }) {
+    return {
+      ...state,
+      loading: false,
+      message,
+    }
+  },
+  [unfollowUserFailure](state = defaultState, { payload: { message } }) {
+    return {
+      ...state,
+      loading: false,
+      error: true,
+      message
+    }
+  },
 }, defaultState);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Animated } from 'react-native';
 import { Button, Text, View, Icon } from 'native-base';
 
 // Pass in a buttonStyle props to override the existing button style
@@ -28,6 +28,12 @@ export const LikeButton = () =>
   <View style={styles.likeSection}>
     <Icon name='heart-outline' type='MaterialCommunityIcons' style={styles.numbHeart} />
   </View>;
+
+export const Heart = ({ filled, style, ...props}) => 
+  <Animated.View {...props} style={[styles.heartView, style]}>
+    {!filled && <Icon name='heart-outline' type='MaterialCommunityIcons' style={styles.numbHeart} />}
+    {filled && <Icon name='heart' type='MaterialCommunityIcons' style={styles.heart} />}
+  </Animated.View> 
    
 const styles = StyleSheet.create({
   unfollowText: {
@@ -64,6 +70,20 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     alignItems: 'center',
     marginTop: 13,
+  },
+  heartView:{
+    width: '10%',
+    marginTop: 20,
+  },
+  heart: {
+    color: '#FF6D6D',
+    height: 30,
+    width: 30
+  },
+  numbHeart: {
+    color: '#777',
+    height: 30,
+    width: 30,
   },
   likeSection:{
     width: '10%',
