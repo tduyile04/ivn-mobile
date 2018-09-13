@@ -5,14 +5,15 @@ import Feed from './feed';
 
 const ScrollableTabs = () =>
   <Container style={styles.container}>
-    <Tabs tabBarUnderlineStyle={styles.tabsStyle}>
+    <Feed />
+    {/* <Tabs tabBarUnderlineStyle={styles.tabsStyle}>
       <Tab heading="Feed" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white}>
         <Feed />
       </Tab>
       <Tab heading="Trending" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white}>
         <Trending />
       </Tab>
-    </Tabs>
+    </Tabs> */}
   </Container>
 
 const styles = {

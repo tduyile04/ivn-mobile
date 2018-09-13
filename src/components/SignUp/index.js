@@ -92,8 +92,6 @@ class SignUp extends Component {
             <Text style={[styles.text, styles.title]}>Welcome!</Text>
             <Text style={[styles.text, styles.description]}>Let’s get you setup quickly</Text>
           </View>
-
-          
           { step1 
             ? <Step1 
                 email={email}

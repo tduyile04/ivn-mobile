@@ -15,6 +15,7 @@ import Notifications from './src/components/Notifications';
 import SideBar from './src/shared-components/SideBar';
 import Footer from './src/shared-components/Footer';
 import TextEditor from './src/components/TextEditor';
+import Onboarding from './src/components/Onboarding';
 
 import SignUp from './src/containers/SignUp'
 import Login from './src/containers/Login';
@@ -26,6 +27,7 @@ class App extends React.Component {
   state = {
     ready: false,
     loggedIn: false,
+    returningUser: false, // First-time-User if value is false.
   };
 
   async componentDidMount() {
@@ -41,7 +43,8 @@ class App extends React.Component {
       'Ionicons': require("@expo/vector-icons/fonts/Ionicons.ttf"),
     });
     const loggedIn = await get("token");
-    this.setState({ ready: true, loggedIn });
+    const returningUser = await get("returningUser");
+    this.setState({ ready: true, loggedIn, returningUser: !!returningUser });
   }
 
   render() {
@@ -52,10 +55,16 @@ class App extends React.Component {
           <Router>
             <Scene key='root'>
               <Scene
+                key="onboarding"
+                component={Onboarding}
+                initial={!this.state.returningUser}
+                hideNavBar
+              />
+              <Scene
                 key='login'
                 component={Login}
                 hideNavBar
-                initial={!this.state.loggedIn}
+                initial={!this.state.loggedIn && this.state.returningUser}
               />
               <Scene
                 key='signup'
@@ -69,7 +78,7 @@ class App extends React.Component {
                   drawerWidth={300}
                   drawerPosition="left"
                   open={false}
-                  initial={this.state.loggedIn}
+                  initial={this.state.loggedIn && this.state.returningUser}
               >
                 <Tabs
                   key='tabs'
