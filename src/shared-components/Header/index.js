@@ -3,10 +3,10 @@ import { Header, Left, Body, Right, Button, Icon, Title , Text } from 'native-ba
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-const HeaderTab = ({menu, back, title, share, onShare}) => {
-
+const HeaderTab = ({menu, back, title, share, onShare, signup}) => {
+  const headerStyle = !signup ? styles.header : styles.headerSignup;
   return (
-    <Header style={styles.header} hasTabs>
+    <Header style={headerStyle} hasTabs>
       <Left>
         { menu && 
           <Button transparent onPress={() => Actions.drawerOpen()}>
@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
       height: 2,
       width: 0
     }
+  },
+  headerSignup: {
+    backgroundColor: 'white',
   },
   text: {
     fontFamily: 'museosans-500',

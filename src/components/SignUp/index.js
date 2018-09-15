@@ -86,7 +86,7 @@ class SignUp extends Component {
     const errorCheck = this.props.error.length > 0 || this.state.error.messages.length > 0;
     return (
       <Container>
-        <Header back />
+        <Header back signup />
         <Content style={styles.content}>
           <View styles={styles.header}>
             <Text style={[styles.text, styles.title]}>Welcome!</Text>
