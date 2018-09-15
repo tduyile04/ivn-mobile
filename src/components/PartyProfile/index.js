@@ -26,7 +26,7 @@ class PartyProfile extends React.Component {
             sourceUri='http://www.signalng.com/wp-content/uploads/president-buhari-meets-president-francoise-hollande-at-elysee-1.jpg'
             coverImageStyle={styles.coverImageStyle}
             />
-          {this.props.selected
+          { this.props.selected
             ? (
               <View style={styles.partyDetailsContainer}>
                 <View style={styles.partyFlagContainer}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Container, Button, Icon, Spinner } from 'native-base';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
@@ -23,6 +23,22 @@ class SideBar extends Component {
     if(!userCached) mapSet([{user}]);
     user = userCached || user;
     this.setState({user, loading: false});
+  }
+
+  logout = () => {
+    remove("token");
+    Actions.login();
+  }
+
+  confirmLogout = () => {
+    Alert.alert(
+      'Logout',
+      'Are you sure?',
+      [
+        {text: 'NO', onPress: () => console.log('NO Pressed'), style: 'cancel'},
+        {text: 'YES', onPress: () => this.logout()},
+      ]
+    );
   }
 
   render() {
@@ -96,9 +112,10 @@ class SideBar extends Component {
           <HorizontalLine lineStyle={styles.lineStyle} />
           <View style={styles.box}>
             <View style={[styles.rowCenter, styles.box]}>
-              <Text style={[styles.text, styles.footerText]}>Privacy Policy</Text>
+              {/* <Text style={[styles.text, styles.footerText]}>Privacy Policy</Text> */}
+              <Text style={[styles.text, styles.footerText]}>Terms of Use</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={[styles.text, styles.footerText, styles.terms]}>Terms of Use</Text>
+              <Text style={[styles.text, styles.footerText, styles.terms]} onPress={() => this.confirmLogout()}>Log out</Text> 
             </View>
           </View>
         </View>

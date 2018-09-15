@@ -38,7 +38,7 @@ const Post = ({
             <View style={styles.info}>
               <Text style={styles.name} onPress={() => Actions.userProfile({id: userId})}>{userFullName}</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText} onPress={() => Actions.partyProfile()}>{userParty}</Text>
+              <Text style={styles.blueText}>{userParty}</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>{postTimePosted}m</Text>
             </View>
