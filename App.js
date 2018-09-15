@@ -16,6 +16,7 @@ import SideBar from './src/shared-components/SideBar';
 import Footer from './src/shared-components/Footer';
 import TextEditor from './src/components/TextEditor';
 import Onboarding from './src/components/Onboarding';
+import Aspirants from './src/components/Aspirants';
 
 import SignUp from './src/containers/SignUp'
 import Login from './src/containers/Login';
@@ -131,6 +132,11 @@ class App extends React.Component {
                   <Scene 
                     key='partyProfile'
                     component={PartyProfile}
+                    hideNavBar
+                  />
+                  <Scene 
+                    key='aspirants'
+                    component={Aspirants}
                     hideNavBar
                   />
                 </Tabs>

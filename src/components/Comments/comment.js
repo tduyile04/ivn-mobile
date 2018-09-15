@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { View, Text, Icon, Button } from 'native-base';
 import { StyleSheet, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
@@ -19,7 +20,7 @@ const Comment = ({ item }) =>
           <Icon name='dot-single' type='Entypo' style={styles.dots} />
           <Text style={[styles.text, styles.blueText]} onPress={() => Actions.partyProfile()}>PDP</Text>
           <Icon name='dot-single' type='Entypo' style={styles.dots} />
-          <Text style={[styles.text, styles.blueText]}>{item.createdAt} m</Text>
+          <Text style={[styles.text, styles.blueText]}>{moment(item.createdAt).fromNow()}</Text>
         </View>
         <Text style={styles.description}>{item.comment}</Text>
         <Button small bordered iconLeft style={styles.button}>
