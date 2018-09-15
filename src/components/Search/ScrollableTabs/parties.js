@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Text, View, Button, Icon } from 'native-base';
+import { Container, Text, View } from 'native-base';
 import { StyleSheet, Image } from 'react-native';
 import HorizontalLine from '../../../shared-components/HorizontalLine';
 import { UnfollowButton, FollowButton } from '../../../shared-components/Buttons';

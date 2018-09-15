@@ -1,93 +1,111 @@
-import React from 'react';
-import { Text, View, Container, Button, Icon, Badge, Left, Body, Right } from 'native-base';
+import React, { Component } from 'react';
+import { Text, View, Container, Button, Icon, Spinner } from 'native-base';
 import { StyleSheet, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
+import { getUserDetails } from '../../actions/user';
 import HorizontalLine from '../../shared-components/HorizontalLine';
 import Listings from '../../shared-components/Listings';
+import { get, mapSet, remove } from '../../modules/cache';
 
-const SideBar = () => {
-  return (
-    <Container style={styles.container}>
-      <View style={styles.content}>
-        <View style={styles.center}>
-          <Image
-            style={styles.profileImage}
-            source={{uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg'}}
-          />
-          <Text style={[styles.name, styles.boldText]}>Jessicca Simpsons</Text>
-          <Text style={[styles.text, styles.username]}>@jessica_sims</Text>
-          <Image
-            style={styles.partyFlag}
-            source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
-            resizeMode="contain"
-          />
-          <HorizontalLine lineStyle={styles.lineStyle} />
-          <Listings endorsements={19205} followers={21098} following={50} countStyle={styles.count} />
-          <HorizontalLine lineStyle={styles.lineStyle} />
-        </View>
-        <View style={[styles.box, styles.main]}>
-          <View style={[styles.rowCenter]}>
-            <Button transparent>
-              <Icon name="home" type='SimpleLineIcons' style={styles.icon} />
-            </Button>
-            <Text style={styles.text}>Timeline</Text>
-          </View>
-          {/* <View style={[styles.rowCenter]}>
-            <Button badge transparent>
-              <Icon name="people" type='SimpleLineIcons' style={styles.icon} />
-            </Button>
-            <Text style={styles.text}>People</Text>
-          </View> */}
-          <View style={[styles.rowCenter]}>
-            <Button transparent>
-              <Icon name="bell" type='SimpleLineIcons'style={styles.icon} />
-            </Button>
-            <Text style={styles.text}>Notifications</Text>
-          </View>
-          <View style={[styles.rowCenter]}>
-            <Button transparent>
-              <Icon name="comment-question-outline" type='MaterialCommunityIcons' style={styles.icon} />
-            </Button>
-            <Text style={styles.text}>Questions</Text>
-          </View>
-          <View style={[styles.rowCenter]}>
-            <Button transparent onPress={() => Actions.partyList()}>
-              <Icon name="people" type='SimpleLineIcons' style={styles.icon} />  
-            </Button>
-            <Text style={styles.text}>Parties</Text>
-          </View>
-        </View>
-      </View>
+class SideBar extends Component {
+  state = {
+    loading: true,
+    user: '',
+  }
 
-      <View style={styles.footer}>
-        <HorizontalLine lineStyle={styles.lineStyle} />
-        <View style={styles.box}>
-          <View style={[styles.rowCenter]}>
-            <Button transparent>
-              <Icon name="settings" type='SimpleLineIcons' style={styles.icon} />
-            </Button>
-            <Text style={styles.text}>Account Settings</Text>
+  async componentDidMount() {
+    const userId = await get('user_id');
+    await this.props.getUserDetails(userId);
+    let user = JSON.stringify(this.props.user.user);
+    const userCached = await get("user");
+    if(!userCached) mapSet([{user}]);
+    user = userCached || user;
+    this.setState({user, loading: false});
+  }
+
+  render() {
+    const user = this.state.user && JSON.parse(this.state.user);
+    const { loading } = this.state;
+    const { followings=[], followers=[], endorsements=[] } = user;
+    if(loading) return <Spinner color='black' style={styles.container} />;
+    return (
+      <Container style={styles.container}>
+        <View style={styles.content}>
+          <View style={styles.center}>
+            <Image
+              style={styles.profileImage}
+              source={{uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg'}}
+            />
+            <Text style={[styles.name, styles.boldText]}>{user.firstName} {user.lastName}</Text>
+            <Text style={[styles.text, styles.username]}>{user.email}</Text>
+            <Image
+              style={styles.partyFlag}
+              source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
+              resizeMode="contain"
+            />
+            <HorizontalLine lineStyle={styles.lineStyle} />
+            <Listings endorsements={endorsements.length} followers={followers.length} following={followings.length} countStyle={styles.count} />
+            <HorizontalLine lineStyle={styles.lineStyle} />
           </View>
-          <View style={[styles.rowCenter]}>
-            <Button transparent>
-              <Icon name="help-circle-outline" type='MaterialCommunityIcons' style={styles.icon} />
-            </Button>
-            <Text style={styles.text}>Help</Text>
+          <View style={[styles.box, styles.main]}>
+            <View style={[styles.rowCenter]}>
+              <Button transparent>
+                <Icon name="home" type='SimpleLineIcons' style={styles.icon} />
+                <Text style={styles.text} onPress={() => Actions.home()}>Timeline</Text>
+              </Button>
+            </View>
+            <View style={[styles.rowCenter]}>
+              <Button transparent onPress={() => Actions.notifications()}>
+                <Icon name="bell" type='SimpleLineIcons'style={styles.icon} />
+                <Text style={styles.text}>Notifications</Text>
+              </Button>
+            </View>
+            <View style={[styles.rowCenter]}>
+              <Button transparent>
+                <Icon name="comment-question-outline" type='MaterialCommunityIcons' style={styles.icon} />
+                <Text style={styles.text}>Questions</Text>
+              </Button>
+            </View>
+            <View style={[styles.rowCenter]}>
+              <Button transparent onPress={() => Actions.partyList()}>
+                <Icon name="people" type='SimpleLineIcons' style={styles.icon} />  
+                <Text style={styles.text}>Parties</Text>
+              </Button>
+            </View>
           </View>
         </View>
-        <HorizontalLine lineStyle={styles.lineStyle} />
-        <View style={styles.box}>
-          <View style={[styles.rowCenter, styles.box]}>
-            <Text style={[styles.text, styles.footerText]}>Privacy Policy</Text>
-            <Icon name='dot-single' type='Entypo' style={styles.dots} />
-            <Text style={[styles.text, styles.footerText]}>Terms of Use</Text>
+
+        <View style={styles.footer}>
+          <HorizontalLine lineStyle={styles.lineStyle} />
+          <View style={styles.box}>
+            <View style={[styles.rowCenter]}>
+              <Button transparent>
+                <Icon name="settings" type='SimpleLineIcons' style={styles.icon} />
+                <Text style={styles.text}>Account Settings</Text>
+              </Button>
+            </View>
+            <View style={[styles.rowCenter]}>
+              <Button transparent>
+                <Icon name="help-circle-outline" type='MaterialCommunityIcons' style={styles.icon} />
+                <Text style={styles.text}>Help</Text>
+              </Button>
+            </View>
+          </View>
+          <HorizontalLine lineStyle={styles.lineStyle} />
+          <View style={styles.box}>
+            <View style={[styles.rowCenter, styles.box]}>
+              <Text style={[styles.text, styles.footerText]}>Privacy Policy</Text>
+              <Icon name='dot-single' type='Entypo' style={styles.dots} />
+              <Text style={[styles.text, styles.footerText, styles.terms]}>Terms of Use</Text>
+            </View>
           </View>
         </View>
-      </View>
-    </Container>
-  );
-};
+      </Container>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -146,9 +164,14 @@ const styles = StyleSheet.create({
     fontFamily: "raleway-regular",
     fontSize: 14,
     color: '#3F3F3F',
+    marginLeft: -15,
   },
   footerText: {
     fontSize: 12,
+    marginLeft: 15,
+  },
+  terms: {
+    marginLeft: 0,
   },
   boldText: {
     fontFamily: 'raleway-bold',
@@ -158,4 +181,12 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SideBar;
+const mapStateToProps = ({user}) => ({
+  user
+})
+
+const mapDispatchToProps = dispatch => ({
+  getUserDetails: userId => dispatch(getUserDetails(userId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideBar);

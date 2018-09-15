@@ -35,6 +35,7 @@ class App extends React.Component {
       'raleway-bold': require('./assets/fonts/Raleway-Bold.ttf'),
       'raleway-regular': require('./assets/fonts/Raleway-Regular.ttf'),
       'raleway-medium': require('./assets/fonts/Raleway-Regular.ttf'),
+      'raleway-italic': require('./assets/fonts/Raleway-Italic.ttf'),
       'museosans-500': require('./assets/fonts/MuseoSans_500.ttf'),
       'SFProText-regular': require('./assets/fonts/SF-Pro-Text-Regular.ttf'),
       'SFProText-SemiBold': require('./assets/fonts/SFProText-SemiBold.ttf'),
@@ -44,6 +45,7 @@ class App extends React.Component {
     });
     const loggedIn = await get("token");
     const returningUser = await get("returningUser");
+    console.disableYellowBox = true; //  Disable yellow box warning message
     this.setState({ ready: true, loggedIn, returningUser: !!returningUser });
   }
 

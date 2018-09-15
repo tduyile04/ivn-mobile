@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Spinner, Content, Container, Button } from 'native-base';
-import { StyleSheet, Text, View } from 'react-native';
+import { Spinner, Content, Container } from 'native-base';
+import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getUserDetails } from '../../actions/user';
@@ -14,16 +14,16 @@ class MyProfile extends Component {
 
   state = {
     loading: true,
+    user: '',
   }
 
   async componentDidMount() {
-    const userId = await get('user_id');
-    await this.props.getUserDetails(userId);
-    this.setState({loading: false});
+    const user = await get("user");
+    this.setState({user, loading: false});
   }
 
   render() {
-    const { user } = this.props.user;
+    const user = this.state.user && JSON.parse(this.state.user);
     const { loading } = this.state;
     const { followings=[], followers=[], endorsements=[] } = user;
     if(loading) return <Spinner color='black' style={styles.container} />;
