@@ -165,8 +165,8 @@ class Feed extends Component {
               postTimePosted={10}
               postContent={post.content}
               postTags={['Change2019', 'RealChange']}
-              postLikes={post.comments && post.comments.length}
-              postComments={post.likes && post.likes.length}
+              postComments={post.comments && post.comments.length}
+              postLikes={post.likes && post.likes.length}
               setActive={setActive}
               liked={liked}
               triggerLike={this.triggerLike}

@@ -65,3 +65,10 @@ export {
   getPartyFailure,
   unSelectPartySuccess
 } from './party'
+
+export {
+  getAspirantsPending,
+  getAspirantsSuccess,
+  getAspirantsFailure,
+  getAspirants
+} from './aspirants'

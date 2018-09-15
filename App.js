@@ -1,6 +1,6 @@
 import React from 'react';
 import { Font, AppLoading } from 'expo';
-import { Router, Scene, Drawer, Tabs } from 'react-native-router-flux';
+import { Router, Scene, Drawer, Tabs, Modal } from 'react-native-router-flux';
 import { Provider } from 'react-redux';
 import { Root } from "native-base";
 
@@ -16,6 +16,9 @@ import SideBar from './src/shared-components/SideBar';
 import Footer from './src/shared-components/Footer';
 import TextEditor from './src/components/TextEditor';
 import Onboarding from './src/components/Onboarding';
+import Aspirants from './src/components/Aspirants';
+
+import AspirantModal from './src/components/Modal/AspirantModal'
 
 import SignUp from './src/containers/SignUp'
 import Login from './src/containers/Login';
@@ -55,87 +58,95 @@ class App extends React.Component {
       <Root>
         <Provider store={store}>
           <Router>
-            <Scene key='root'>
-              <Scene
-                key="onboarding"
-                component={Onboarding}
-                initial={!this.state.returningUser}
-                hideNavBar
-              />
-              <Scene
-                key='login'
-                component={Login}
-                hideNavBar
-                initial={!this.state.loggedIn && this.state.returningUser}
-              />
-              <Scene
-                key='signup'
-                component={SignUp}
-                hideNavBar
-              />
-              <Drawer
+            <Modal>
+              <Scene key='root'>
+                <Scene
+                  key="onboarding"
+                  component={Onboarding}
+                  initial={!this.state.returningUser}
                   hideNavBar
-                  key="drawer"
-                  contentComponent={SideBar}
-                  drawerWidth={300}
-                  drawerPosition="left"
-                  open={false}
-                  initial={this.state.loggedIn && this.state.returningUser}
-              >
-                <Tabs
-                  key='tabs'
-                  tabBarComponent={Footer}
+                />
+                <Scene
+                  key='login'
+                  component={Login}
+                  hideNavBar
+                  initial={!this.state.loggedIn && this.state.returningUser}
+                />
+                <Scene
+                  key='signup'
+                  component={SignUp}
+                  hideNavBar
+                />
+                <Drawer
+                    hideNavBar
+                    key="drawer"
+                    contentComponent={SideBar}
+                    drawerWidth={300}
+                    drawerPosition="left"
+                    open={false}
+                    initial={this.state.loggedIn && this.state.returningUser}
                 >
-                  <Scene
-                    key='home'
-                    component={Home}
-                    hideNavBar
-                  />
-                  <Scene
-                    key='textEditor'
-                    component={TextEditor}
-                    hideTabBar
-                    hideNavBar
-                  />
-                  <Scene
-                    key='comments'
-                    component={Comments}
-                    hideNavBar
-                    hideTabBar
-                  />
-                  <Scene 
-                    key='notifications'
-                    component={Notifications}
-                    hideNavBar 
-                  />
-                  <Scene 
-                    key='search'
-                    component={Search}
-                    hideNavBar
-                  />
-                  <Scene 
-                    key='myProfile'
-                    component={MyProfile}
-                    hideNavBar
-                  />
-                  <Scene 
-                    key='userProfile'
-                    component={UserProfile}
-                    hideNavBar
-                  />
-                  <Scene
-                    key='partyList'
-                    component={PartyList}
-                    hideNavBar
-                  />
-                  <Scene 
-                    key='partyProfile'
-                    component={PartyProfile}
-                    hideNavBar
-                  />
-                </Tabs>
-              </Drawer>
-            </Scene>
+                  <Tabs
+                    key='tabs'
+                    tabBarComponent={Footer}
+                  >
+                    <Scene
+                      key='home'
+                      component={Home}
+                      hideNavBar
+                    />
+                    <Scene
+                      key='textEditor'
+                      component={TextEditor}
+                      hideTabBar
+                      hideNavBar
+                    />
+                    <Scene
+                      key='comments'
+                      component={Comments}
+                      hideNavBar
+                      hideTabBar
+                    />
+                    <Scene 
+                      key='notifications'
+                      component={Notifications}
+                      hideNavBar 
+                    />
+                    <Scene 
+                      key='search'
+                      component={Search}
+                      hideNavBar
+                    />
+                    <Scene 
+                      key='myProfile'
+                      component={MyProfile}
+                      hideNavBar
+                    />
+                    <Scene 
+                      key='userProfile'
+                      component={UserProfile}
+                      hideNavBar
+                    />
+                    <Scene
+                      key='partyList'
+                      component={PartyList}
+                      hideNavBar
+                    />
+                    <Scene 
+                      key='partyProfile'
+                      component={PartyProfile}
+                      hideNavBar
+                    />
+                    <Scene 
+                      key='aspirants'
+                      component={Aspirants}
+                      hideNavBar
+                    />
+                  </Tabs>
+                </Drawer>
+              </Scene>
+              <Scene key="aspirantModal" component={AspirantModal}  hideNavBar />
+            </Modal>
           </Router>
         </Provider>
       </Root>
