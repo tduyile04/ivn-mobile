@@ -1,12 +1,14 @@
 import React from 'react';
-import { Item, Input, Icon } from 'native-base';
+import { Item, Input, Icon, Button } from 'native-base';
 import { StyleSheet } from 'react-native';
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   return (
-    <Item style={styles.SearchBar}> 
-      <Input style={styles.input} placeholder='Search' placeholderTextColor="#C7C7CB"/>
-      <Icon active name='search' style={styles.icon} />
+    <Item style={styles.SearchBar}>
+      <Input style={styles.input} placeholder='Search' placeholderTextColor="#C7C7CB" onChangeText={props.handleChange}/>
+      <Button badge transparent onPress={props.search}>
+        <Icon active name='search' style={styles.icon} />
+      </Button>
     </Item>
   );
 };
@@ -16,12 +18,12 @@ const styles = StyleSheet.create({
     height: 46,
   },
   input: {
-    color:"#3F3F3F", 
-    fontFamily:"museosans-500", 
+    color:"#3F3F3F",
+    fontFamily:"museosans-500",
     paddingLeft: 30
   },
   icon: {
-    color:"#000000", 
+    color:"#000000",
     paddingRight: 30,
   }
 });

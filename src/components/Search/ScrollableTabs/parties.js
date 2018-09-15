@@ -4,48 +4,28 @@ import { StyleSheet, Image } from 'react-native';
 import HorizontalLine from '../../../shared-components/HorizontalLine';
 import { UnfollowButton, FollowButton } from '../../../shared-components/Buttons';
 
-const Parties = () => {
+const Parties = (props) => {
   return (
     <Container>
-      <View style={styles.card}>
-        <Image
-          style={styles.profileImage}
-          source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
-          resizeMode='contain'
-        />
-        <View style={styles.items}>
-          <Text style={styles.handle}>@pdp</Text>
-          <Text style={styles.title}>People’s Democratic Party</Text>
-          <FollowButton />
-        </View>
-      </View>
-      <HorizontalLine />
-      <View style={styles.card}>
-        <Image
-          style={styles.profileImage}
-          source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
-          resizeMode='contain'
-        />
-        <View style={styles.items}>
-          <Text style={styles.handle}>@pdpofficial</Text>
-          <Text style={styles.title}>The official account of PDP</Text>
-          <UnfollowButton />
-        </View>
-      </View>
-      <HorizontalLine />
-      <View style={styles.card}>
-        <Image
-          style={styles.profileImage}
-          source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
-          resizeMode='contain'
-        />
-        <View style={styles.items}>
-          <Text style={styles.handle}>@pdpfanpage</Text>
-          <Text style={styles.title}>Fan page of PDP</Text>
-          <UnfollowButton />
-        </View>
-      </View>
-      <HorizontalLine />
+      {props.data.map(party => {
+        return (
+          <View key={party.id}>
+            <View style={styles.card}>
+              <Image
+                style={styles.profileImage}
+                source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
+                resizeMode='contain'
+              />
+              <View style={styles.items}>
+                {party.abbr && party.abbr.length > 0 && <Text style={styles.handle}>@{party.abbr}</Text>}
+                <Text style={styles.title}>{party.name}</Text>
+                <FollowButton />
+              </View>
+            </View>
+            <HorizontalLine />
+          </View>
+        )
+      })}
     </Container>
   );
 }

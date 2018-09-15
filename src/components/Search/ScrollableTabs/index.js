@@ -1,27 +1,24 @@
 import React from 'react';
-import { View, Text, Tab, Tabs } from 'native-base';
+import { View, Text, Tab, Tabs, Spinner } from 'native-base';
 import { StyleSheet } from 'react-native';
 
 import Parties from './parties';
 import People from './people';
 
-const ScrollableTabs = () => {
+const ScrollableTabs = (props) => {
   return (
     <Tabs tabBarUnderlineStyle={styles.tabsStyle}>
-      <Tab heading="Feed" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle} >
-        <Text style={{marginTop: 15, fontFamily: 'raleway-regular', paddingLeft: 16, paddingRight: 16 }}>
-        This text should be replaced with a react component for feed. This is just a placeholder.
-        {"\n\n"}This text should be replaced with a react component for feed. This is just a placeholder.
-        {"\n\n"}This text should be replaced with a react component for feed. This is just a placeholder.
-        {"\n\n"}This text should be replaced with a react component for feed. This is just a placeholder.
-        {"\n\n"}This text should be replaced with a react component for feed. This is just a placeholder.
-      </Text>
+      <Tab heading="People" activeTextStyle={styles.activeTextStyle}>
+        {props.loading
+          ? (<Spinner size="small" color="#000" />)
+          : (<People data={props.users} />)
+        }
       </Tab>
-      <Tab heading="People" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle}>
-        <People />
-      </Tab>
-      <Tab heading="Parties" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle}>
-        <Parties />
+      <Tab heading="Parties" activeTextStyle={styles.activeTextStyle}>
+        {props.loading
+          ? (<Spinner size="small" color="#000" />)
+          : (<Parties data={props.parties} />)
+        }
       </Tab>
     </Tabs>
   );
