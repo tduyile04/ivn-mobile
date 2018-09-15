@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { Container, Content, Button } from 'native-base';
+import { Container, Content, Button, Spinner } from 'native-base';
 import { connect } from 'react-redux';
 import Carousel from 'react-native-snap-carousel';
+import { Actions } from 'react-native-router-flux';
 
 import { getAspirants } from '../../actions';
+
+import { localGovernmentCategories } from '../../modules/mock/localgovernment';
+
+const stateCategories = [
+  { label: "Lagos", value: "lagos" }
+]
 
 const leadershipLevel = [
   { level: "Country" },
@@ -20,11 +27,15 @@ const defaultLocations = {
 
 class Aspirants extends Component {
 
+  componentDidMount() {
+    this.props.getAspirants(defaultLocations.COUNTRY);
+  }
+
   renderCard = ({item, index}) => {
     return (
       <Button 
         style={styles.cardStyle}
-        onPress={() => console.log(index,"index") || this.renderCategory(index)}
+        onPress={() => this.renderCategory(index)}
       >
         <Text style={styles.cardTextHeaderStyle}>{item.level}</Text>
         {/* <Text style={styles.cardTextSubStyle}>Sub-Heading</Text> */}
@@ -33,7 +44,6 @@ class Aspirants extends Component {
   }
 
   renderCategory = index => {
-    console.log("in the render category", index)
     const { getAspirants } = this.props;
     const { COUNTRY, STATE, LGA } = defaultLocations;
     if (index === 0) {
@@ -85,10 +95,16 @@ class Aspirants extends Component {
             <Text style={{ width: 140, fontFamily: 'museosans-500', fontSize: 20, color: '#628AFF'}}>Aspirants</Text>
             {/* <Text style={{ fontFamily: 'raleway-regular', fontSize: 14, color: '#3F3F3F' }}>326 Aspirants</Text> */}
             <View style={styles.filterSection}>
-              <Button bordered small rounded style={styles.tagBtn}>
+              <Button bordered small rounded style={styles.tagBtn} 
+                onPress={() => 
+                  Actions.aspirantModal({ viewState: true, stateSelected: defaultLocations.STATE, stateCategories })
+                }>
                 <Text style={styles.tagText}>state</Text>
               </Button>
-              <Button bordered small rounded style={styles.tagBtn}>
+              <Button bordered small rounded style={styles.tagBtn} 
+                onPress={() => 
+                  Actions.aspirantModal({ viewLocalGovernment: true, lgaSelected: defaultLocations.LGA, localGovernmentCategories })
+                }>
                 <Text style={styles.tagText}>lga</Text>
               </Button>
             </View>
@@ -96,50 +112,22 @@ class Aspirants extends Component {
 
           {/*Aspirant list view */}
           <Content>
-            <View style={{ display: 'flex', flexDirection: 'row', paddingTop: 40, borderTopColor: '#ECECEC', borderTopWidth: 1, borderStyle: 'solid' }}>
-              <Image
-                style={[styles.profileImage, { borderRadius: 5 }]}
-                source={{ uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg' }}
-              />
-              <View>
-                <Text style={styles.aspirantBasicStyle}>Anthony Franklin</Text>
-                <Text style={styles.aspirantNormalStyle}>member of</Text>
-                <Text style={styles.aspirantPartyName}>People Democratic Party</Text>
-              </View>
-            </View>
-            <View style={{ display: 'flex', flexDirection: 'row', paddingTop: 40, borderTopColor: '#ECECEC', borderTopWidth: 1, borderStyle: 'solid' }}>
-              <Image
-                style={[styles.profileImage, { borderRadius: 5 }]}
-                source={{ uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg' }}
-              />
-              <View>
-                <Text style={styles.aspirantBasicStyle}>Anthony Franklin</Text>
-                <Text style={styles.aspirantNormalStyle}>member of</Text>
-                <Text style={styles.aspirantPartyName}>People Democratic Party</Text>
-              </View>
-            </View>
-            <View style={{ display: 'flex', flexDirection: 'row', paddingTop: 40, borderTopColor: '#ECECEC', borderTopWidth: 1, borderStyle: 'solid' }}>
-              <Image
-                style={[styles.profileImage, { borderRadius: 5 }]}
-                source={{ uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg' }}
-              />
-              <View>
-                <Text style={styles.aspirantBasicStyle}>Anthony Franklin</Text>
-                <Text style={styles.aspirantNormalStyle}>member of</Text>
-                <Text style={styles.aspirantPartyName}>People Democratic Party</Text>
-              </View>
-            </View>
-            <View style={{ display: 'flex', flexDirection: 'row', paddingTop: 40, borderTopColor: '#ECECEC', borderTopWidth: 1, borderStyle: 'solid' }}>
-            <Image
-              style={[styles.profileImage, { borderRadius: 5 }]}
-              source={{ uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg' }}
-            />
-            <View>
-              <Text style={styles.aspirantBasicStyle}>Anthony Franklin</Text>
-              <Text style={styles.aspirantNormalStyle}>member of</Text>
-              <Text style={styles.aspirantPartyName}>People Democratic Party</Text>
-            </View>
-          </View>
+            {this.props.loading && <Spinner size="small" color="#000" />}
+            {this.props.aspirants && this.props.aspirants.map(aspirant => {
+              return (
+                <View style={{ display: 'flex', flexDirection: 'row', paddingTop: 40, borderTopColor: '#ECECEC', borderTopWidth: 1, borderStyle: 'solid' }}>
+                  <Image
+                    style={[styles.profileImage, { borderRadius: 5 }]}
+                    source={{ uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg' }}
+                  />
+                  <View>
+                    <Text style={styles.aspirantBasicStyle}>{aspirant.firstName} {aspirant.lastName}</Text>
+                    <Text style={styles.aspirantNormalStyle}>member of</Text>
+                    <Text style={styles.aspirantPartyName}>People Democratic Party</Text>
+                  </View>
+                </View>
+              )
+            })}
           </Content>
         </Container>
 
@@ -241,7 +229,8 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => ({
-  aspirants: state.aspirant.aspirants
+  aspirants: state.aspirant.aspirants,
+  loading: state.aspirant.loading
 })
 
 const mapDispatchToProps = dispatch => ({
