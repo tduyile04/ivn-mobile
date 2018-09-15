@@ -8,8 +8,8 @@ import People from './people';
 const ScrollableTabs = () => {
   return (
     <Tabs tabBarUnderlineStyle={styles.tabsStyle}>
-      <Tab heading="Feed" activeTextStyle={styles.activeTextStyle} >
-      <Text style={{marginTop: 15, fontFamily: 'raleway-regular', paddingLeft: 16, paddingRight: 16 }}>
+      <Tab heading="Feed" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle} >
+        <Text style={{marginTop: 15, fontFamily: 'raleway-regular', paddingLeft: 16, paddingRight: 16 }}>
         This text should be replaced with a react component for feed. This is just a placeholder.
         {"\n\n"}This text should be replaced with a react component for feed. This is just a placeholder.
         {"\n\n"}This text should be replaced with a react component for feed. This is just a placeholder.
@@ -17,10 +17,10 @@ const ScrollableTabs = () => {
         {"\n\n"}This text should be replaced with a react component for feed. This is just a placeholder.
       </Text>
       </Tab>
-      <Tab heading="People" activeTextStyle={styles.activeTextStyle}>
+      <Tab heading="People" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle}>
         <People />
       </Tab>
-      <Tab heading="Parties" activeTextStyle={styles.activeTextStyle}>
+      <Tab heading="Parties" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle}>
         <Parties />
       </Tab>
     </Tabs>
@@ -29,12 +29,24 @@ const ScrollableTabs = () => {
 
 const styles = StyleSheet.create({
   tabsStyle: {
-    backgroundColor: '#628AFF',
+    backgroundColor: '#444',
+    borderBottomWidth:0
   },
   activeTextStyle: {
-    color: '#628AFF',
+    color: '#444',
     fontFamily: 'raleway-bold',
     backgroundColor: 'transparent'
+  },
+  tabsStyle: {
+    backgroundColor: '#444',
+    borderBottomWidth:0
+  },
+  white: {
+    backgroundColor: '#fff',
+  },
+  textStyle: {
+    color: '#3F3F3F',
+    fontFamily: 'raleway-regular'
   }
 });
 

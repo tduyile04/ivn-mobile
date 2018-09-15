@@ -39,7 +39,7 @@ class FooterTabs extends Component {
             {unread && <Badge><Text>{unread}</Text></Badge>}
             <Icon name="bell" type='SimpleLineIcons' />
           </Button>
-          <Button onPress={() => Actions.userProfile()}>
+          <Button onPress={() => Actions.myProfile()}>
             <Icon name="people" type='SimpleLineIcons' />
           </Button>
         </FooterTab>

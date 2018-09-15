@@ -19,7 +19,7 @@ const Listings = ({followers, following, posts, endorsements, members, countStyl
           </View>
           {
             (following || following === 0) && (
-              <View>
+              <View style={styles.center}>
                 <Text style={[styles.count, countStyle]}>{following}</Text>
                 <Text style={styles.title}>Following</Text>
               </View>

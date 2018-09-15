@@ -8,6 +8,7 @@ import HorizontalLine from '../HorizontalLine';
 
 
 const Post = ({ 
+  id,
   userId,
   userAvatar, 
   userFullName, 
@@ -26,7 +27,7 @@ const Post = ({
   heartButtonStyle,
  }) => {
   return (
-    <View>
+    <View key={postId}>
       <Card transparent style={styles.card}>
         <View style={styles.row}>
           <Image
@@ -156,7 +157,6 @@ class Feed extends Component {
           data={posts}
           renderItem={({ item: post }) => (
             <Post
-              id={post.id} 
               userId={post.author.id}
               userAvatar={post.author && post.author.avatar}
               userFullName={`${post.author && post.author.firstName} ${post.author && post.author.lastName}`}

@@ -1,12 +1,14 @@
 import React from 'react';
 import { Container, Text, Tab, Tabs } from 'native-base';
 import { StyleSheet } from 'react-native';
+import HorizontalLine from '../../../shared-components/HorizontalLine';
 
 import About from './about';
 
 const ScrollableTabs = () => {
   return (
     <Container style={styles.container}>
+      <HorizontalLine />
       <Tabs tabBarUnderlineStyle={styles.tabsStyle}>
         <Tab heading="About" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle}>
           <About />
@@ -28,14 +30,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   tabsStyle: {
-    backgroundColor: '#628AFF',
+    backgroundColor: '#444',
     borderBottomWidth:0
   },
   white: {
     backgroundColor: '#fff',
   },
   activeTextStyle: {
-    color: '#628AFF',
+    color: '#444',
     fontFamily: 'raleway-bold',
     backgroundColor: 'transparent'
   },
