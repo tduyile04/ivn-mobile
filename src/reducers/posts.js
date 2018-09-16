@@ -47,7 +47,6 @@ export default handleActions({
     return {
       ...state,
       loading: false,
-      page: state.page - 1,
       error: payload
     }
   },
