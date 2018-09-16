@@ -68,26 +68,20 @@ class SideBar extends Component {
           <View style={[styles.box, styles.main]}>
             <View style={[styles.rowCenter]}>
               <Button transparent>
-                <Icon name="home" type='SimpleLineIcons' style={styles.icon} />
-                <Text style={styles.text} onPress={() => Actions.home()}>Timeline</Text>
-              </Button>
-            </View>
-            <View style={[styles.rowCenter]}>
-              <Button transparent onPress={() => Actions.notifications()}>
-                <Icon name="bell" type='SimpleLineIcons'style={styles.icon} />
-                <Text style={styles.text}>Notifications</Text>
-              </Button>
-            </View>
-            <View style={[styles.rowCenter]}>
-              <Button transparent>
                 <Icon name="comment-question-outline" type='MaterialCommunityIcons' style={styles.icon} />
                 <Text style={styles.text}>Questions</Text>
               </Button>
             </View>
             <View style={[styles.rowCenter]}>
               <Button transparent onPress={() => Actions.partyList()}>
-                <Icon name="people" type='SimpleLineIcons' style={styles.icon} />  
+                <Icon name="flag" type='SimpleLineIcons' style={styles.icon} />  
                 <Text style={styles.text}>Parties</Text>
+              </Button>
+            </View>
+            <View style={[styles.rowCenter]}>
+              <Button transparent>
+                <Icon name="user" type='SimpleLineIcons' style={styles.icon} />
+                <Text style={styles.text} onPress={() => Actions.aspirants()}>Aspirants</Text>
               </Button>
             </View>
           </View>

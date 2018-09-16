@@ -34,9 +34,6 @@ class FooterTabs extends Component {
           <Button onPress={() => Actions.search()}>
             <Icon name="magnifier" type='SimpleLineIcons' />
           </Button>
-          <Button onPress={() => Actions.aspirants()}>
-            <Icon name="layers" type='SimpleLineIcons' />
-          </Button>
           <Button badge onPress={() => this.pressNotification()}>
             {!unread &&<Badge style={{ backgroundColor: 'transparent' }}></Badge>}
             {unread && <Badge><Text>{unread}</Text></Badge>}

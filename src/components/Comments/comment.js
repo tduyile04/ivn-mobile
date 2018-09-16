@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { View, Text, Icon, Button } from 'native-base';
+import { View, Text, Icon } from 'native-base';
 import { StyleSheet, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
@@ -23,10 +23,6 @@ const Comment = ({ item }) =>
           <Text style={[styles.text, styles.blueText]}>{moment(item.createdAt).fromNow()}</Text>
         </View>
         <Text style={styles.description}>{item.comment}</Text>
-        <Button small bordered iconLeft style={styles.button}>
-          <Icon name='triangle-up' type='Entypo' style={styles.icon} />
-          <Text style={[styles.text, styles.darkText]}>178</Text>
-        </Button>
       </View>
     </View>
   </View>
@@ -79,6 +75,7 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     color: '#000',
     fontFamily: 'SFProText-regular',
+    marginBottom: 10,
   },
   button: {
     borderColor: '#E3E3E3',

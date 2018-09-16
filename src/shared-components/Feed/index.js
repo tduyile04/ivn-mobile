@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment'
 import { Content, Card, View, Text, Button, Icon, Spinner } from 'native-base';
 import { StyleSheet, Image, FlatList, Animated } from 'react-native';
 import { Actions } from 'react-native-router-flux';
@@ -40,7 +41,7 @@ const Post = ({
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>{userParty}</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText}>{postTimePosted}m</Text>
+              <Text style={styles.blueText}>{moment(postTimePosted).fromNow()}</Text>
             </View>
             { userPosition && <Text style={styles.position}>{userPosition}</Text> }
             { postTitle && <Text style={styles.title}>{postTitle}</Text> }
@@ -162,7 +163,7 @@ class Feed extends Component {
               userFullName={`${post.author && post.author.firstName} ${post.author && post.author.lastName}`}
               userParty={'APC'}
               postId={post.id}
-              postTimePosted={10}
+              postTimePosted={post.created_at}
               postContent={post.content}
               postTags={['Change2019', 'RealChange']}
               postComments={post.comments && post.comments.length}

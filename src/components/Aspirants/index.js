@@ -6,6 +6,7 @@ import Carousel from 'react-native-snap-carousel';
 import { Actions } from 'react-native-router-flux';
 
 import { getAspirants } from '../../actions';
+import Header from '../../shared-components/Header';
 
 import { localGovernmentCategories } from '../../modules/mock/localgovernment';
 
@@ -58,6 +59,7 @@ class Aspirants extends Component {
   render() {
     return (
       <Container style={styles.container}>
+         <Header title='Aspirants' back />
         {/*Carousel section*/}
         <View style={styles.carouselCoverStyle}>
           <Carousel 
@@ -92,8 +94,6 @@ class Aspirants extends Component {
           {/* Aspirant title */}
 
           <View style={{ paddingBottom: 15, paddingLeft: 10 }}>
-            <Text style={{ width: 140, fontFamily: 'museosans-500', fontSize: 20, color: '#628AFF'}}>Aspirants</Text>
-            {/* <Text style={{ fontFamily: 'raleway-regular', fontSize: 14, color: '#3F3F3F' }}>326 Aspirants</Text> */}
             <View style={styles.filterSection}>
               <Button bordered small rounded style={styles.tagBtn} 
                 onPress={() => 

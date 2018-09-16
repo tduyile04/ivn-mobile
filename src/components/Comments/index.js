@@ -87,7 +87,7 @@ class Comments extends Component {
 
 const styles = StyleSheet.create({
   content: {
-    marginTop: 20,
+    marginTop: 10,
   }
 });
 

@@ -3,10 +3,8 @@ import { Card, View, Text, Button, Icon, Spinner } from 'native-base';
 import { StyleSheet, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { LikeButton } from '../../shared-components/Buttons';
+import moment from 'moment';
 
-import { getPost } from '../../actions';
-
-// This component should be replaced with the feed component in the Shared Components Folder
 class ActivePost extends Component {
   render() {
     const { 
@@ -33,7 +31,7 @@ class ActivePost extends Component {
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText} onPress={() => Actions.partyProfile()}>{userParty}</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText}>{postTimePosted}m</Text>
+              <Text style={styles.blueText}>{moment(postTimePosted).fromNow()}</Text>
             </View>
             <Text style={styles.description}>{postContent}</Text>
             <View style={styles.row}>

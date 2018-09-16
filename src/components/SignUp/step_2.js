@@ -18,25 +18,33 @@ const Step2 = (props) => {
           <Input 
             placeholder='Phone'
             onChangeText={text => updateInputField(text, 'phoneNumber')}
-            style={styles.text} />
+            autoCapitalize = 'none'
+            style={styles.text} 
+          />
         </Item>
         <Item error={errorCheck && error.key.country}>
           <Input 
             placeholder='Country' 
             style={styles.text}
-            onChangeText={text => updateInputField(text, 'country')} />
+            autoCapitalize = 'none'
+            onChangeText={text => updateInputField(text, 'country')} 
+          />
         </Item>
         <Item error={errorCheck && error.key.state} style={styles.section}>
           <Input 
             placeholder='State' 
             style={styles.text}
-            onChangeText={text => updateInputField(text, 'state')} />
+            autoCapitalize = 'none'
+            onChangeText={text => updateInputField(text, 'state')} 
+          />
         </Item>
         <Item error={errorCheck && error.key.localGovernment} style={styles.section}>
           <Input 
             placeholder='Local Government Area' 
             style={styles.text}
-            onChangeText={text => updateInputField(text, 'localGovernment')} />
+            autoCapitalize = 'none'
+            onChangeText={text => updateInputField(text, 'localGovernment')} 
+          />
         </Item>
         <Button block dark style={[styles.button, styles.completeButton]} onPress={() => handleNextButtonClick(field)}>
           {loading  
