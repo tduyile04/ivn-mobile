@@ -16,17 +16,20 @@ class SideBar extends Component {
   }
 
   async componentDidMount() {
-    const userId = await get('user_id');
-    await this.props.getUserDetails(userId);
-    let user = JSON.stringify(this.props.user.user);
-    const userCached = await get("user");
-    if(!userCached) mapSet([{user}]);
-    user = userCached || user;
+    let user = await get("user");
+    if(!user) {
+      const userId = await get('user_id');
+      await this.props.getUserDetails(userId);
+      user = JSON.stringify(this.props.user.user);
+      mapSet([{user}]);
+    }
     this.setState({user, loading: false});
   }
 
   logout = () => {
     remove("token");
+    remove("user");
+    remove("user_id");
     Actions.login();
   }
 
