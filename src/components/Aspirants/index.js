@@ -113,9 +113,9 @@ class Aspirants extends Component {
           {/*Aspirant list view */}
           <Content>
             {this.props.loading && <Spinner size="small" color="#000" />}
-            {this.props.aspirants && this.props.aspirants.map(aspirant => {
+            {this.props.aspirants && this.props.aspirants.map((aspirant, index) => {
               return (
-                <View style={{ display: 'flex', flexDirection: 'row', paddingTop: 40, borderTopColor: '#ECECEC', borderTopWidth: 1, borderStyle: 'solid' }}>
+                <View key={index} style={{ display: 'flex', flexDirection: 'row', paddingTop: 40, borderTopColor: '#ECECEC', borderTopWidth: 1, borderStyle: 'solid' }}>
                   <Image
                     style={[styles.profileImage, { borderRadius: 5 }]}
                     source={{ uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg' }}
