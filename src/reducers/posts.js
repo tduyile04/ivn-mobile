@@ -31,6 +31,7 @@ export default handleActions({
     return {
       ...state,
       loading: true,
+      page: state.page + 1,
       error: ''
     }
   },
@@ -38,7 +39,6 @@ export default handleActions({
     return {
       ...state,
       posts: [ ...state.posts, ...posts ],
-      page: state.page + 1,
       loading: false,
       error: ''
     }
@@ -47,6 +47,7 @@ export default handleActions({
     return {
       ...state,
       loading: false,
+      page: state.page - 1,
       error: payload
     }
   },
