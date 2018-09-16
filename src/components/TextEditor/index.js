@@ -24,12 +24,12 @@ class TextEditor extends Component {
   render() {
     return (
       <Container style={styles.container}>
-        <Header back title='Post a question' share onShare={this.handleShare}/>
+        <Header back title='New post' share onShare={this.handleShare}/>
         <Content padder style={styles.content}>
           <Form>
             <Textarea 
               rowSpan={15} 
-              placeholder="What is on your mind?"
+              placeholder="Share your thoughts?"
               onChangeText={content => this.setState({ content })}
               multiline/>
           </Form>

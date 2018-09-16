@@ -14,9 +14,9 @@ class Search extends React.Component {
 
   }
   handleChange = (value) => {
-    console.log(value)
     this.setState({ search: value })
   }
+
   handleSearch = () => {
     this.props.dispatch(searchUser(this.state.search))
     this.props.dispatch(searchParty(this.state.search))
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    paddingTop: 50
+    paddingTop: 5
   },
 });
 

@@ -5,7 +5,13 @@ import { StyleSheet } from 'react-native';
 const SearchBar = (props) => {
   return (
     <Item style={styles.SearchBar}>
-      <Input style={styles.input} placeholder='Search' placeholderTextColor="#C7C7CB" onChangeText={props.handleChange}/>
+      <Input style={styles.input} 
+        placeholder='Search' 
+        placeholderTextColor="#C7C7CB" 
+        autoCapitalize = 'none'
+        onChangeText={props.handleChange}
+        onSubmitEditing={props.search}
+      />
       <Button badge transparent onPress={props.search}>
         <Icon active name='search' style={styles.icon} />
       </Button>

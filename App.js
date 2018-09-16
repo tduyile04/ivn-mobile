@@ -48,7 +48,6 @@ class App extends React.Component {
     });
     const loggedIn = await get("token");
     const returningUser = await get("returningUser");
-    console.disableYellowBox = true; //  Disable yellow box warning message
     this.setState({ ready: true, loggedIn, returningUser: !!returningUser });
   }
 

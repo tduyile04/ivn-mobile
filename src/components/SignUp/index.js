@@ -134,8 +134,8 @@ class SignUp extends Component {
 const styles = StyleSheet.create({
   content: {
     flex: 1,
-    paddingLeft: 40,
-    paddingRight: 40,
+    paddingLeft: '7%',
+    paddingRight: '7%',
     paddingTop: 20,
   },
   title: {
