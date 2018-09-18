@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import FeedList from '../../../shared-components/Feed';
 
-import { getPosts } from '../../../actions';
+import { getPosts, likePost, likePostSuccess } from '../../../actions';
 
 const Feed = (props) => <FeedList {...props} />
 
@@ -16,7 +16,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getPosts: (page, limit) => dispatch(getPosts(page, limit))
+  getPosts: (page, limit) => dispatch(getPosts(page, limit)),
+  likePost: (postId) => dispatch(likePost(postId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feed);

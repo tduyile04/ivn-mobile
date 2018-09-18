@@ -43,7 +43,11 @@ export {
   createCommentsPending,
   createCommentsSuccess,
   createCommentsFailure,
-  createComments
+  createComments,
+  likePost,
+  likePostPending,
+  likePostSuccess,
+  likePostFailure
 } from './posts';
 
 export {

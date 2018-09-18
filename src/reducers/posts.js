@@ -11,7 +11,10 @@ import {
   getPostFailure,
   createCommentsPending,
   createCommentsSuccess,
-  createCommentsFailure
+  createCommentsFailure,
+  likePostSuccess,
+  likePostPending,
+  likePostFailure
 } from '../actions';
 
 const defaultState = {
@@ -23,10 +26,45 @@ const defaultState = {
   postLoading: false,
   error: '',
   page: 1,
-  limit: 3
+  limit: 3,
+  pendingPost: {
+    liked: false,
+    id: 23
+  }
 };
 
 export default handleActions({
+  [likePostPending](state=defaultState) {
+    return {
+      ...state,
+      loading: true,
+      error: ''
+    }
+  },
+  [likePostSuccess](state=defaultState, { payload: { post } }) {
+    const updatedPosts = state.posts.map(gottenPost => {
+      if (gottenPost.id === post.id) {
+        return {
+          ...gottenPost,
+          ...post
+        };
+      }
+      return gottenPost;
+    });
+    return {
+      ...state,
+      loading: false,
+      error: '',
+      posts: updatedPosts
+    }
+  },
+  [likePostFailure](state=defaultState, { payload }) {
+    return {
+      ...state,
+      loading: true,
+      error: payload
+    }
+  },
   [getPostsPending](state = {}) {
     return {
       ...state,
