@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     secondaryInfo: {
       flexDirection: 'row',
       justifyContent: 'space-around',
-      width: '90%'
+      width: '75%'
     },
     count: {
       fontSize: 25,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Spinner, Content, Container } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getUserDetails } from '../../actions/user';
@@ -22,20 +22,28 @@ class MyProfile extends Component {
     this.setState({user, loading: false});
   }
 
+  hasRole = (roles, name) => roles.some(role => role.name === name);
+
   render() {
     const user = this.state.user && JSON.parse(this.state.user);
     const { loading } = this.state;
-    const { followings=[], followers=[], endorsements=[] } = user;
+    const { followings=[], followers=[], roles=[] } = user;
+    const candidate  = this.hasRole(roles, 'candidate');
     if(loading) return <Spinner color='black' style={styles.container} />;
     return (
       <Container style={styles.container}>
         <Content>
-          <CoverImage 
-            sourceUri='http://www.signalng.com/wp-content/uploads/president-buhari-meets-president-francoise-hollande-at-elysee-1.jpg' 
-            coverImageStyle={styles.coverImageStyle} 
+          <Image 
+            style={styles.icon}
+            source={require('../../../assets/images/backdrop.png')}
           />
           <UserDetails user={user} editProfileButton />
-          <Listings followers={followers.length} following={followings.length} posts />
+          {
+            candidate ?
+              <Listings followers={followers.length} following={followings.length} endorsements={endorsements.length}/>
+            :
+            <Listings followers={followers.length} following={followings.length} />
+          }
           <ScrollableTabs />
         </Content>
       </Container>
