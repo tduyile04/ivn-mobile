@@ -24,8 +24,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 22,
     paddingLeft: 25,
-    paddingRight: 25,
-    textAlign: 'center',
+    paddingRight: 25
   },
   text: {
     fontFamily: 'raleway-regular',
