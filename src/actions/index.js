@@ -82,7 +82,9 @@ export {
   getLgaPending,
   getLgaSuccess,
   getLgaFailure,
-  getLocalGovernmentFromSelectedState
+  getLocalGovernmentFromSelectedState,
+  updateSelectedState,
+  updateSelectedLocalGovernment
 } from './aspirants'
 
 export {

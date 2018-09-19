@@ -12,10 +12,6 @@ import defaultPicture from '../../../assets/images/placeholder.png';
 
 import { localGovernmentCategories } from '../../modules/mock/localgovernment';
 
-const stateCategories = [
-  { label: "Lagos", value: "lagos" }
-]
-
 const leadershipLevel = [
   { level: "Select Filter >> " },
   { level: "Country" },
@@ -32,12 +28,6 @@ const convertDataToPickerOptions = list => {
   }, [])
 }
 
-const defaultLocations = {
-  COUNTRY: "nigeria",
-  STATE: "lagos",
-  LGA: "maryland"
-}
-
 const ITEM_WIDTH = 240;
 
 class Aspirants extends Component {
@@ -47,7 +37,7 @@ class Aspirants extends Component {
   }
 
   componentDidMount() {
-    this.props.getAspirants(defaultLocations.COUNTRY);
+    this.props.getAspirants(this.props.countrySelected);
   }
 
   renderCard = ({item, index}) => {
@@ -64,30 +54,38 @@ class Aspirants extends Component {
 
   renderCategory = index => {
     const { getAspirants } = this.props;
-    const { COUNTRY, STATE, LGA } = defaultLocations;
+    const { 
+      countrySelected, 
+      stateSelected, 
+      localGovernmentSelected 
+    } = this.props;
     if (index === 0) {
       return null;
     }
     if (index === 1) {
-      getAspirants(COUNTRY);
+      getAspirants(countrySelected);
     } else if (index === 2) {
-      getAspirants(COUNTRY, STATE);
+      getAspirants(countrySelected, stateSelected);
     } else if (index === 3) {
-      getAspirants(COUNTRY, STATE, LGA);
+      getAspirants(countrySelected, stateSelected, localGovernmentSelected);
     }
   }
 
   handleStatePickerClick = async () => {
-    await this.props.getState("ng")
-    console.log("the countey state -> ", this.props.countryState)
+    await this.props.getState(this.props.countrySelected)
     const stateCategories = convertDataToPickerOptions(this.props.countryState);
-    console.log("the stateCategories ", stateCategories);
-    Actions.aspirantModal({ viewState: true, stateSelected: defaultLocations.STATE, stateCategories })
+    Actions.aspirantModal({
+      stateCategories,
+      viewState: true
+    })
   }
   
   handleLocalGovtPickerClick = async () => {
-    await this.props.getLocalGovernmentFromSelectedState("ng", "Lagos")
-    Actions.aspirantModal({ viewLocalGovernment: true, lgaSelected: defaultLocations.LGA, localGovernmentCategories })
+    await this.props.getLocalGovernmentFromSelectedState(this.props.countrySelected, this.props.stateSelected)
+    Actions.aspirantModal({ 
+      viewLocalGovernment: true, 
+      localGovernmentCategories 
+    })
   }
 
   render() {
@@ -136,7 +134,7 @@ class Aspirants extends Component {
                   <Text style={styles.tagText}>state</Text>
                 </Button>
                 <Button bordered small rounded style={styles.tagBtn} 
-                  onPress={() => null }>
+                  onPress={() => this.handleLocalGovtPickerClick() }>
                   <Text style={styles.tagText}>lga</Text>
                 </Button>
               </View>
@@ -262,8 +260,11 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => ({
   aspirants: state.aspirant.aspirants,
   countryState: state.aspirant.countryState,
+  countrySelected: state.aspirant.countrySelected,
   lga: state.aspirant.lga,
-  loading: state.aspirant.loading
+  loading: state.aspirant.loading,
+  stateSelected: state.aspirant.stateSelected,
+  localGovernmentSelected: state.aspirant.localgovernmentSelected
 })
 
 const mapDispatchToProps = dispatch => ({

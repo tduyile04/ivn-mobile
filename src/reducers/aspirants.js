@@ -8,14 +8,25 @@ import {
   getLgaFailure,
   getStatePending,
   getStateSuccess,
-  getStateFailure
+  getStateFailure,
+  updateSelectedState,
+  updateSelectedLocalGovernment
 } from '../actions'
+
+const defaultLocations = {
+  COUNTRY: "ng",
+  STATE: "Lagos",
+  LGA: "Ikeja"
+}
 
 const defaultState = {
   token: '',
   aspirants: [],
   countryState: [],
   lga: [],
+  countrySelected: defaultLocations.COUNTRY,
+  stateSelected: defaultLocations.STATE,
+  localGovernmentSelected: defaultLocations.LGA,
   loading: false,
   error: ''
 };
@@ -86,6 +97,19 @@ export default handleActions({
       ...state,
       // loading: false,
       error: payload 
+    }
+  },
+  [updateSelectedState](state = defaultState, { payload }) {
+    console.log("the payload -> ", payload)
+    return {
+      ...state,
+      stateSelected: payload
+    }
+  },
+  [updateSelectedLocalGovernment](state = defaultState, { payload }) {
+    return {
+      ...state,
+      localgovernmentSelected: payload
     }
   }
 }, defaultState);
