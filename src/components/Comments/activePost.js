@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, View, Text, Button, Icon, Spinner } from 'native-base';
 import { StyleSheet, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { LikeButton } from '../../shared-components/Buttons';
+// import { LikeButton } from '../../shared-components/Buttons';
 import moment from 'moment';
 
 class ActivePost extends Component {
@@ -40,7 +40,7 @@ class ActivePost extends Component {
                   <Text style={styles.tagText}>Change2019</Text>
                 </Button>
               </View>
-              <LikeButton />
+              {/* <LikeButton /> */}
             </View>
             <View style={styles.postInfo}>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
