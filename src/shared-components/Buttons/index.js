@@ -9,7 +9,7 @@ export const UnfollowButton = ({buttonStyle}) =>
     <Button bordered style={[styles.unfollowButton, buttonStyle]} >
       <Text style={styles.unfollowText}>Unfollow</Text>
     </Button>
-  </View>;
+  </View>
 
 export const FollowButton = ({buttonStyle}) => 
   <View>
@@ -17,17 +17,7 @@ export const FollowButton = ({buttonStyle}) =>
       <Icon type="Feather" name='user-plus' style={styles.userIcon} />
       <Text style={styles.followText}>Follow</Text>
     </Button>
-  </View>;
-
-export const LikedButton = () => 
-  <View style={styles.likeSection}>
-    <Icon name='heart' type='MaterialCommunityIcons' style={styles.heart} />
-  </View>;
-
-export const LikeButton = () => 
-  <View style={styles.likeSection}>
-    <Icon name='heart-outline' type='MaterialCommunityIcons' style={styles.numbHeart} />
-  </View>;
+  </View>
 
 export const Heart = ({ filled, style, ...props}) => 
   <Animated.View {...props} style={[styles.heartView, style]}>
@@ -39,15 +29,16 @@ const styles = StyleSheet.create({
   unfollowText: {
     fontFamily: 'raleway-bold',
     fontSize: 13,
-    color: '#4F5764',
+    color: '#628AFF',
     textAlign: 'center'
   },
   unfollowButton: {
     height: 30,
     width: 114,
     borderWidth: 1,
-    borderColor: '#E5E5E5',
+    borderColor: '#628AFF',
     justifyContent: 'center',
+    borderColor: '#628AFF',
     borderRadius: 3,
     marginTop: 13,
   },

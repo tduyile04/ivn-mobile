@@ -29,7 +29,7 @@ class SideBar extends Component {
   logout = () => {
     remove("token");
     remove("user");
-    remove("user_id");
+    remove("user_id"); // To refactor to use a removeList method
     Actions.login();
   }
 

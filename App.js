@@ -4,8 +4,8 @@ import { Router, Scene, Drawer, Tabs, Modal } from 'react-native-router-flux';
 import { Provider } from 'react-redux';
 import { Root } from "native-base";
 
-import MyProfile from './src/components/UserProfile/me';
-import UserProfile from './src/components/UserProfile/others';
+import MyProfile from './src/components/MyProfile';
+import UserProfile from './src/components/UserProfile';
 import PartyProfile from './src/components/PartyProfile';
 import PartyList from './src/components/PartyList';
 import Search from './src/components/Search';
@@ -144,7 +144,11 @@ class App extends React.Component {
                   </Tabs>
                 </Drawer>
               </Scene>
-              <Scene key="aspirantModal" component={AspirantModal}  hideNavBar />
+              <Scene 
+                key="aspirantModal" 
+                component={AspirantModal}  
+                hideNavBar 
+              />
             </Modal>
           </Router>
         </Provider>

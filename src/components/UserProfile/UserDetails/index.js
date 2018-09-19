@@ -1,34 +1,63 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
-import { Text, View, Button } from 'native-base';
+import { Text, View, Button, Icon } from 'native-base';
 
-const UserDetails = ({user, editProfileButton}) => {
+import { FollowButton, UnfollowButton } from '../../../shared-components/Buttons';
+
+const UserDetails = ({
+    id,
+    user,
+    endorseUser, 
+    withdrawEndorsement,
+    endorsed, 
+    following,
+    candidate
+}) => {
   const avatar = user.avatar || 'https://forumine.com/download/file.php?avatar=86_1519467243.jpg';
   return (
     <View style={styles.content}>
-      <View style={styles.profileImageSection}>
-        <Image
-          style={styles.profileImage}
-          source={{uri: avatar}}
-        />
-      </View>
-      <View style={styles.userDetailsSection}>
-        <Text style={styles.name}>{`${user.firstName} ${user.lastName}`}</Text>
-        <Text style={styles.username}>{user.email}</Text>
-        <View style={styles.partyDetails}>
+      <View style={styles.row}>
+        <View style={styles.profileImageSection}>
           <Image
-            style={styles.partyFlag}
-            source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
-            resizeMode="contain"
+            style={styles.profileImage}
+            source={{uri: avatar}}
           />
-          <View style={styles.partyInfo}>
-            <Text style={styles.member}>member of</Text>
-            <Text style={styles.partyName}>People's Democratic Party</Text>
+        </View>
+        <View style={styles.actionSection}>
+          {
+            candidate && ( endorsed ?
+              <Button transparent dark style={styles.endorseBtn} onPress={() => withdrawEndorsement(id)}>
+                <Text style={styles.text}>Unendorse</Text>
+              </Button> 
+            :
+              <Button transparent dark style={styles.endorseBtn} onPress={() => endorseUser(id)}>
+                <Icon type="MaterialCommunityIcons" name='checkbox-marked-circle-outline' style={styles.verified} /> 
+                <Text style={[styles.text, styles.endorse]}>Endorse</Text>
+            </Button> )
+          }
+          { following ? <UnfollowButton /> : <FollowButton /> }
+        </View>
+      </View>
+      <View style={styles.center}>
+        <Text style={styles.name}>{`${user.firstName} ${user.lastName}`}</Text>
+        <View style={styles.userDetailsSection}>
+          <Text style={styles.username}>{user.email}</Text>
+          <View style={styles.partyDetails}>
+            <View>
+              <Image
+                style={styles.partyFlag}
+                source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={styles.partyInfo}>
+              <Text style={styles.member}>
+                member of 
+                <Text style={styles.partyName}> People's Democratic Party</Text>
+              </Text>
+            </View>
           </View>
         </View>
-        { editProfileButton && <Button small bordered block style={styles.button} onPress={() => alert('Editing My Profile...')}>
-          <Text style={styles.text}>Edit Profile</Text>
-        </Button>}
       </View>
     </View>
   );
@@ -36,25 +65,25 @@ const UserDetails = ({user, editProfileButton}) => {
 
 const styles = StyleSheet.create({
   content: {
+    flex: 1,
     paddingLeft: 25,
     paddingRight: 25,
+  },
+  row: {
     flexDirection: 'row'
   },
   profileImage: {
     width: 68,
     height: 68,
     borderRadius: 33,
-    marginTop: -15,
-  },
-  userDetailsSection: {
-    marginLeft: 29,
-    marginTop: 10,
+    marginTop: -25,
   },
   name: {
     fontSize: 25,
     fontWeight: 'bold',
     fontFamily: 'raleway-bold',
     color: "#3F3F3F",
+    marginTop: 10,
   },
   username: {
     fontSize: 13,
@@ -65,7 +94,6 @@ const styles = StyleSheet.create({
   partyDetails: {
     flexDirection: 'row',
     marginTop: 10,
-    // marginBottom: 10
   },
   partyFlag: {
     width: 39,
@@ -83,18 +111,36 @@ const styles = StyleSheet.create({
   }, 
   member: {
     fontSize: 11,
+    marginTop: 6,
     lineHeight: 13,
     fontFamily: 'raleway-regular',
     color: "#3F3F3F",
   },
   button: {
-    width: '105%',
-    borderColor: '#aaa',
-    marginBottom: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#E5E5E5'
   },
   text: {
     fontFamily: 'raleway-bold',
-    color: '#444'
+    color: '#4F5764',
+    fontSize: 13,
+    textAlign: 'center'
+  },
+  actionSection: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginLeft: 29,
+  },
+  endorseBtn: {
+    marginTop: 5,
+  },
+  endorse: {
+    marginLeft: -28,
+  },
+  verified: {
+    color: '#ff6277',
   }
 });
 
