@@ -89,11 +89,30 @@ class App extends React.Component {
                     key='tabs'
                     tabBarComponent={Footer}
                   >
+                    {/* Changing Order of Home, Search, Notifications and MyProfile Scene
+                     can cause issues toggling the display of the active icon. */}
                     <Scene
                       key='home'
                       component={Home}
                       hideNavBar
                     />
+                    <Scene 
+                      key='search'
+                      component={Search}
+                      hideNavBar
+                    />
+                    <Scene 
+                      key='notifications'
+                      component={Notifications}
+                      hideNavBar 
+                    />
+                    <Scene 
+                      key='myProfile'
+                      component={MyProfile}
+                      hideNavBar
+                    />
+                    {/* Other Scenes can be moved around freely. Temporary fix till we 
+                    come up with a better solution */}
                     <Scene
                       key='textEditor'
                       component={TextEditor}
@@ -105,21 +124,6 @@ class App extends React.Component {
                       component={Comments}
                       hideNavBar
                       hideTabBar
-                    />
-                    <Scene 
-                      key='notifications'
-                      component={Notifications}
-                      hideNavBar 
-                    />
-                    <Scene 
-                      key='search'
-                      component={Search}
-                      hideNavBar
-                    />
-                    <Scene 
-                      key='myProfile'
-                      component={MyProfile}
-                      hideNavBar
                     />
                     <Scene 
                       key='userProfile'

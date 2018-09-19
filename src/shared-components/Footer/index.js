@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
 import { connect } from 'react-redux'
 import { Footer, FooterTab, Button, Icon, Badge, Text } from 'native-base';
+import { StyleSheet } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
 import { incrementUnread, getNotifications, addNotification, clearUnread } from '../../actions/notification'
@@ -24,29 +25,35 @@ class FooterTabs extends Component {
   }
 
   render () {
-    const { unread } = this.props
+    const { unread, navigationState: { index } } = this.props
     return (
       <Footer>
         <FooterTab>
           <Button onPress={() => Actions.home()}>
-            <Icon name="home" type='SimpleLineIcons' />
+            <Icon name="home" type='SimpleLineIcons' style={index === 0 ? styles.active : {}}  />
           </Button>
           <Button onPress={() => Actions.search()}>
-            <Icon name="magnifier" type='SimpleLineIcons' />
+            <Icon name="magnifier" type='SimpleLineIcons'  style={index === 1 ? styles.active : {}}/>
           </Button>
           <Button badge onPress={() => this.pressNotification()}>
             {!unread &&<Badge style={{ backgroundColor: 'transparent' }}></Badge>}
             {unread && <Badge><Text>{unread}</Text></Badge>}
-            <Icon name="bell" type='SimpleLineIcons' />
+            <Icon name="bell" type='SimpleLineIcons' style={index === 2 ? styles.active : {}} />
           </Button>
           <Button onPress={() => Actions.myProfile()}>
-            <Icon name="people" type='SimpleLineIcons' />
+            <Icon name="people" type='SimpleLineIcons' style={index === 3 ? styles.active : {}} />
           </Button>
         </FooterTab>
       </Footer>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  active: {
+    color: '#628AFF',
+  },
+})
 
 const mapStateToProps = state => ({
   unread: state.notification.new,
