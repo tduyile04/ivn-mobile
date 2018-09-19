@@ -1,19 +1,21 @@
 import React from 'react';
-import { Container, Text } from 'native-base';
+import { FileSystem } from 'expo';
+import { Container, Text, Button } from 'native-base';
 import { StyleSheet } from 'react-native';
 
-const Manifesto = () => {
+const downloadFile = (name, url) => FileSystem.downloadAsync(url, `${FileSystem.documentDirectory}${name}.pdf`)
+
+const Manifesto = (props) => {
   return (
     <Container style={styles.container}>
-      <Text style={styles.text}>
-        See what I’m getting at here? You have the right to take any piece of your personal 
-        history and reinterpret it to your advantage rather than to your detriment. 
-        You can find ways to turn your past to your own good.
-        {"\n\n"}
-        See what I’m getting at here? You have the right to take any piece of your personal 
-        history and reinterpret it to your advantage rather than to your detriment. 
-        You can find ways to turn your past to your own good.
-      </Text>
+      {props.party && props.party.manifesto && props.party.manifesto.length > 0
+        ? <Button onPress={() => downloadFile(props.party.abbr, props.party.manifesto)}>
+              <Text>Download Manifesto</Text>
+            </Button>
+        : <Text style={styles.text}>
+            Manifesto not available yet on this platform.
+          </Text>
+      }
     </Container>
   );
 }
@@ -22,7 +24,8 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 22,
     paddingLeft: 25,
-    paddingRight: 25
+    paddingRight: 25,
+    textAlign: 'center',
   },
   text: {
     fontFamily: 'raleway-regular',
