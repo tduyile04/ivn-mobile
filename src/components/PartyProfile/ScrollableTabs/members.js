@@ -4,45 +4,27 @@ import { StyleSheet, Image } from 'react-native';
 import HorizontalLine from '../../../shared-components/HorizontalLine';
 import { UnfollowButton, FollowButton } from '../../../shared-components/Buttons';
 
-const Members = () => {
+const Members = (props) => {
   return (
     <Container>
-      <View style={styles.card}>
-        <Image
-          style={styles.profileImage}
-          source={{uri: 'https://78.media.tumblr.com/918336515ad76e6fbbb9f1b43a77433d/tumblr_ojqofutSn41rkih50o1_500.jpg'}}
-        />
-        <View style={styles.items}>
-          <Text style={styles.title}>Anthony Franklin</Text>
-          <Text style={styles.handle}>@anthony_franklink</Text>
-          <FollowButton />
-        </View>
-      </View>
-      <HorizontalLine />
-      <View style={styles.card}>
-        <Image
-          style={styles.profileImage}
-          source={{uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg'}}
-        />
-        <View style={styles.items}>
-          <Text style={styles.title}>Jessicca Alli</Text>
-          <Text style={styles.handle}>@jessicca_alli</Text>
-          <UnfollowButton />
-        </View>
-      </View>
-      <HorizontalLine />
-      <View style={styles.card}>
-        <Image
-          style={styles.profileImage}
-          source={{uri: 'https://i.pinimg.com/736x/19/a8/6c/19a86c6673349bb21910dd4b3bb18e68.jpg'}}
-        />
-        <View style={styles.items}>
-          <Text style={styles.title}>Daniel Smith</Text>
-          <Text style={styles.handle}>@daniel_smith</Text>
-          <FollowButton />
-        </View>
-      </View>
-      <HorizontalLine />
+      {props.party.members.map(member => {
+        return (
+          <View>
+            <View style={styles.card}>
+              <Image
+                style={styles.profileImage}
+                source={{uri: member.avatar }}
+              />
+              <View style={styles.items}>
+                <Text style={styles.title}>{member.firstName} {member.lastName}</Text>
+                <Text style={styles.handle}>@{member.firstName}_{member.lastName}</Text>
+                <FollowButton />
+              </View>
+            </View>
+            <HorizontalLine />
+          </View>
+        )
+      })}
     </Container>
   );
 }

@@ -6,19 +6,19 @@ import Manifesto from './manifesto';
 import Members from './members';
 import HorizontalLine from '../../../shared-components/HorizontalLine';
 
-const ScrollableTabs = () => {
+const ScrollableTabs = (props) => {
   return (
     <Container style={styles.container}>
       <HorizontalLine />
       <Tabs tabBarUnderlineStyle={styles.tabsStyle}>
         <Tab heading="About" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle} >
-          <About />
+          <About {...props} />
         </Tab>
         <Tab heading="Maifesto" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle} >
-          <Manifesto />
+          <Manifesto {...props} />
         </Tab>
         <Tab heading="Members" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle} >
-          <Members />
+          <Members {...props} />
         </Tab>
       </Tabs>
     </Container>

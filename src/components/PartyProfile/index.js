@@ -11,13 +11,6 @@ import { FollowButton } from '../../shared-components/Buttons';
 import { getParty, unSelectParty } from '../../actions/party';
 
 class PartyProfile extends React.Component {
-  componentDidMount () {
-    this.props.getParty(this.props.data);
-  }
-  componentWillUnmount () {
-    this.props.unSelectParty();
-  }
-
   render () {
     return (
       <Container>
@@ -37,7 +30,11 @@ class PartyProfile extends React.Component {
                     />
                 </View>
                 <Text style={styles.partyName}>{this.props.selected.name}</Text>
-                <Text style={styles.partyHandle}>@{this.props.selected.abbr}</Text>
+                {
+                  this.props.selected.abbr &&
+                  this.props.selected.abbr.length > 0 &&
+                  <Text style={styles.partyHandle}>@{this.props.selected.abbr}</Text>
+                }
                 <Listings followers={21098} members={1050} />
                 <View style={styles.followActionView}>
                   <FollowButton />
@@ -45,7 +42,7 @@ class PartyProfile extends React.Component {
               </View>
             ) : <Spinner size="small" color="#000" />
           }
-          <ScrollableTabs />
+          <ScrollableTabs party={this.props.selected}/>
         </Content>
       </Container>
     )

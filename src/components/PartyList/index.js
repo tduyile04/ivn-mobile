@@ -6,7 +6,7 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 
 import Header from '../../shared-components/Header';
 
-import { getParties } from '../../actions/party';
+import { getParties, getParty, unSelectParty } from '../../actions/party';
 import { Actions } from 'react-native-router-flux';
 import HorizontalLine from '../../shared-components/HorizontalLine';
 import { UnfollowButton, FollowButton } from '../../shared-components/Buttons';
@@ -16,6 +16,12 @@ class PartyList extends React.Component {
 
   componentDidMount () {
     this.props.getParties();
+  }
+
+  handleSelectParty = (item) => {
+    this.props.unSelectParty();
+    this.props.getParty(item.id);
+    return Actions.partyProfile(item.id);
   }
 
   handleRefresh = () => null
@@ -38,13 +44,13 @@ class PartyList extends React.Component {
                     resizeMode='contain'
                   />
                   <View style={styles.items}>
-                    <Text style={styles.title} onPress={() => Actions.partyProfile(item.id)}>
-                      {item.name + " "} 
+                    <Text style={styles.title} onPress={() => this.handleSelectParty(item)}>
+                      {item.name + " "}
                       {item.abbr && item.abbr.length ? `(${item.abbr})`: ""}
                     </Text>
                     { item.motto && item.motto.length ? <Text style={styles.motto}>{`"${item.motto}"`}</Text> : ""  }
                     <Text style={styles.followed}>
-                      <Text style={styles.bold}>Followed </Text>        
+                      <Text style={styles.bold}>Followed </Text>
                       by {item.members.length} people
                     </Text>
                     <FollowButton />
@@ -155,7 +161,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getParties: () => dispatch(getParties())
+  getParty: id => dispatch(getParty(id)),
+  getParties: () => dispatch(getParties()),
+  unSelectParty: () => dispatch(unSelectParty())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PartyList)

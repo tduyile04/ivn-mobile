@@ -2,13 +2,14 @@ import React from 'react';
 import { Container, Text } from 'native-base';
 import { StyleSheet } from 'react-native';
 
-const About = () => {
+const About = (props) => {
   return (
     <Container style={styles.container}>
       <Text style={styles.about}>
-        See what I’m getting at here? You have the right to take any piece of your personal 
-        history and reinterpret it to your advantage rather than to your detriment. 
-        You can find ways to turn your past to your own good.
+        {props.party && props.party.about && props.party.about.length > 0
+          ? props.party.about
+          : 'Information about this party not available yet on this platform'
+        }
       </Text>
     </Container>
   );
