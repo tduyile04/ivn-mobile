@@ -8,11 +8,11 @@ import { Heart } from '../../shared-components/Buttons';
 import HorizontalLine from '../HorizontalLine';
 
 
-const Post = ({ 
+const Post = ({
   id,
   userId,
-  userAvatar, 
-  userFullName, 
+  userAvatar,
+  userFullName,
   userParty,
   postTimePosted,
   userPosition,
@@ -27,6 +27,7 @@ const Post = ({
   triggerLike,
   heartButtonStyle,
  }) => {
+
   return (
     <View key={postId}>
       <Card transparent style={styles.card}>
@@ -57,7 +58,7 @@ const Post = ({
                   )
                 })}
               </View>
-              <Button transparent onPress={triggerLike}>
+              <Button transparent onPress={() => triggerLike(postId)}>
                 <Animated.View style={heartButtonStyle}>
                   <Heart filled={liked} />
                 </Animated.View>
@@ -67,11 +68,11 @@ const Post = ({
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>{postLikes} Likes</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text 
-                style={styles.blueText}  
+              <Text
+                style={styles.blueText}
                 onPress={() => Actions.comments({
-                  userAvatar, 
-                  userFullName, 
+                  userAvatar,
+                  userFullName,
                   userParty,
                   postTimePosted,
                   userPosition,
@@ -88,8 +89,9 @@ const Post = ({
       </Card>
       <HorizontalLine />
     </View>
-  )
+  );
 }
+
 
 class Feed extends Component {
   constructor(props) {
@@ -110,24 +112,23 @@ class Feed extends Component {
     }
   }
 
-  triggerLike = () => {
-    this.setState({
-      liked: !this.state.liked
-    })
+  triggerLike = async (postId) => {
+    await this.props.likePost(postId);
     Animated.spring(this.state.scale, {
       toValue: 2,
       friction: 3
     }).start(() => {
       this.state.scale.setValue(0);
     });
+    return false;
   }
 
   async componentDidMount() {
-    await this.props.getPosts(this.props.page, this.props.limit) 
+    await this.props.getPosts(this.props.page, this.props.limit)
   }
 
   fetchMorePosts = async () => {
-    await this.props.getPosts(this.props.page, this.props.limit) 
+    await this.props.getPosts(this.props.page, this.props.limit)
     this.setState(() => ({ refreshing: false }))
   }
 
@@ -135,7 +136,7 @@ class Feed extends Component {
     this.setState(() => ({
       refreshing: true
     }), () => {
-      this.props.getPosts(this.props.page, this.props.limit) 
+      this.props.getPosts(this.props.page, this.props.limit)
     })
   }
 
@@ -158,6 +159,7 @@ class Feed extends Component {
           data={posts}
           renderItem={({ item: post }) => (
             <Post
+              key={post.id}
               userId={post.author.id}
               userAvatar={post.author && post.author.avatar}
               userFullName={`${post.author && post.author.firstName} ${post.author && post.author.lastName}`}
@@ -169,7 +171,7 @@ class Feed extends Component {
               postComments={post.comments && post.comments.length}
               postLikes={post.likes && post.likes.length}
               setActive={setActive}
-              liked={liked}
+              liked={post.liked}
               triggerLike={this.triggerLike}
               heartButtonStyle={heartButtonStyle}
             />
@@ -274,12 +276,12 @@ const styles = StyleSheet.create({
     fontFamily: 'raleway-bold',
   },
   info: {
-    flexDirection: 'row', 
+    flexDirection: 'row',
     alignItems: 'center',
   },
   postInfo: {
-    flexDirection: 'row', 
-    marginTop: 10, 
+    flexDirection: 'row',
+    marginTop: 10,
     alignItems: 'center',
   }
 });

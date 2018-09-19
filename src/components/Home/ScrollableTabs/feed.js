@@ -16,7 +16,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getPosts: (page, limit) => dispatch(getPosts(page, limit))
+  getPosts: (page, limit) => dispatch(getPosts(page, limit)),
+  likePost: (postId) => dispatch(likePost(postId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feed);
