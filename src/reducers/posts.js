@@ -26,11 +26,7 @@ const defaultState = {
   postLoading: false,
   error: '',
   page: 1,
-  limit: 3,
-  pendingPost: {
-    liked: false,
-    id: 23
-  }
+  limit: 3
 };
 
 export default handleActions({

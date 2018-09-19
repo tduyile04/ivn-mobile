@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import FeedList from '../../../shared-components/Feed';
 
-import { getPosts, likePost, likePostSuccess } from '../../../actions';
+import { getPosts } from '../../../actions';
 
 const Feed = (props) => <FeedList {...props} />
 

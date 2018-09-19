@@ -98,7 +98,6 @@ export const likePost = postId => async dispatch => {
     console.log(response.data.data);
     return dispatch(likePostSuccess(response.data.data));
   } catch ({ response, message }) {
-    // const errorMessage = data && data.error ? data.error.message : 'Please try again';
     return dispatch(likePostFailure(message));
   }
 }
