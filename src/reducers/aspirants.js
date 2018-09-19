@@ -2,12 +2,20 @@ import { handleActions } from "redux-actions";
 import { 
   getAspirantsPending,
   getAspirantsSuccess, 
-  getAspirantsFailure
+  getAspirantsFailure,
+  getLgaPending,
+  getLgaSuccess,
+  getLgaFailure,
+  getStatePending,
+  getStateSuccess,
+  getStateFailure
 } from '../actions'
 
 const defaultState = {
   token: '',
   aspirants: [],
+  countryState: [],
+  lga: [],
   loading: false,
   error: ''
 };
@@ -32,6 +40,51 @@ export default handleActions({
     return {
       ...state,
       loading: false,
+      error: payload 
+    }
+  },
+  [getStatePending](state = defaultState) {
+    return {
+      ...state,
+      // loading: true,
+      error: ''
+    }
+  },
+  [getStateSuccess](state = defaultState, { payload }) {
+    return {
+      ...state,
+      // loading: false,
+      countryState: payload.country,
+      error: ''
+    }
+  },
+  [getStateFailure](state = defaultState, { payload }) {
+    return {
+      ...state,
+      // loading: false,
+      error: payload 
+    }
+  },
+  [getLgaPending](state = defaultState) {
+    return {
+      ...state,
+      // loading: true,
+      error: ''
+    }
+  },
+  [getLgaSuccess](state = defaultState, { payload }) {
+    console.log("In the get local government success ", payload)
+    return {
+      ...state,
+      // loading: false,
+      countryState: payload.state,
+      error: ''
+    }
+  },
+  [getLgaFailure](state = defaultState, { payload }) {
+    return {
+      ...state,
+      // loading: false,
       error: payload 
     }
   }

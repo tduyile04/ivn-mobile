@@ -74,7 +74,15 @@ export {
   getAspirantsPending,
   getAspirantsSuccess,
   getAspirantsFailure,
-  getAspirants
+  getAspirants,
+  getStatePending,
+  getStateSuccess,
+  getStateFailure,
+  getState,
+  getLgaPending,
+  getLgaSuccess,
+  getLgaFailure,
+  getLocalGovernmentFromSelectedState
 } from './aspirants'
 
 export {
