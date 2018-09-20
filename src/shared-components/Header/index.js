@@ -3,7 +3,7 @@ import { Header, Left, Body, Right, Button, Icon, Title , Text } from 'native-ba
 import { StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-const HeaderTab = ({menu, back, title, share, onShare, signup}) => {
+const HeaderTab = ({menu, back, title, share, onShare, ask, onAsk, signup}) => {
   const headerStyle = !signup ? styles.header : styles.headerSignup;
   return (
     <Header style={headerStyle} hasTabs>
@@ -22,6 +22,7 @@ const HeaderTab = ({menu, back, title, share, onShare, signup}) => {
       </Body>
       <Right>
         { share && <Button transparent onPress={onShare}><Text style={[styles.text, styles.share]}>Share</Text></Button>}
+        { ask && <Button transparent onPress={onAsk}><Text style={[styles.text, styles.share]}>Ask</Text></Button>}
       </Right>
     </Header>
   );
