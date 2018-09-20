@@ -77,7 +77,7 @@ class UserProfile extends Component {
             following={followings.length} 
             endorsements={endorsements.length} 
           />
-          <Button small bordered dark block style={styles.button} onPress={() => alert('Editing My Profile...')}>
+          <Button small bordered dark block style={styles.button} onPress={() => Actions.question()}>
             <Icon name='comment' type='EvilIcons' />
             <Text style={styles.text}>Ask Question</Text>
           </Button>

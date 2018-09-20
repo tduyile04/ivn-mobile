@@ -15,6 +15,7 @@ import Notifications from './src/components/Notifications';
 import SideBar from './src/shared-components/SideBar';
 import Footer from './src/shared-components/Footer';
 import TextEditor from './src/components/TextEditor';
+import Question from './src/components/Question';
 import Onboarding from './src/components/Onboarding';
 import Aspirants from './src/components/Aspirants';
 
@@ -114,12 +115,6 @@ class App extends React.Component {
                     {/* Other Scenes can be moved around freely. Temporary fix till we 
                     come up with a better solution */}
                     <Scene
-                      key='textEditor'
-                      component={TextEditor}
-                      hideTabBar
-                      hideNavBar
-                    />
-                    <Scene
                       key='comments'
                       component={Comments}
                       hideNavBar
@@ -152,6 +147,18 @@ class App extends React.Component {
                 key="aspirantModal" 
                 component={AspirantModal}  
                 hideNavBar 
+              />
+              <Scene
+                key='textEditor'
+                component={TextEditor}
+                hideTabBar
+                hideNavBar
+              />
+              <Scene
+                key='question'
+                component={Question}
+                hideTabBar
+                hideNavBar
               />
             </Modal>
           </Router>

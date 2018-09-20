@@ -24,24 +24,27 @@ class FooterTabs extends Component {
     return Actions.notifications()
   }
 
+  setActiveStyle = (index, position) => index === position ? styles.active : {};
+
   render () {
     const { unread, navigationState: { index } } = this.props
+    
     return (
       <Footer>
         <FooterTab>
           <Button onPress={() => Actions.home()}>
-            <Icon name="home" type='SimpleLineIcons' style={index === 0 ? styles.active : {}}  />
+            <Icon name="home" type='SimpleLineIcons' style={this.setActiveStyle(index, 0)}  />
           </Button>
           <Button onPress={() => Actions.search()}>
-            <Icon name="magnifier" type='SimpleLineIcons'  style={index === 1 ? styles.active : {}}/>
+            <Icon name="magnifier" type='SimpleLineIcons'  style={this.setActiveStyle(index, 1)}/>
           </Button>
           <Button badge onPress={() => this.pressNotification()}>
             {!unread &&<Badge style={{ backgroundColor: 'transparent' }}></Badge>}
             {unread && <Badge><Text>{unread}</Text></Badge>}
-            <Icon name="bell" type='SimpleLineIcons' style={index === 2 ? styles.active : {}} />
+            <Icon name="bell" type='SimpleLineIcons' style={this.setActiveStyle(index, 2)} />
           </Button>
           <Button onPress={() => Actions.myProfile()}>
-            <Icon name="people" type='SimpleLineIcons' style={index === 3 ? styles.active : {}} />
+            <Icon name="people" type='SimpleLineIcons' style={this.setActiveStyle(index, 3)} />
           </Button>
         </FooterTab>
       </Footer>
