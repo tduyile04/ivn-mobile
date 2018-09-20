@@ -8,6 +8,8 @@ import HorizontalLine from '../../shared-components/HorizontalLine';
 import Header from '../../shared-components/Header';
 import { getNotifications, clearUnread } from '../../actions/notification'
 
+import defaultPicture from '../../../assets/images/placeholder.png';
+
 class Notifications extends Component {
 
   async componentDidMount() {
@@ -22,6 +24,9 @@ class Notifications extends Component {
       'party_member_remove': 'You\'ve been removed from a party!',
       'role_downgrade': 'Revoked role access!'
     }
+
+    const setAvatar = userAvatar => userAvatar ? { uri: userAvatar } : defaultPicture;
+
     return this.props.notifications.map(notification => (
       <View key={notification.id}>
         <Card transparent style={styles.card}>
@@ -35,8 +40,7 @@ class Notifications extends Component {
               :
                 <Image
                   style={styles.profileImage}
-                  source={{
-                    uri: notification.sender[0].avatar || 'https://i.pinimg.com/736x/19/a8/6c/19a86c6673349bb21910dd4b3bb18e68.jpg'}}
+                  source={setAvatar(notification.sender[0].avatar)}
                 />
             }
             <View style={styles.right}>

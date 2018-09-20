@@ -8,6 +8,8 @@ import { Actions } from 'react-native-router-flux';
 import { getAspirants } from '../../actions';
 import Header from '../../shared-components/Header';
 
+import defaultPicture from '../../../assets/images/placeholder.png';
+
 import { localGovernmentCategories } from '../../modules/mock/localgovernment';
 
 const stateCategories = [
@@ -79,7 +81,7 @@ class Aspirants extends Component {
           <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', paddingTop: 15, paddingBottom: 10 }}>
             <Image
               style={styles.profileImage}
-              source={{ uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg' }}
+              source={defaultPicture}
             />
             <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
               <Text style={styles.currentLeaderTextStyle}>Joke Adams</Text>
@@ -118,7 +120,7 @@ class Aspirants extends Component {
                 <View key={index} style={{ display: 'flex', flexDirection: 'row', paddingTop: 40, borderTopColor: '#ECECEC', borderTopWidth: 1, borderStyle: 'solid' }}>
                   <Image
                     style={[styles.profileImage, { borderRadius: 5 }]}
-                    source={{ uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg' }}
+                    source={defaultPicture}
                   />
                   <View>
                     <Text style={styles.aspirantBasicStyle}>{aspirant.firstName} {aspirant.lastName}</Text>
@@ -130,7 +132,6 @@ class Aspirants extends Component {
             })}
           </Content>
         </Container>
-
       </Container>
 
     )

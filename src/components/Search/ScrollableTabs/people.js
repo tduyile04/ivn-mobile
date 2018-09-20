@@ -3,6 +3,9 @@ import { Container, Text, View, Button, Icon } from 'native-base';
 import { StyleSheet, Image } from 'react-native';
 import HorizontalLine from '../../../shared-components/HorizontalLine';
 import { UnfollowButton, FollowButton } from '../../../shared-components/Buttons';
+import defaultPicture from '../../../../assets/images/placeholder.png';
+
+const setAvatar = userAvatar => userAvatar ? { uri: userAvatar } : defaultPicture;
 
 const People = (props) => {
   return (
@@ -13,7 +16,7 @@ const People = (props) => {
             <View style={styles.card}>
               <Image
                 style={styles.profileImage}
-                source={{uri: 'https://78.media.tumblr.com/918336515ad76e6fbbb9f1b43a77433d/tumblr_ojqofutSn41rkih50o1_500.jpg'}}
+                source={setAvatar(user.avatar)}
               />
               <View style={styles.items}>
                 <Text style={styles.fullname}>{user.firstName} {user.lastName}</Text>

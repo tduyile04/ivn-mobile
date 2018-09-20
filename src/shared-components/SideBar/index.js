@@ -9,6 +9,10 @@ import HorizontalLine from '../../shared-components/HorizontalLine';
 import Listings from '../../shared-components/Listings';
 import { get, mapSet, remove } from '../../modules/cache';
 
+import defaultPicture from '../../../assets/images/placeholder.png';
+
+const setAvatar = userAvatar => userAvatar ? { uri: userAvatar } : defaultPicture;
+
 class SideBar extends Component {
   state = {
     loading: true,
@@ -55,15 +59,15 @@ class SideBar extends Component {
           <View style={styles.center}>
             <Image
               style={styles.profileImage}
-              source={{uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg'}}
+              source={setAvatar(user.avatar)}
             />
             <Text style={[styles.name, styles.boldText]}>{user.firstName} {user.lastName}</Text>
             <Text style={[styles.text, styles.username]}>{user.email}</Text>
-            <Image
+            {/* <Image
               style={styles.partyFlag}
               source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
               resizeMode="contain"
-            />
+            /> */}
             <HorizontalLine lineStyle={styles.lineStyle} />
             <Listings endorsements={endorsements.length} followers={followers.length} following={followings.length} countStyle={styles.count} />
             <HorizontalLine lineStyle={styles.lineStyle} />

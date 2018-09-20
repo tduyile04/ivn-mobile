@@ -6,7 +6,9 @@ import { StyleSheet, Image, FlatList, Animated } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Heart } from '../../shared-components/Buttons';
 import HorizontalLine from '../HorizontalLine';
+import defaultPicture from '../../../assets/images/placeholder.png';
 
+const setAvatar = userAvatar => userAvatar ? { uri: userAvatar } : defaultPicture;
 
 const Post = ({
   id,
@@ -27,14 +29,13 @@ const Post = ({
   triggerLike,
   heartButtonStyle,
  }) => {
-
   return (
     <View key={postId}>
       <Card transparent style={styles.card}>
         <View style={styles.row}>
           <Image
             style={styles.profileImage}
-            source={{ uri: userAvatar || 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg' }}
+            source={setAvatar(userAvatar)}
           />
           <View style={styles.items}>
             <View style={styles.info}>

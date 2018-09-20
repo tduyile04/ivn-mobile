@@ -3,6 +3,7 @@ import { Image, StyleSheet } from 'react-native';
 import { Text, View, Button, Icon } from 'native-base';
 
 import { FollowButton, UnfollowButton } from '../../../shared-components/Buttons';
+import defaultPicture from '../../../../assets/images/placeholder.png';
 
 const UserDetails = ({
     id,
@@ -13,14 +14,14 @@ const UserDetails = ({
     following,
     candidate
 }) => {
-  const avatar = user.avatar || 'https://forumine.com/download/file.php?avatar=86_1519467243.jpg';
+  const avatar = user && user.avatar ? { uri: user.avatar } : defaultPicture;
   return (
     <View style={styles.content}>
       <View style={styles.row}>
         <View style={styles.profileImageSection}>
           <Image
             style={styles.profileImage}
-            source={{uri: avatar}}
+            source={avatar}
           />
         </View>
         <View style={styles.actionSection}>
@@ -46,7 +47,7 @@ const UserDetails = ({
             <View>
               <Image
                 style={styles.partyFlag}
-                source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
+                source={{ uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif' }}
                 resizeMode="contain"
               />
             </View>

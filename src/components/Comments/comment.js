@@ -3,13 +3,14 @@ import moment from 'moment';
 import { View, Text, Icon } from 'native-base';
 import { StyleSheet, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import defaultPicture from '../../../assets/images/placeholder.png';
 
 const Comment = ({ item }) => 
   <View style={styles.container}>
     <View>
       <Image
         style={styles.profileImage}
-        source={{uri: item.user && item.user.avatar || 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg'}}
+        source={item.user && item.user.avatar ? { uri: item.user.avatar } : defaultPicture}
       />
       <Icon style={{ fontSize: 18, color: '#97A1B3', marginTop: 5 }} name="subdirectory-arrow-right" type="MaterialCommunityIcons" />
     </View>
