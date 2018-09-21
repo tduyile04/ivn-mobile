@@ -19,8 +19,8 @@ import Question from './src/components/Question';
 import QuestionList from './src/components/Question/QuestionList';
 import Onboarding from './src/components/Onboarding';
 import Aspirants from './src/components/Aspirants';
-
-import AspirantModal from './src/components/Modal/AspirantModal'
+import CandidateOfTheWeek from './src/components/CandidateOfTheWeek';
+import AspirantModal from './src/components/Modal/AspirantModal';
 
 import SignUp from './src/containers/SignUp'
 import Login from './src/containers/Login';
@@ -149,6 +149,11 @@ class App extends React.Component {
                     <Scene
                       key='questionList'
                       component={QuestionList}
+                      hideNavBar
+                    />
+                    <Scene
+                      key='candidateOfTheWeek'
+                      component={CandidateOfTheWeek}
                       hideNavBar
                     />
                   </Tabs>

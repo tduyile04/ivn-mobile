@@ -90,6 +90,12 @@ class SideBar extends Component {
                 <Text style={styles.text}>Aspirants</Text>
               </Button>
             </View>
+            <View style={[styles.rowCenter]}>
+              <Button transparent onPress={() => Actions.candidateOfTheWeek()}>
+                <Icon name="user" type='SimpleLineIcons' style={styles.icon} />
+                <Text style={styles.text}>Candidate of the Week</Text>
+              </Button>
+            </View>
           </View>
         </View>
 
