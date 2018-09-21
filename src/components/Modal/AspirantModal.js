@@ -51,16 +51,16 @@ class AspirantModal extends Component {
                 onValueChange={(itemValue) => this.props.updateSelectedState(itemValue)}>
                 {stateCategories.map((category, index) => <Picker.Item key={index} label={category.label} value={category.value} />)}
               </Picker>)}
-              {localGovernmentCategories && (<Picker
-                selectedValue={this.props.localgovernmentSelected}
+            {localGovernmentCategories && (<Picker
+                selectedValue={this.props.localGovernmentSelected}
                 style={{ height: 50, width: 100 }}
                 onValueChange={(itemValue) => this.props.updateSelectedLocalGovernment(itemValue)}>
-                {localGovernmentCategories['lagos'].map((category, index) => <Picker.Item key={index} label={category.label} value={category.value} />)}
+                {localGovernmentCategories.map((category, index) => <Picker.Item key={index} label={category.label} value={category.value} />)}
               </Picker>)}
           </View>
         </View>
         <Button bordered style={{ position: "absolute", bottom: (HEIGHT / 2) - 40, width: WIDTH - 40, marginLeft: 20, marginRight: 20, borderColor: '#000' }}
-          onClick={() => Actions.popTo("aspirant")}>
+          onPress={() => Actions.pop()}>
           <Text style={{ marginLeft: "auto", marginRight: "auto", fontFamily: 'raleway-regular', fontSize: 18 }}>SELECT</Text>
         </Button>
       </Container>
@@ -71,7 +71,7 @@ class AspirantModal extends Component {
 
 const mapStateToProps = state => ({
   stateSelected: state.aspirant.stateSelected,
-  localGovernmentSelected: state.aspirant.localgovernmentSelected
+  localGovernmentSelected: state.aspirant.localGovernmentSelected
 })
 
 const mapDispatchToProps = dispatch => ({

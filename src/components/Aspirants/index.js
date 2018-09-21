@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, ScrollView, Modal } from 'react-native';
 import { Container, Content, Button, Spinner } from 'native-base';
 import { connect } from 'react-redux';
 import Carousel from 'react-native-snap-carousel';
 import { Actions } from 'react-native-router-flux';
-
+import AspirantModal from '../Modal/AspirantModal'
 import { getAspirants, getState, getLocalGovernmentFromSelectedState } from '../../actions';
 import Header from '../../shared-components/Header';
 
 import defaultPicture from '../../../assets/images/placeholder.png';
-
-import { localGovernmentCategories } from '../../modules/mock/localgovernment';
 
 const leadershipLevel = [
   { level: "Select Filter >> " },
@@ -19,7 +17,9 @@ const leadershipLevel = [
   { level: "Local Government" }
 ]
 
-const convertDataToPickerOptions = list => {
+const setAvatar = userAvatar => userAvatar ? { uri: userAvatar } : defaultPicture;
+
+const convertStateDataToPickerOptions = list => {
   return Object.keys(list).reduce((accumulator, value, index) => {
     accumulator[index] = {}
     accumulator[index].label = value
@@ -27,6 +27,13 @@ const convertDataToPickerOptions = list => {
     return accumulator
   }, [])
 }
+
+const convertLocalGovtDataToPickerOptions = list => list.reduce((accumulator,value, index) => {
+  accumulator[index] = {}
+  accumulator[index].label = value
+  accumulator[index].value = value
+  return accumulator
+}, [])
 
 const ITEM_WIDTH = 240;
 
@@ -73,7 +80,7 @@ class Aspirants extends Component {
 
   handleStatePickerClick = async () => {
     await this.props.getState(this.props.countrySelected)
-    const stateCategories = convertDataToPickerOptions(this.props.countryState);
+    const stateCategories = convertStateDataToPickerOptions(this.props.countryState);
     Actions.aspirantModal({
       stateCategories,
       viewState: true
@@ -82,6 +89,7 @@ class Aspirants extends Component {
   
   handleLocalGovtPickerClick = async () => {
     await this.props.getLocalGovernmentFromSelectedState(this.props.countrySelected, this.props.stateSelected)
+    const localGovernmentCategories = convertLocalGovtDataToPickerOptions(this.props.countryLocalGovernment)
     Actions.aspirantModal({ 
       viewLocalGovernment: true, 
       localGovernmentCategories 
@@ -116,7 +124,7 @@ class Aspirants extends Component {
             <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', paddingTop: 15, paddingBottom: 10 }}>
               <Image
                 style={styles.profileImage}
-                source={{ uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg' }}
+                source={setAvatar(null)}
               />
               <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
                 <Text style={styles.currentLeaderTextStyle}>Joke Adams</Text>
@@ -148,7 +156,7 @@ class Aspirants extends Component {
                   <View key={index} style={{ display: 'flex', flexDirection: 'row', paddingTop: 40, borderTopColor: '#ECECEC', borderTopWidth: 1, borderStyle: 'solid' }}>
                     <Image
                       style={[styles.profileImage, { borderRadius: 5 }]}
-                      source={{ uri: 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg' }}
+                      source={setAvatar(aspirant.avatar)}
                     />
                     <View>
                       <Text style={styles.aspirantBasicStyle}>{aspirant.firstName} {aspirant.lastName}</Text>
@@ -260,17 +268,18 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => ({
   aspirants: state.aspirant.aspirants,
   countryState: state.aspirant.countryState,
+  countryLocalGovernment: state.aspirant.countryLocalGovernment,
   countrySelected: state.aspirant.countrySelected,
   lga: state.aspirant.lga,
   loading: state.aspirant.loading,
   stateSelected: state.aspirant.stateSelected,
-  localGovernmentSelected: state.aspirant.localgovernmentSelected
+  localGovernmentSelected: state.aspirant.localGovernmentSelected
 })
 
 const mapDispatchToProps = dispatch => ({
   getAspirants: (country, state, localgovernment) => dispatch(getAspirants(country, state, localgovernment)),
   getState: country => dispatch(getState(country)),
-  getLocalGovernmentFromSelectedState: (country, state) => dispatch(getLocalGovernmentFromSelectedState(country, state))
+  getLocalGovernmentFromSelectedState: (country, state) => dispatch(getLocalGovernmentFromSelectedState(country, state)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Aspirants);

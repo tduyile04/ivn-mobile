@@ -84,7 +84,7 @@ export const getLocalGovernmentFromSelectedState = (country, state) => async (di
   dispatch(getLgaPending())
   try {
     const token = await get("token");
-    const response = await axios(token).get(`api/v1//location/${country}/${state}`)
+    const response = await axios(token).get(`api/v1/location/${country}/${state}`)
     return dispatch(getLgaSuccess(response.data.data));
   } catch (response) {
     // const errorMessage = data && data.error ? data.error.message : 'Please try again';

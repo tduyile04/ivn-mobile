@@ -23,7 +23,7 @@ const defaultState = {
   token: '',
   aspirants: [],
   countryState: [],
-  lga: [],
+  countryLocalGovernment: [],
   countrySelected: defaultLocations.COUNTRY,
   stateSelected: defaultLocations.STATE,
   localGovernmentSelected: defaultLocations.LGA,
@@ -57,14 +57,12 @@ export default handleActions({
   [getStatePending](state = defaultState) {
     return {
       ...state,
-      // loading: true,
       error: ''
     }
   },
   [getStateSuccess](state = defaultState, { payload }) {
     return {
       ...state,
-      // loading: false,
       countryState: payload.country,
       error: ''
     }
@@ -72,35 +70,29 @@ export default handleActions({
   [getStateFailure](state = defaultState, { payload }) {
     return {
       ...state,
-      // loading: false,
       error: payload 
     }
   },
   [getLgaPending](state = defaultState) {
     return {
       ...state,
-      // loading: true,
       error: ''
     }
   },
   [getLgaSuccess](state = defaultState, { payload }) {
-    console.log("In the get local government success ", payload)
     return {
       ...state,
-      // loading: false,
-      countryState: payload.state,
+      countryLocalGovernment: payload.state,
       error: ''
     }
   },
   [getLgaFailure](state = defaultState, { payload }) {
     return {
       ...state,
-      // loading: false,
       error: payload 
     }
   },
   [updateSelectedState](state = defaultState, { payload }) {
-    console.log("the payload -> ", payload)
     return {
       ...state,
       stateSelected: payload
@@ -109,7 +101,7 @@ export default handleActions({
   [updateSelectedLocalGovernment](state = defaultState, { payload }) {
     return {
       ...state,
-      localgovernmentSelected: payload
+      localGovernmentSelected: payload
     }
   }
 }, defaultState);
