@@ -16,6 +16,7 @@ import SideBar from './src/shared-components/SideBar';
 import Footer from './src/shared-components/Footer';
 import TextEditor from './src/components/TextEditor';
 import Question from './src/components/Question';
+import QuestionList from './src/components/Question/QuestionList';
 import Onboarding from './src/components/Onboarding';
 import Aspirants from './src/components/Aspirants';
 
@@ -140,6 +141,16 @@ class App extends React.Component {
                       component={Aspirants}
                       hideNavBar
                     />
+                    <Scene
+                      key='question'
+                      component={Question}
+                      hideNavBar
+                    />
+                    <Scene
+                      key='questionList'
+                      component={QuestionList}
+                      hideNavBar
+                    />
                   </Tabs>
                 </Drawer>
               </Scene>
@@ -151,12 +162,6 @@ class App extends React.Component {
               <Scene
                 key='textEditor'
                 component={TextEditor}
-                hideTabBar
-                hideNavBar
-              />
-              <Scene
-                key='question'
-                component={Question}
                 hideTabBar
                 hideNavBar
               />

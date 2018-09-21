@@ -91,5 +91,9 @@ export {
   submitQuestionsPending,
   submitQuestionsSuccess,
   submitQuestionsFailure,
-  submitQuestions
+  submitQuestions,
+  getQuestionsPending,
+  getQuestionsSuccess,
+  getQuestionsFailure,
+  getQuestions
 } from './questions'

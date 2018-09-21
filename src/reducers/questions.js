@@ -2,7 +2,10 @@ import { handleActions } from "redux-actions";
 import {
   submitQuestionsPending,
   submitQuestionsSuccess,
-  submitQuestionsFailure
+  submitQuestionsFailure,
+  getQuestionsPending,
+  getQuestionsSuccess,
+  getQuestionsFailure
 } from '../actions';
 
 const defaultState = {
@@ -13,7 +16,7 @@ const defaultState = {
 };
 
 export default handleActions({
-  [submitQuestionsPending](state = {}) {
+  [submitQuestionsPending](state = defaultState) {
     return {
       ...state,
       loading: true,
@@ -30,6 +33,29 @@ export default handleActions({
     }
   },
   [submitQuestionsFailure](state = defaultState, { payload }) {
+    return {
+      ...state,
+      loading: false,
+      success: false,
+      error: payload
+    }
+  },
+  [getQuestionsPending](state = defaultState) {
+    return {
+      ...state,
+      loading: true,
+      error: ''
+    }
+  },
+  [getQuestionsSuccess](state = defaultState, { payload: { questions } }) {
+    return {
+      ...state,
+      loading: false,
+      questions,
+      error: ''
+    }
+  },
+  [getQuestionsFailure](state = defaultState, { payload }) {
     return {
       ...state,
       loading: false,

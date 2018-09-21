@@ -17,7 +17,7 @@ class Question extends Component {
     const { question } = this.state;
     if (question && question.trim() !== '') {
       await this.props.submitQuestions(this.props.userId, question)
-      Actions.home()
+      Actions.userProfile()
     }
   }
 
@@ -39,12 +39,6 @@ class Question extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  questions: state.question.questions,
-  error: state.post.error,
-  loading: state.post.loading
-})
-
 const mapDispatchToProps = dispatch => ({
   submitQuestions: (candidateId, question) => dispatch(submitQuestions(candidateId, question))
 })
@@ -59,4 +53,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Question);
+export default connect(null, mapDispatchToProps)(Question);

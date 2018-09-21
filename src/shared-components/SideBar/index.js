@@ -30,6 +30,8 @@ class SideBar extends Component {
     this.setState({user, loading: false});
   }
 
+  hasRole = (roles, name) => roles.some(role => role.name === name);
+
   logout = () => {
     remove("token");
     remove("user");
@@ -51,6 +53,8 @@ class SideBar extends Component {
   render() {
     const user = this.state.user && JSON.parse(this.state.user);
     const { loading } = this.state;
+    const { roles = [] } = this.state.user
+    const candidate  = this.hasRole(roles, 'candidate');
     const { followings=[], followers=[], endorsements=[] } = user;
     if(loading) return <Spinner color='black' style={styles.container} />;
     return (
@@ -63,22 +67,17 @@ class SideBar extends Component {
             />
             <Text style={[styles.name, styles.boldText]}>{user.firstName} {user.lastName}</Text>
             <Text style={[styles.text, styles.username]}>{user.email}</Text>
-            {/* <Image
-              style={styles.partyFlag}
-              source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
-              resizeMode="contain"
-            /> */}
             <HorizontalLine lineStyle={styles.lineStyle} />
             <Listings endorsements={endorsements.length} followers={followers.length} following={followings.length} countStyle={styles.count} />
             <HorizontalLine lineStyle={styles.lineStyle} />
           </View>
           <View style={[styles.box, styles.main]}>
-            <View style={[styles.rowCenter]}>
-              <Button transparent>
+            {candidate && <View style={[styles.rowCenter]}>
+              <Button transparent onPress={() => Actions.questionList()}>
                 <Icon name="comment-question-outline" type='MaterialCommunityIcons' style={styles.icon} />
                 <Text style={styles.text}>Questions</Text>
               </Button>
-            </View>
+            </View>}
             <View style={[styles.rowCenter]}>
               <Button transparent onPress={() => Actions.partyList()}>
                 <Icon name="flag" type='SimpleLineIcons' style={styles.icon} />  

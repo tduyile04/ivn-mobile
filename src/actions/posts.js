@@ -95,7 +95,6 @@ export const likePost = postId => async dispatch => {
   try {
     const token = await get("token");
     const response = await axios(token).put(`/api/v1/post/${postId}/like`);
-    console.log(response.data.data);
     return dispatch(likePostSuccess(response.data.data));
   } catch ({ response, message }) {
     return dispatch(likePostFailure(message));
