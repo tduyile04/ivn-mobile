@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Content, View, Text, Button, Icon, Spinner, Card } from 'native-base';
 import { StyleSheet, Image, FlatList } from 'react-native';
-import { Col, Row, Grid } from 'react-native-easy-grid';
 
 import Header from '../../shared-components/Header';
 
