@@ -11,11 +11,11 @@ const Parties = (props) => {
         return (
           <View key={party.id}>
             <View style={styles.card}>
-              <Image
+              {/* <Image
                 style={styles.profileImage}
                 source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
                 resizeMode='contain'
-              />
+              /> */}
               <View style={styles.items}>
                 {party.abbr && party.abbr.length > 0 && <Text style={styles.handle}>@{party.abbr}</Text>}
                 <Text style={styles.title}>{party.name}</Text>
