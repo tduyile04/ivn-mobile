@@ -4,6 +4,7 @@ import { StyleSheet, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 // import { LikeButton } from '../../shared-components/Buttons';
 import moment from 'moment';
+import defaultPicture from '../../../assets/images/placeholder.png';
 
 class ActivePost extends Component {
   render() {
@@ -18,12 +19,13 @@ class ActivePost extends Component {
       postComments
     } = this.props;
 
+    const avatar = userAvatar ? { uri: userAvatar } : defaultPicture;
     return (
       <Card transparent style={styles.card}>
         <View style={styles.row}>
           <Image
             style={styles.profileImage}
-            source={{uri: userAvatar || 'https://i.ytimg.com/vi/GtHEFawysgs/maxresdefault.jpg' }}
+            source={avatar}
           />
           <View style={styles.items}>
             <View style={styles.info}>

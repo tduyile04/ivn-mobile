@@ -1,15 +1,18 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { Text, View, Button } from 'native-base';
+import defaultPicture from '../../../../assets/images/placeholder.png';
+
+const setAvatar = userAvatar => userAvatar ? { uri: userAvatar } : defaultPicture;
 
 const UserDetails = ({user, editProfileButton}) => {
-  const avatar = user.avatar || 'https://forumine.com/download/file.php?avatar=86_1519467243.jpg';
+  const avatar = setAvatar(user.avatar);
   return (
     <View style={styles.content}>
       <View style={styles.profileImageSection}>
         <Image
           style={styles.profileImage}
-          source={{uri: avatar}}
+          source={avatar}
         />
       </View>
       <View style={styles.userDetailsSection}>

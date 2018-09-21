@@ -4,21 +4,21 @@ import { StyleSheet, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-// import { createPosts } from '../../actions';
+import { submitQuestions } from '../../actions';
 
 import Header from '../../shared-components/Header';
 
 class Question extends Component {
   state = {
-    content: ''
+    question: ''
   }
 
   handleAsk = async () => {
-    // const { content } = this.state;
-    // if (content && content.trim() !== '') {
-    //   await this.props.createPosts(content)
-    //   Actions.home()
-    // }
+    const { question } = this.state;
+    if (question && question.trim() !== '') {
+      await this.props.submitQuestions(this.props.userId, question)
+      Actions.userProfile()
+    }
   }
 
   render() {
@@ -30,7 +30,7 @@ class Question extends Component {
             <Textarea 
               rowSpan={15} 
               placeholder="Ask me anything?"
-              onChangeText={content => this.setState({ content })}
+              onChangeText={question => this.setState({ question })}
               multiline/>
           </Form>
         </Content>
@@ -39,14 +39,8 @@ class Question extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  // posts: state.post.posts,
-  // error: state.post.error,
-  // loading: state.post.loading
-})
-
 const mapDispatchToProps = dispatch => ({
-  // createPosts: content => dispatch(createPosts(content))
+  submitQuestions: (candidateId, question) => dispatch(submitQuestions(candidateId, question))
 })
 
 const styles = StyleSheet.create({
@@ -59,4 +53,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Question);
+export default connect(null, mapDispatchToProps)(Question);

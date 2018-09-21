@@ -4,6 +4,10 @@ import { StyleSheet, Image } from 'react-native';
 import HorizontalLine from '../../../shared-components/HorizontalLine';
 import { UnfollowButton, FollowButton } from '../../../shared-components/Buttons';
 
+import defaultPicture from '../../../../assets/images/placeholder.png';
+
+const setAvatar = userAvatar => userAvatar ? { uri: userAvatar } : defaultPicture;
+
 const Members = (props) => {
   return (
     <Container>
@@ -13,7 +17,7 @@ const Members = (props) => {
             <View style={styles.card}>
               <Image
                 style={styles.profileImage}
-                source={{uri: member.avatar }}
+                source={{ uri: setAvatar(member.avatar) }}
               />
               <View style={styles.items}>
                 <Text style={styles.title}>{member.firstName} {member.lastName}</Text>

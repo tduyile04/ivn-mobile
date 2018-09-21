@@ -7,6 +7,7 @@ import partyReducer from './party';
 import searchReducer from './search';
 import notificationReducer from './notification';
 import aspirantsReducer from './aspirants';
+import questionReducer from './questions'
 
 export default combineReducers({
   auth: authReducer,
@@ -15,5 +16,6 @@ export default combineReducers({
   post: postReducer,
   party: partyReducer,
   search: searchReducer,
-  notification: notificationReducer
+  notification: notificationReducer,
+  question: questionReducer
 });

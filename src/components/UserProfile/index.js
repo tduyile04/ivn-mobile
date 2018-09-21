@@ -77,10 +77,12 @@ class UserProfile extends Component {
             following={followings.length} 
             endorsements={endorsements.length} 
           />
-          <Button small bordered dark block style={styles.button} onPress={() => Actions.question()}>
-            <Icon name='comment' type='EvilIcons' />
-            <Text style={styles.text}>Ask Question</Text>
-          </Button>
+          { candidate && (
+              <Button small bordered dark block style={styles.button} onPress={() => Actions.question({ userId: this.props.id })}>
+                  <Icon name='comment' type='EvilIcons' />
+                  <Text style={styles.text}>Ask Question</Text>
+              </Button> 
+          )}
           <ScrollableTabs />
         </Content>
       </Container>
