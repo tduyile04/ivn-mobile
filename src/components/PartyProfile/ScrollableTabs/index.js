@@ -9,7 +9,7 @@ import HorizontalLine from '../../../shared-components/HorizontalLine';
 const ScrollableTabs = (props) => {
   return (
     <Container style={styles.container}>
-      <HorizontalLine />
+      {/* <HorizontalLine /> */}
       <Tabs tabBarUnderlineStyle={styles.tabsStyle}>
         <Tab heading="About" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle} >
           <About {...props} />
@@ -31,14 +31,14 @@ const styles = {
     backgroundColor: 'transparent'
   },
   tabsStyle: {
-    backgroundColor: '#444',
+    backgroundColor: '#628AFF',
     borderBottomWidth:0
   },
   white: {
     backgroundColor: '#fff',
   },
   activeTextStyle: {
-    color: '#444',
+    color: '#628AFF',
     fontFamily: 'raleway-bold',
     backgroundColor: 'transparent'
   },

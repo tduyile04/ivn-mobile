@@ -14,7 +14,7 @@ const ScrollableTabs = () => {
           <About />
         </Tab>
         <Tab heading="Posts" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle}>
-          <Text>Hello there 2</Text>
+          <Text style={styles.text}>No post(s) available yet</Text>
         </Tab>
       </Tabs>
     </Container>
@@ -41,6 +41,13 @@ const styles = StyleSheet.create({
   textStyle: {
     color: '#3F3F3F',
     fontFamily: 'raleway-regular'
+  },
+  text: {
+    fontFamily: 'raleway-regular',
+    marginTop: 20,
+    marginLeft: '5%',
+    marginRight: '5%',
+    fontSize: 14,
   }
 });
 

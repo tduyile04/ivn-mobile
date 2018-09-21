@@ -39,8 +39,8 @@ const Post = ({
           <View style={styles.items}>
             <View style={styles.info}>
               <Text style={styles.name} onPress={() => Actions.userProfile({id: userId})}>{userFullName}</Text>
-              <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText}>{userParty}</Text>
+              {/* <Icon name='dot-single' type='Entypo' style={styles.dots} />
+              <Text style={styles.blueText}>{userParty}</Text> */}
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>{moment(postTimePosted).fromNow()}</Text>
             </View>

@@ -26,20 +26,16 @@ const ScrollableTabs = (props) => {
 
 const styles = StyleSheet.create({
   tabsStyle: {
-    backgroundColor: 'transparent',
+    backgroundColor: '#628AFF',
     borderBottomWidth:0
   },
   white: {
     backgroundColor: '#fff',
   },
   activeTextStyle: {
-    color: '#444',
+    color: '#628AFF',
     fontFamily: 'raleway-bold',
     backgroundColor: 'transparent'
-  },
-  tabsStyle: {
-    backgroundColor: '#444',
-    borderBottomWidth:0
   },
   white: {
     backgroundColor: '#fff',

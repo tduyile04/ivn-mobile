@@ -18,7 +18,7 @@ const UserDetails = ({user, editProfileButton}) => {
       <View style={styles.userDetailsSection}>
         <Text style={styles.name}>{`${user.firstName} ${user.lastName}`}</Text>
         <Text style={styles.username}>{user.email}</Text>
-        <View style={styles.partyDetails}>
+        {/* <View style={styles.partyDetails}>
           <Image
             style={styles.partyFlag}
             source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
@@ -28,7 +28,7 @@ const UserDetails = ({user, editProfileButton}) => {
             <Text style={styles.member}>member of</Text>
             <Text style={styles.partyName}>People's Democratic Party</Text>
           </View>
-        </View>
+        </View> */}
         { editProfileButton && <Button small bordered block style={styles.button} onPress={() => alert('Editing My Profile...')}>
           <Text style={styles.text}>Edit Profile</Text>
         </Button>}

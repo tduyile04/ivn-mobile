@@ -40,7 +40,7 @@ class MyProfile extends Component {
           <UserDetails user={user} editProfileButton />
           {
             candidate ?
-              <Listings followers={followers.length} following={followings.length} endorsements={endorsements.length}/>
+              <Listings followers={followers.length} following={followings.length} endorsements={candidate && endorsements.length}/>
             :
             <Listings followers={followers.length} following={followings.length} />
           }

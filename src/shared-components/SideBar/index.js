@@ -68,7 +68,7 @@ class SideBar extends Component {
             <Text style={[styles.name, styles.boldText]}>{user.firstName} {user.lastName}</Text>
             <Text style={[styles.text, styles.username]}>{user.email}</Text>
             <HorizontalLine lineStyle={styles.lineStyle} />
-            <Listings endorsements={endorsements.length} followers={followers.length} following={followings.length} countStyle={styles.count} />
+            <Listings endorsements={candidate && endorsements.length} followers={followers.length} following={followings.length} countStyle={styles.count} />
             <HorizontalLine lineStyle={styles.lineStyle} />
           </View>
           <View style={[styles.box, styles.main]}>

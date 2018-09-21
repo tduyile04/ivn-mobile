@@ -10,13 +10,13 @@ class CandidateOfTheWeek extends Component {
       <Container>
         <Header title='Weekly Pick!' menu />
         <Card style={styles.textViewStyle}>
-          <View style={{ padding: 8 }}>
+          <View style={{ padding: 8, alignItems: "center", }}>
             <Image 
               source={require('../../../assets/images/Untitled.png')}
-              style={{ width: 110, height: 110, borderRadius: 5 }} />
+              style={{ width: 110, height: 110, borderRadius: 55 }} />
           </View>
-          <Text style={[styles.textStyle, { fontFamily: "raleway-bold" }]}>Senator Ademola Adeleke</Text>
-          <Text style={[styles.textStyle]}>The DANCING GOVERNOR??</Text>
+          <Text style={[styles.textStyle, { fontFamily: "raleway-bold", textAlign: "center", fontSize: 18 }]}>Senator Ademola Adeleke</Text>
+          <Text style={[styles.textStyle, {fontFamily: "raleway-italic", textAlign: "center"}]}>The Dancing Governor</Text>
           {paragraph()}
           <Text style={styles.textStyle}>Born on the 13th of May 1960 Ademola Adeleke is a Politician in Nigeria and also a senator who represents Osun-west district of Osun state since the year 2017. </Text>
           {paragraph()}
@@ -40,12 +40,13 @@ const styles = StyleSheet.create({
   textViewStyle: {
     padding: 10,
     display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
   },
   textStyle: {
-    fontFamily: "raleway-regular"
+    fontFamily: "raleway-regular",
+    fontSize: 12,
+  },
+  center: {
+    alignItems: "center",
   }
 })
 
