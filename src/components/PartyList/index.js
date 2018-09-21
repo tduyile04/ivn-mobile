@@ -33,15 +33,10 @@ class PartyList extends React.Component {
         <Content style={styles.content}>
           <FlatList
             data={this.props.parties}
-            renderItem={({ item }) => {
+            renderItem={({ item }) =>  {
               return (
               <Card transparent style={styles.partyCard}>
                 <View style={styles.card}>
-                  <Image
-                    style={styles.profileImage}
-                    source={{uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif'}}
-                    resizeMode='contain'
-                  />
                   <View style={styles.items}>
                     <Text style={styles.title} onPress={() => this.handleSelectParty(item)}>
                       {item.name + " "}
@@ -89,10 +84,6 @@ const styles = StyleSheet.create({
   },
   items: {
     marginLeft: 17
-  },
-  profileImage: {
-    width: 40,
-    height: 40,
   },
   userIcon: {
     fontSize: 14,
