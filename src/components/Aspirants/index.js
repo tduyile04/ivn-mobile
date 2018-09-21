@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, ScrollView, Modal } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, Modal } from 'react-native';
 import { Container, Content, Button, Spinner } from 'native-base';
 import { connect } from 'react-redux';
 import Carousel from 'react-native-snap-carousel';
@@ -100,7 +100,7 @@ class Aspirants extends Component {
     return (
       <Container>
       <Header title='Aspirants' back />
-      <ScrollView>
+      <Content>
         <View 
           style={styles.container} 
           onLayout={() => this.setState(() => ({ sliderWidth: Dimensions.get('window').width }))}>
@@ -169,7 +169,7 @@ class Aspirants extends Component {
             </View>
           </View>
         </View>
-      </ScrollView>
+      </Content>
       </Container>
 
     )
@@ -179,7 +179,6 @@ class Aspirants extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
   },
   carouselCoverStyle: {
     height: 110, 

@@ -75,7 +75,7 @@ class UserProfile extends Component {
           <Listings 
             followers={followers.length} 
             following={followings.length} 
-            endorsements={endorsements.length} 
+            endorsements={candidate && endorsements.length} 
           />
           { candidate && (
               <Button small bordered dark block style={styles.button} onPress={() => Actions.question({ userId: this.props.id })}>

@@ -43,7 +43,7 @@ const UserDetails = ({
         <Text style={styles.name}>{`${user.firstName} ${user.lastName}`}</Text>
         <View style={styles.userDetailsSection}>
           <Text style={styles.username}>{user.email}</Text>
-          <View style={styles.partyDetails}>
+          {/* <View style={styles.partyDetails}>
             <View>
               <Image
                 style={styles.partyFlag}
@@ -57,7 +57,7 @@ const UserDetails = ({
                 <Text style={styles.partyName}> People's Democratic Party</Text>
               </Text>
             </View>
-          </View>
+          </View> */}
         </View>
       </View>
     </View>
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: "#3F3F3F",
     fontFamily: "raleway-regular",
-    marginBottom: 10
+    marginBottom: 30
   },
   partyDetails: {
     flexDirection: 'row',
