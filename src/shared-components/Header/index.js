@@ -17,7 +17,7 @@ const HeaderTab = ({menu, back, title, share, onShare, ask, onAsk, signup}) => {
           <Icon name='chevron-left' type='MaterialCommunityIcons' style={{color: '#3F3F3F', marginLeft: 10 }}/>
         </Button> }
       </Left>
-      <Body>
+      <Body style={{ }}>
         <Text style={[styles.text, styles.title]}>{title}</Text>
       </Body>
       <Right>
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'museosans-500',
-    fontSize: 16
+    fontSize: 16,
   },
   title: {
     color: '#3F3F3F',
