@@ -4,16 +4,16 @@ import { Button, Text, View, Icon } from 'native-base';
 
 // Pass in a buttonStyle props to override the existing button style
 
-export const UnfollowButton = ({buttonStyle}) => 
+export const UnfollowButton = ({buttonStyle, unfollowUser, id}) => 
   <View>
-    <Button bordered style={[styles.unfollowButton, buttonStyle]} >
+    <Button bordered style={[styles.unfollowButton, buttonStyle]} onPress={() => unfollowUser(id)}>
       <Text style={styles.unfollowText}>Unfollow</Text>
     </Button>
   </View>
 
-export const FollowButton = ({buttonStyle}) => 
+export const FollowButton = ({buttonStyle, followUser, id}) => 
   <View>
-    <Button iconLeft style={[styles.followButton, buttonStyle]} >
+    <Button iconLeft style={[styles.followButton, buttonStyle]} onPress={() => followUser(id)}>
       <Icon type="Feather" name='user-plus' style={styles.userIcon} />
       <Text style={styles.followText}>Follow</Text>
     </Button>

@@ -9,13 +9,13 @@ class CandidateOfTheWeek extends Component {
     return (
       <Container>
         <Header title='Weekly Pick!' menu />
-        <Card style={styles.textViewStyle}>
+        <View style={styles.textViewStyle}>
           <View style={{ padding: 8, alignItems: "center", }}>
             <Image 
               source={require('../../../assets/images/Untitled.png')}
               style={{ width: 110, height: 110, borderRadius: 55 }} />
           </View>
-          <Text style={[styles.textStyle, { fontFamily: "raleway-bold", textAlign: "center", fontSize: 18 }]}>Senator Ademola Adeleke</Text>
+          <Text style={[styles.textStyle, { fontFamily: "raleway-bold", textAlign: "center", fontSize: 18, color: '#628AFF' }]}>Senator Ademola Adeleke</Text>
           <Text style={[styles.textStyle, {fontFamily: "raleway-italic", textAlign: "center"}]}>The Dancing Governor</Text>
           {paragraph()}
           <Text style={styles.textStyle}>Born on the 13th of May 1960 Ademola Adeleke is a Politician in Nigeria and also a senator who represents Osun-west district of Osun state since the year 2017. </Text>
@@ -27,7 +27,7 @@ class CandidateOfTheWeek extends Component {
           <Text style={styles.textStyle}>Osun elections hold this weekend the 16th of September 2018 and candidates include:</Text>
           {paragraph()}
           <Text style={styles.textStyle}>Here’s wishing all the candidates a peaceful and credible election!!!</Text>
-        </Card>
+        </View>
       </Container>
     )
   }

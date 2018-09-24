@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { Text, View, Button } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 import defaultPicture from '../../../../assets/images/placeholder.png';
 
 const setAvatar = userAvatar => userAvatar ? { uri: userAvatar } : defaultPicture;
@@ -29,7 +30,7 @@ const UserDetails = ({user, editProfileButton}) => {
             <Text style={styles.partyName}>People's Democratic Party</Text>
           </View>
         </View> */}
-        { editProfileButton && <Button small bordered block style={styles.button} onPress={() => alert('Editing My Profile...')}>
+        { editProfileButton && <Button small bordered block style={styles.button} onPress={() => alert('Edit Profile Feature coming soon...')}>
           <Text style={styles.text}>Edit Profile</Text>
         </Button>}
       </View>
