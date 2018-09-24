@@ -9,9 +9,7 @@ const About = () => {
     <Container>
       <View style={styles.card}>
         <Text style={styles.description}>
-          See what I’m getting at here? You have the right to take any piece 
-          of your personal history and reinterpret it to your advantage rather
-          than to your detriment. You can find ways to turn your past to your own good.
+          Edit Profile to update about section.
         </Text>
       </View>
     </Container>

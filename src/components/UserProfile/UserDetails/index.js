@@ -12,7 +12,9 @@ const UserDetails = ({
     withdrawEndorsement,
     endorsed, 
     following,
-    candidate
+    unfollowUser,
+    followUser,
+    candidate,
 }) => {
   const avatar = user && user.avatar ? { uri: user.avatar } : defaultPicture;
   return (
@@ -36,7 +38,7 @@ const UserDetails = ({
                 <Text style={[styles.text, styles.endorse]}>Endorse</Text>
             </Button> )
           }
-          { following ? <UnfollowButton /> : <FollowButton /> }
+          { following ? <UnfollowButton unfollowUser={unfollowUser} id={id}/> : <FollowButton followUser={followUser} id={id} /> }
         </View>
       </View>
       <View style={styles.center}>

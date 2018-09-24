@@ -9,7 +9,7 @@ class Thoughts extends Component {
       <Container>
         <Header title='Daily Thoughts' menu />
         <Content style={styles.textViewStyle}>
-          <Text style={[ styles.textStyle, { textAlign: "center" } ]}>The Pursuit of Democracy</Text>
+          <Text style={[ styles.textStyle, { fontFamily: "raleway-bold", textAlign: "center", fontSize: 18, color: '#628AFF' } ]}>The Pursuit of Democracy</Text>
           <Text style={styles.textStyle}>The debate goes on as it relates to the inconclusive declaration of the Osun State gubernatorial elections.
 What determines an inconclusive election and why does this term rear its ugly head at every election in Nigeria?
 The Nigerian constitution states the following, which is also imbedded into the INEC guidelines noting that the constitution holds sway over said guidelines (Section 179):
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     padding: 10
   }, 
   textViewStyle: {
+    marginTop: 5,
     padding: 10,
     display: "flex",
   },

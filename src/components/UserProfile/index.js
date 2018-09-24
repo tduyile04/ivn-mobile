@@ -35,9 +35,7 @@ class UserProfile extends Component {
   async componentDidUpdate(prevProps) {
     if(this.props.id === this.state.userId) Actions.myProfile();
     if (this.props.id !== prevProps.id || this.props.user.message !== prevProps.user.message) {
-      this.setState({loading: true});
       await this.props.getUserDetails(this.props.id);
-      this.setState({loading: false});
     }
   }
 
@@ -57,8 +55,9 @@ class UserProfile extends Component {
       <Container style={styles.container}>
         <Content>
           <Image 
-            style={styles.icon}
+            style={styles.coverImageStyle}
             source={require('../../../assets/images/backdrop.png')}
+            resizeMode='cover'
           />
           <UserDetails 
             user={user} 

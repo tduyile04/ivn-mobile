@@ -34,8 +34,9 @@ class MyProfile extends Component {
       <Container style={styles.container}>
         <Content>
           <Image 
-            style={styles.icon}
+            style={styles.coverImageStyle}
             source={require('../../../assets/images/backdrop.png')}
+            resizeMode='cover'
           />
           <UserDetails user={user} editProfileButton />
           {

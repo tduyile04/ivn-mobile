@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { Root } from "native-base";
 
 import MyProfile from './src/components/MyProfile';
+import EditProfile from './src/components/EditProfile';
 import UserProfile from './src/components/UserProfile';
 import PartyProfile from './src/components/PartyProfile';
 import PartyList from './src/components/PartyList';
@@ -116,6 +117,12 @@ class App extends React.Component {
                     />
                     {/* Other Scenes can be moved around freely. Temporary fix till we 
                     come up with a better solution */}
+                    <Scene
+                      key='editProfile'
+                      component={EditProfile}
+                      hideNavBar
+                      hideTabBar
+                    />
                     <Scene
                       key='comments'
                       component={Comments}
