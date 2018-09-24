@@ -15,8 +15,7 @@ const Step3 = ({styles, switchStep}) =>
       <Text style={styles.text}>NG</Text>
     </View>
     <Text style={styles.text}>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Get up to date with your party's details and what they are up to...
     </Text>
     <Button block dark style={styles.button} onPress={() => Actions.login()}>
       <Text style={styles.bold}>COMPLETE</Text>
