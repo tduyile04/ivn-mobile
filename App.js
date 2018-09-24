@@ -21,6 +21,7 @@ import Onboarding from './src/components/Onboarding';
 import Aspirants from './src/components/Aspirants';
 import CandidateOfTheWeek from './src/components/CandidateOfTheWeek';
 import AspirantModal from './src/components/Modal/AspirantModal';
+import Thoughts from './src/components/Thoughts';
 
 import SignUp from './src/containers/SignUp'
 import Login from './src/containers/Login';
@@ -154,6 +155,11 @@ class App extends React.Component {
                     <Scene
                       key='candidateOfTheWeek'
                       component={CandidateOfTheWeek}
+                      hideNavBar
+                    />
+                    <Scene
+                      key='thoughts'
+                      component={Thoughts}
                       hideNavBar
                     />
                   </Tabs>
