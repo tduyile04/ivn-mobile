@@ -4,12 +4,12 @@ import { StyleSheet } from 'react-native';
 
 import HorizontalLine from '../../../shared-components/HorizontalLine';
 
-const About = () => {
+const About = ({ user }) => {
   return (
     <Container>
       <View style={styles.card}>
         <Text style={styles.description}>
-          Edit Profile to update about section.
+          {user.user && user.user.bio ? user.user.bio: "No bio updated yet" }
         </Text>
       </View>
     </Container>

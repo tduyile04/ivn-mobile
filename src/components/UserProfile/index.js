@@ -82,7 +82,7 @@ class UserProfile extends Component {
                   <Text style={styles.text}>Ask Question</Text>
               </Button> 
           )}
-          <ScrollableTabs />
+          <ScrollableTabs user={this.props.user} />
         </Content>
       </Container>
     );

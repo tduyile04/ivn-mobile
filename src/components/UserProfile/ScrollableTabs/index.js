@@ -5,13 +5,13 @@ import HorizontalLine from '../../../shared-components/HorizontalLine';
 
 import About from './about';
 
-const ScrollableTabs = () => {
+const ScrollableTabs = (props) => {
   return (
     <Container style={styles.container}>
       {/* <HorizontalLine /> */}
       <Tabs tabBarUnderlineStyle={styles.tabsStyle}>
         <Tab heading="About" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle}>
-          <About />
+          <About user={props.user} />
         </Tab>
         <Tab heading="Posts" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle}>
           <Text style={styles.text}>No post(s) available yet</Text>
