@@ -47,7 +47,7 @@ class Aspirants extends Component {
     this.props.getAspirants(this.props.countrySelected);
   }
 
-  renderCard = ({item, index}) => {
+  renderCard = (item, index, stateSelected, localGovernmentSelected) => {
     const cardColor = index === 0 ? { backgroundColor: "rgba(18,30,65,0.61)" } : { backgroundColor: '#628AFF' }
     return (
       <Button 
@@ -55,6 +55,9 @@ class Aspirants extends Component {
         onPress={() => this.renderCategory(index)}
       >
         <Text style={styles.cardTextHeaderStyle}>{item.level}</Text>
+        {index === 1  && <Text style={styles.cardTextHeaderStyle}>Nigeria</Text>}
+        {index === 2  && <Text style={styles.cardTextHeaderStyle}>{stateSelected}</Text>}
+        {index === 3  && <Text style={styles.cardTextHeaderStyle}>{localGovernmentSelected}</Text>}
       </Button>
     )
   }
@@ -110,7 +113,7 @@ class Aspirants extends Component {
               data={leadershipLevel}
               layout={'default'}
               inactiveSlideScale={1}
-              renderItem={this.renderCard}
+              renderItem={({item, index}) => this.renderCard(item, index, this.props.stateSelected, this.props.localGovernmentSelected)}
               itemWidth={this.state.itemWidth}
               firstItem={0}
               activeSlideAlignment={'start'}
@@ -121,7 +124,7 @@ class Aspirants extends Component {
 
           {/* Current Leader section */}
           <View style={styles.profileSection}>
-            <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', paddingTop: 15, paddingBottom: 10 }}>
+            {/* <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', paddingTop: 15, paddingBottom: 10 }}>
               <Image
                 style={styles.profileImage}
                 source={setAvatar(null)}
@@ -132,18 +135,18 @@ class Aspirants extends Component {
                   <Text style={styles.tagText}>Current</Text>
                 </View>
               </View>
-            </View>
+            </View> */}
 
             {/* Aspirant title */}
 
             <View style={{ paddingBottom: 15, paddingLeft: 10 }}>
               <View style={styles.filterSection}>
                 <Button bordered small rounded style={styles.tagBtn} onPress={() => this.handleStatePickerClick() }>
-                  <Text style={styles.tagText}>state</Text>
+                  <Text style={styles.tagText}>{this.props.stateSelected}</Text>
                 </Button>
                 <Button bordered small rounded style={styles.tagBtn} 
                   onPress={() => this.handleLocalGovtPickerClick() }>
-                  <Text style={styles.tagText}>lga</Text>
+                  <Text style={styles.tagText}>{this.props.localGovernmentSelected}</Text>
                 </Button>
               </View>
             </View>
@@ -151,6 +154,7 @@ class Aspirants extends Component {
             {/*Aspirant list view */}
             <View>
               {this.props.loading && <Spinner size="small" color="#000" />}
+              {(!this.props.aspirants || this.props.aspirants.length === 0) && !this.props.loading && <Text style={{ textAlign: "center", paddingTop: 40, fontFamily: "raleway-regular" }}>No Aspirants available for this region</Text>}
               {this.props.aspirants && this.props.aspirants.map((aspirant, index) => {
                 return (
                   <View key={index} style={{ display: 'flex', flexDirection: 'row', paddingTop: 40, borderTopColor: '#ECECEC', borderTopWidth: 1, borderStyle: 'solid' }}>
@@ -159,7 +163,7 @@ class Aspirants extends Component {
                       source={setAvatar(aspirant.avatar)}
                     />
                     <View>
-                      <Text style={styles.aspirantBasicStyle}>{aspirant.firstName} {aspirant.lastName}</Text>
+                      <Text style={styles.aspirantBasicStyle} onPress={() => Actions.userProfile({ id: aspirant.id })}>{aspirant.firstName} {aspirant.lastName}</Text>
                       <Text style={styles.aspirantNormalStyle}>member of</Text>
                       <Text style={styles.aspirantPartyName}>People Democratic Party</Text>
                     </View>
@@ -195,7 +199,11 @@ const styles = StyleSheet.create({
     height: 100,
     width: 220,
     padding: 15,
-    borderRadius: 5
+    borderRadius: 5,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "space-around"
   },
   cardTextHeaderStyle: {
     color: '#fff',

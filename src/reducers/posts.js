@@ -14,16 +14,21 @@ import {
   createCommentsFailure,
   likePostSuccess,
   likePostPending,
-  likePostFailure
+  likePostFailure,
+  getUserPostsPending,
+  getUserPostsSuccess,
+  getUserPostsFailure
 } from '../actions';
 
 const defaultState = {
   posts: [],
   activePost: {},
+  userPosts: [],
   comments: [],
   loading: false,
   commentLoading: false,
   postLoading: false,
+  userPostLoading: false,
   error: '',
   page: 1,
   limit: 3
@@ -151,5 +156,28 @@ export default handleActions({
       commentLoading: false,
       error: payload
     }
-  }
+  },
+  [getUserPostsPending](state = {}) {
+    return {
+      ...state,
+      userPostLoading: true,
+      // page: state.page + 1,
+      error: ''
+    }
+  },
+  [getUserPostsSuccess](state = defaultState, { payload: { posts } }) {
+    return {
+      ...state,
+      userPosts: posts,
+      userPostLoading: false,
+      error: ''
+    }
+  },
+  [getUserPostsFailure](state = defaultState, { payload }) {
+    return {
+      ...state,
+      userPostLoading: false,
+      error: payload
+    }
+  },
 }, defaultState);

@@ -12,9 +12,7 @@ const HEIGHT = Dimensions.get('window').height;
 class AspirantModal extends Component {
   state = {
     stateSelected: "",
-    stateView: "",
-    localGovernmentView: "",
-    localgovernmentSelected: "",
+    stateView: ""
   }
 
   componentDidMount() {
@@ -29,10 +27,6 @@ class AspirantModal extends Component {
     if (viewLocalGovernmentOption) {
       return this.setState(() => ({ localGovernmentCategories: this.props.localGovernmentCategories }))
     }
-  }
-
-  handleValueChange = (itemValue, itemIndex) => {
-    this.setState(() => ({ localGovernmentSelected: itemValue }))
   }
 
   render() {

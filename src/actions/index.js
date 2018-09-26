@@ -47,7 +47,11 @@ export {
   likePost,
   likePostPending,
   likePostSuccess,
-  likePostFailure
+  likePostFailure,
+  getUserPostsPending,
+  getUserPostsSuccess,
+  getUserPostsFailure,
+  getUserPosts
 } from './posts';
 
 export {

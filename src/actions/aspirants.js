@@ -36,21 +36,22 @@ export const getLgaPending = createAction(GET_LGA_PENDING)
 export const getLgaSuccess = createAction(GET_LGA_SUCCESS)
 export const getLgaFailure = createAction(GET_LGA_FAILURE)
 
-const selectRightEndpoint = (country, state, localgovernment, roles, page, limit) => {
-  let url;
+const selectRightEndpoint = (countryInitial, state, localgovernment, roles, page, limit) => {
+  let url, country;
+  if (countryInitial === "ng") country = "Nigeria";
   if (country && state && localgovernment) {
-    url = `/api/v1/users/?roles=${roles}&state=${state}&localgovernment=${localgovernment}&country=${country}&limit=${limit}&page=${page}&demo=true`
+    url = `/api/v1/users/?roles=${roles}&state=${state}&localgovernment=${localgovernment}&country=${country}&limit=${limit}&page=${page}`
   }
   if (country && state && !localgovernment) {
-    url = `/api/v1/users/?roles=${roles}&state=${state}&country=${country}&limit=${limit}&page=${page}&demo=true`
+    url = `/api/v1/users/?roles=${roles}&state=${state}&country=${country}&limit=${limit}&page=${page}`
   }
   if (country && !state && !localgovernment) {
-    url = `/api/v1/users/?roles=${roles}&country=${country}&limit=${limit}&page=${page}&demo=true`
+    url = `/api/v1/users/?roles=${roles}&country=${country}&limit=${limit}&page=${page}`
   }
   return url
 }
 
-export const getAspirants = (country = "nigeria", state="", localgovernment="", roles="candidate,politician", page = 1, limit = 20) => async (dispatch) => {
+export const getAspirants = (country = "Nigeria", state="", localgovernment="", roles="candidate,politician", page = 1, limit = 20) => async (dispatch) => {
   const url = selectRightEndpoint(country, state, localgovernment, roles, page, limit);
   dispatch(getAspirantsPending())
   try {
