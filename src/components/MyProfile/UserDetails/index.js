@@ -7,6 +7,7 @@ import defaultPicture from '../../../../assets/images/placeholder.png';
 const setAvatar = userAvatar => userAvatar ? { uri: userAvatar } : defaultPicture;
 
 const UserDetails = ({user, editProfileButton}) => {
+  console.log(user)
   const avatar = setAvatar(user.avatar);
   return (
     <View style={styles.content}>
@@ -30,7 +31,7 @@ const UserDetails = ({user, editProfileButton}) => {
             <Text style={styles.partyName}>People's Democratic Party</Text>
           </View>
         </View> */}
-        { editProfileButton && <Button small bordered block style={styles.button} onPress={() => alert('Edit Profile Feature coming soon...')}>
+        { editProfileButton && <Button small bordered block style={styles.button} onPress={() => Actions.editProfile({id:user.id})}>
           <Text style={styles.text}>Edit Profile</Text>
         </Button>}
       </View>
