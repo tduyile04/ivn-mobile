@@ -51,6 +51,7 @@ class SideBar extends Component {
   }
 
   render() {
+
     const user = this.state.user && JSON.parse(this.state.user);
     const { loading } = this.state;
     const { roles = [] } = this.state.user
