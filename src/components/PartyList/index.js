@@ -34,6 +34,7 @@ class PartyList extends React.Component {
           <FlatList
             data={this.props.parties}
             renderItem={({ item }) =>  {
+              console.log(item)
               return (
               <Card transparent style={styles.partyCard}>
                 <View style={styles.card}>
@@ -42,12 +43,14 @@ class PartyList extends React.Component {
                       {item.name + " "}
                       {item.abbr && item.abbr.length ? `(${item.abbr})`: ""}
                     </Text>
-                    { item.motto && item.motto.length ? <Text style={styles.motto}>{`"${item.motto}"`}</Text> : ""  }
+                      { item.motto && item.motto.length ? <Text style={styles.motto}>{`"${item.motto}"`}</Text> :<Text></Text>  }
                     <Text style={styles.followed}>
                       <Text style={styles.bold}>Followed </Text>
                       by {item.members.length} people
                     </Text>
                     <FollowButton />
+
+
                   </View>
                 </View>
                 <HorizontalLine />

@@ -10,6 +10,7 @@ import { getUserDetails,
     unfollowUser,
 } from '../../actions/user';
 import EditableUserProfile from './UserProfile/EditableUserProfile';
+import Header from '../../shared-components/Header';
 import { get, remove } from '../../../src/modules/cache';
 
 class EditProfile extends Component {
@@ -50,24 +51,9 @@ class EditProfile extends Component {
       if(loading) return <Spinner color='black' style={styles.container} />;
 
     return (
-        <Container style={styles.container}>
+        <Container>
             <Content>
-                <Image
-                    style={styles.coverImageStyle}
-                    source={require('../../../assets/images/backdrop.png')}
-                    resizeMode='cover'
-                />
-                <EditableUserProfile
-                    user={user}
-                    candidate={candidate}
-                    id={user.id}
-                    endorseUser={endorseUser}
-                    withdrawEndorsement={withdrawEndorsement}
-                    followUser={followUser}
-                    unfollowUser={unfollowUser}
-                    endorsed={endorsed}
-                    following={following}
-                />
+                <Header back />
             </Content>
         </Container>
     );
