@@ -19,7 +19,7 @@ const Parties = (props) => {
               <View style={styles.items}>
                 {party.abbr && party.abbr.length > 0 && <Text style={styles.handle}>@{party.abbr}</Text>}
                 <Text style={styles.title}>{party.name}</Text>
-                <FollowButton />
+                <FollowButton followUser={()=>alert('coming soon')} />
               </View>
             </View>
             <HorizontalLine />

@@ -58,8 +58,14 @@ class PartyList extends React.Component {
                       <Text style={styles.bold}>Followed </Text>
                       by {item.members.length} people
                     </Text>
-                    <FollowButton />
-                    <DownloadButton link={item.about} downloadLink={(link)=>this.download(link)} />
+                    <FollowButton followUser={()=>alert('Coming Soon')} />
+                      {
+                          item.about?
+                              <DownloadButton link={item.about} downloadLink={(link)=>this.download(link)} />
+                              :
+                              <Text/>
+                      }
+
 
 
                   </View>

@@ -58,6 +58,7 @@ class SideBar extends Component {
     const candidate  = this.hasRole(roles, 'candidate');
     const { followings=[], followers=[], endorsements=[] } = user;
     if(loading) return <Spinner color='black' style={styles.container} />;
+    // console.log(user.id)
     return (
       <Container style={styles.container}>
         <View style={styles.content}>
@@ -103,6 +104,18 @@ class SideBar extends Component {
                 <Text style={styles.text}>Thoughts of the day</Text>
               </Button>
             </View>
+              <View style={[styles.rowCenter]}>
+                  <Button transparent onPress={() => Actions.question({userId:user.id})}>
+                      <Icon name="question" type='SimpleLineIcons' style={styles.icon} />
+                      <Text style={styles.text}>Questions</Text>
+                  </Button>
+              </View>
+              <View style={[styles.rowCenter]}>
+                  <Button transparent onPress={() => Actions.notifications()}>
+                      <Icon name="bell" type='SimpleLineIcons' style={styles.icon} />
+                      <Text style={styles.text}>Notifications</Text>
+                  </Button>
+              </View>
           </View>
         </View>
 
