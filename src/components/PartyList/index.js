@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Content, View, Text, Button, Icon, Spinner, Card } from 'native-base';
-import { StyleSheet, Image, FlatList } from 'react-native';
+import { StyleSheet, Image, FlatList,Linking } from 'react-native';
 
 import Header from '../../shared-components/Header';
 
 import { getParties, getParty, unSelectParty } from '../../actions/party';
 import { Actions } from 'react-native-router-flux';
 import HorizontalLine from '../../shared-components/HorizontalLine';
-import { UnfollowButton, FollowButton } from '../../shared-components/Buttons';
+import { UnfollowButton, FollowButton,DownloadButton } from '../../shared-components/Buttons';
 
 class PartyList extends React.Component {
   state = { refreshing:  false }
@@ -23,6 +23,17 @@ class PartyList extends React.Component {
     return Actions.partyProfile(item.id);
   }
 
+  download=(item)=>{
+
+    if(!item){
+
+      return false;
+    }
+
+    Linking.openURL(item)
+    console.log(item)
+  }
+
   handleRefresh = () => null
   fetchMorePosts = () =>  null
 
@@ -34,7 +45,6 @@ class PartyList extends React.Component {
           <FlatList
             data={this.props.parties}
             renderItem={({ item }) =>  {
-              console.log(item)
               return (
               <Card transparent style={styles.partyCard}>
                 <View style={styles.card}>
@@ -49,6 +59,7 @@ class PartyList extends React.Component {
                       by {item.members.length} people
                     </Text>
                     <FollowButton />
+                    <DownloadButton link={item.about} downloadLink={(link)=>this.download(link)} />
 
 
                   </View>
