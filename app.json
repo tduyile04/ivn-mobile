@@ -8,6 +8,9 @@
     "ios": {
       "bundleIdentifier": "com.politics.iVoteNaija"
     },
+    "android": {
+      "package": "com.politics.iVoteNaija"
+    },
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "cover",
