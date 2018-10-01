@@ -28,8 +28,9 @@ const Post = ({
   triggerLike,
   heartButtonStyle,
  }) => {
+  const postIds= postId;
   return (
-    <View key={postId}>
+    <View key={postIds}>
       <Card transparent style={styles.card}>
         <View style={styles.row}>
           <Image
@@ -76,7 +77,7 @@ const Post = ({
                   userParty,
                   postTimePosted,
                   userPosition,
-                  postId,
+                  postIds,
                   postTitle,
                   postContent,
                   postTags,
