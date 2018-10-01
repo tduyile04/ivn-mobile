@@ -68,8 +68,7 @@ class UserProfile extends Component {
             followUser={followUser} 
             unfollowUser={unfollowUser}
             endorsed={endorsed}
-            following={following} 
-            candidate={candidate}
+            following={following}
           />
           <Listings 
             followers={followers.length} 

@@ -23,7 +23,15 @@ export const Heart = ({ filled, style, ...props}) =>
   <Animated.View {...props} style={[styles.heartView, style]}>
     {!filled && <Icon name='heart-outline' type='MaterialCommunityIcons' style={styles.numbHeart} />}
     {filled && <Icon name='heart' type='MaterialCommunityIcons' style={styles.heart} />}
-  </Animated.View> 
+  </Animated.View>
+
+export const DownloadButton = ({buttonStyle, downloadLink, link}) =>
+    <View>
+        <Button iconLeft style={[styles.followButton, buttonStyle]} onPress={() => downloadLink(link)}>
+            <Icon type="Feather" name='download' style={styles.userIcon} />
+            <Text style={styles.followText}>Download</Text>
+        </Button>
+    </View>
    
 const styles = StyleSheet.create({
   unfollowText: {
@@ -38,7 +46,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#628AFF',
     justifyContent: 'center',
-    borderColor: '#628AFF',
     borderRadius: 3,
     marginTop: 13,
   },
@@ -79,15 +86,5 @@ const styles = StyleSheet.create({
   likeSection:{
     width: '10%',
     marginTop: 20,
-  },
-  heart: {
-    color: '#FF6D6D',
-    height: 30,
-    width: 30
-  },
-  numbHeart: {
-    color: '#333',
-    height: 30,
-    width: 30
   },
 });

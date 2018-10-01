@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Content, View, Text, Button, Icon, Spinner, Card } from 'native-base';
-import { StyleSheet, Image, FlatList } from 'react-native';
+import { StyleSheet, Image, FlatList,Linking } from 'react-native';
 
 import Header from '../../shared-components/Header';
 
 import { getParties, getParty, unSelectParty } from '../../actions/party';
 import { Actions } from 'react-native-router-flux';
 import HorizontalLine from '../../shared-components/HorizontalLine';
-import { UnfollowButton, FollowButton } from '../../shared-components/Buttons';
+import { UnfollowButton, FollowButton,DownloadButton } from '../../shared-components/Buttons';
 
 class PartyList extends React.Component {
   state = { refreshing:  false }
@@ -21,6 +21,17 @@ class PartyList extends React.Component {
     this.props.unSelectParty();
     this.props.getParty(item.id);
     return Actions.partyProfile(item.id);
+  }
+
+  download=(item)=>{
+
+    if(!item){
+
+      return false;
+    }
+
+    Linking.openURL(item)
+    console.log(item)
   }
 
   handleRefresh = () => null
@@ -42,12 +53,21 @@ class PartyList extends React.Component {
                       {item.name + " "}
                       {item.abbr && item.abbr.length ? `(${item.abbr})`: ""}
                     </Text>
-                    { item.motto && item.motto.length ? <Text style={styles.motto}>{`"${item.motto}"`}</Text> : ""  }
+                      { item.motto && item.motto.length ? <Text style={styles.motto}>{`"${item.motto}"`}</Text> :<Text></Text>  }
                     <Text style={styles.followed}>
                       <Text style={styles.bold}>Followed </Text>
                       by {item.members.length} people
                     </Text>
-                    <FollowButton />
+                    <FollowButton followUser={()=>alert('Coming Soon')} />
+                      {
+                          item.about?
+                              <DownloadButton link={item.about} downloadLink={(link)=>this.download(link)} />
+                              :
+                              <Text/>
+                      }
+
+
+
                   </View>
                 </View>
                 <HorizontalLine />

@@ -33,7 +33,7 @@ class Login extends Component {
     if (!this.props.error) {
       mapSet([{ "email": email}, {"token": this.props.token}, {"user_id": this.props.user.id}])
       this.setState(() => ({ email: '', password: '' }))
-      return Actions.home();
+      Actions.home();
     }
   }
 

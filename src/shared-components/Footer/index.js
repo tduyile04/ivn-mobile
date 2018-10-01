@@ -39,8 +39,10 @@ class FooterTabs extends Component {
             <Icon name="magnifier" type='SimpleLineIcons'  style={this.setActiveStyle(index, 1)}/>
           </Button>
           <Button badge onPress={() => this.pressNotification()}>
-            {!unread &&<Badge style={{ backgroundColor: 'transparent' }}></Badge>}
-            {unread && <Badge><Text>{unread}</Text></Badge>}
+              {!unread?<Badge style={{ backgroundColor: 'transparent' }}></Badge>:<Text></Text>}
+              {unread?<Badge><Text>{unread}</Text></Badge>:<Text></Text>}
+            {/*{!unread &&<Badge style={{ backgroundColor: 'transparent' }}></Badge>}*/}
+            {/*{unread && <Badge><Text>{unread}</Text></Badge>}*/}
             <Icon name="bell" type='SimpleLineIcons' style={this.setActiveStyle(index, 2)} />
           </Button>
           <Button onPress={() => Actions.myProfile()}>

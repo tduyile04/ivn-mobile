@@ -50,6 +50,7 @@ class App extends React.Component {
       'Roboto_medium': require("native-base/Fonts/Roboto_medium.ttf"),
       'Ionicons': require("@expo/vector-icons/fonts/Ionicons.ttf"),
     });
+
     const loggedIn = await get("token");
     const returningUser = await get("returningUser");
     this.setState({ ready: true, loggedIn, returningUser: !!returningUser });
@@ -80,6 +81,7 @@ class App extends React.Component {
                   component={SignUp}
                   hideNavBar
                 />
+
                 <Drawer
                     hideNavBar
                     key="drawer"
@@ -93,12 +95,11 @@ class App extends React.Component {
                     key='tabs'
                     tabBarComponent={Footer}
                   >
-                    {/* Changing Order of Home, Search, Notifications and MyProfile Scene
-                     can cause issues toggling the display of the active icon. */}
+
                     <Scene
-                      key='home'
-                      component={Home}
-                      hideNavBar
+                        key='home'
+                        component={Home}
+                        hideNavBar
                     />
                     <Scene 
                       key='search'
