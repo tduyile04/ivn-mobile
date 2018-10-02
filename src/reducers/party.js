@@ -6,6 +6,11 @@ import {
   getPartyPending,
   getPartySuccess,
   getPartyFailure,
+  getPartyFollowFailure,
+  getPartyFollowPending,
+  getPartyUnFollowSuccess,
+  getPartyUnFollowFailure,
+  getPartyFollowSuccess,
   unSelectPartySuccess
 } from '../actions';
 
@@ -57,6 +62,36 @@ export default handleActions({
     }
   },
   [getPartyFailure](state = defaultState, { payload }) {
+    return {
+      ...state,
+      partyLoading: false,
+      error: payload
+    }
+  },
+  [getPartyFollowFailure](state = defaultState, { payload: { party } }) {
+    return {
+      ...state,
+      selected: party,
+      partyLoading: false,
+      error: ''
+    }
+  },
+  [getPartyFollowSuccess](state = defaultState, { payload }) {
+    return {
+      ...state,
+      partyLoading: false,
+      error: payload
+    }
+  },
+   [getPartyUnFollowSuccess](state = defaultState, { payload: { party } }) {
+    return {
+      ...state,
+      selected: party,
+      partyLoading: false,
+      error: ''
+    }
+  },
+  [getPartyUnFollowFailure](state = defaultState, { payload }) {
     return {
       ...state,
       partyLoading: false,

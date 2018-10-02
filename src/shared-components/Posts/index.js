@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment'
-import { Card, View, Text, Button, Icon } from 'native-base';
+import {Card, View, Text, Button, Icon, Item, Input} from 'native-base';
 import {StyleSheet, Image, Animated, FlatList} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Heart } from '../../shared-components/Buttons';
@@ -9,6 +9,14 @@ import defaultPicture from '../../../assets/images/placeholder.png';
 import Comment from '../../components/Comments/comment';
 
 const setAvatar = userAvatar => userAvatar ? { uri: userAvatar } : defaultPicture;
+
+let state={
+    comments: 'test'
+}
+
+const handleComment=(comment)=>{
+  state.comments = comment;
+}
 
 const Post = ({
   id,
@@ -30,6 +38,8 @@ const Post = ({
   heartButtonStyle,
   comments=[]
  }) => {
+
+
 
     const postDetail = {
         userAvatar,
@@ -68,21 +78,35 @@ const Post = ({
             <Text style={styles.description}>{postContent}</Text>
             <View style={styles.row}>
               <View style={styles.tagSection}>
-                { postTags.length > 0 && postTags.map(tag => {
-                  return (
-                    <Button bordered small rounded style={styles.tagBtn} key={tag}>
-                      <Text style={styles.tagText}>{tag}</Text>
-                    </Button>
-                  )
-                })}
+                  <Item rounded style={styles.comment}>
+                      <Input
+                          placeholder='Write a comment'
+                          placeholderTextColor="#C7C7CB"
+                          multiline
+                          style={styles.input}
+                          value={state.comments}
+                          onChangeText={(comment) => handleComment(comment)}
+                      />
+                  </Item>
+                  <Button style={styles.button} onPress={()=>{alert(state.comments)}}>
+                      <Icon name='send' />
+                  </Button>
+                {/*{ postTags.length > 0 && postTags.map(tag => {*/}
+                  {/*return (*/}
+                    {/*<Button bordered small rounded style={styles.tagBtn} key={tag}>*/}
+                      {/*<Text style={styles.tagText}>{tag}</Text>*/}
+                    {/*</Button>*/}
+                  {/*)*/}
+                {/*})}*/}
               </View>
-              <Button transparent onPress={() => triggerLike(postId)}>
-                <Animated.View style={heartButtonStyle}>
-                  <Heart filled={liked} />
-                </Animated.View>
-              </Button>
+
             </View>
             <View style={styles.postInfo}>
+                <Button transparent onPress={() => triggerLike(postId)}>
+                    <Animated.View style={heartButtonStyle}>
+                        <Heart filled={liked} />
+                    </Animated.View>
+                </Button>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>{postLikes} Likes</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
@@ -221,7 +245,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 10,
     alignItems: 'center',
-  }
+  },
+    comment: {
+        width: '75%',
+        backgroundColor: 'white',
+        height: 40
+    },
+    button: {
+        width: '21%',
+        backgroundColor: '#628AFF',
+        borderRadius: 5,
+        height: 40
+    },
+    input: {
+        color:"#3F3F3F",
+        fontFamily:"museosans-500",
+        fontSize: 13,
+        paddingLeft: 18,
+        marginTop: -10
+    },
 });
 
 export default Post;
