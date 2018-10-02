@@ -6,6 +6,7 @@ import { StyleSheet, Image, FlatList, Animated } from 'react-native';
 // import { Actions } from 'react-native-router-flux';
 // import { Heart } from '../../shared-components/Buttons';
 import Post from '../../shared-components/Posts'
+import CommentBox from '../../components/Comments';
 
 class Feed extends Component {
   constructor(props) {
@@ -54,6 +55,52 @@ class Feed extends Component {
     })
   }
 
+  renderPostDetails=(post)=>{
+      const { liked } = this.state;
+      const bouncyHeart = this.state.scale.interpolate({
+          inputRange: [0, 1, 2],
+          outputRange: [1, .8, 1]
+      })
+      const heartButtonStyle = {
+          transform: [
+              { scale: bouncyHeart }
+          ]
+      }
+    return(
+        <React.Fragment>
+        <Post
+            key={post.id}
+            userId={post.author.id}
+            userAvatar={post.author && post.author.avatar}
+            userFullName={`${post.author && post.author.firstName} ${post.author && post.author.lastName}`}
+            userParty={'APC'}
+            postId={post.id}
+            postTimePosted={post.created_at}
+            postContent={post.content}
+            postTags={['Change2019', 'RealChange']}
+            postComments={post.comments && post.comments.length}
+            postLikes={post.likes && post.likes.length}
+            setActive={this.props.setActive}
+            liked={post.liked}
+            triggerLike={this.triggerLike}
+            comments={post.comments}
+        />
+          {/*<CommentBox*/}
+              {/*comments={post.comments}*/}
+            {/*postId={post.id}*/}
+            {/*userAvatar={post.author && post.author.avatar}*/}
+            {/*userFullName={`${post.author && post.author.firstName} ${post.author && post.author.lastName}`}*/}
+            {/*userParty={'APC'}*/}
+            {/*postTimePosted={post.created_at}*/}
+            {/*postContent={post.content}*/}
+            {/*postTags={['Change2019', 'RealChange']}*/}
+            {/*postLikes={post.likes && post.likes.length}*/}
+            {/*postComments={post.comments && post.comments.length}*/}
+        {/*/>*/}
+        </React.Fragment>
+    )
+  }
+
   render() {
     const { setActive, posts, loading } = this.props;
     const { liked } = this.state;
@@ -72,23 +119,7 @@ class Feed extends Component {
         <FlatList
           data={posts}
           renderItem={({ item: post }) => (
-            <Post
-              key={post.id}
-              userId={post.author.id}
-              userAvatar={post.author && post.author.avatar}
-              userFullName={`${post.author && post.author.firstName} ${post.author && post.author.lastName}`}
-              userParty={'APC'}
-              postId={post.id}
-              postTimePosted={post.created_at}
-              postContent={post.content}
-              postTags={['Change2019', 'RealChange']}
-              postComments={post.comments && post.comments.length}
-              postLikes={post.likes && post.likes.length}
-              setActive={setActive}
-              liked={post.liked}
-              triggerLike={this.triggerLike}
-              heartButtonStyle={heartButtonStyle}
-            />
+            this.renderPostDetails(post)
           )}
           keyExtractor={item => item.id}
           refreshing={this.state.refreshing}

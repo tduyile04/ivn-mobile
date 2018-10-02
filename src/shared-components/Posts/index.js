@@ -1,11 +1,12 @@
 import React from 'react';
 import moment from 'moment'
 import { Card, View, Text, Button, Icon } from 'native-base';
-import { StyleSheet, Image, Animated } from 'react-native';
+import {StyleSheet, Image, Animated, FlatList} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Heart } from '../../shared-components/Buttons';
 import HorizontalLine from '../HorizontalLine';
 import defaultPicture from '../../../assets/images/placeholder.png';
+import Comment from '../../components/Comments/comment';
 
 const setAvatar = userAvatar => userAvatar ? { uri: userAvatar } : defaultPicture;
 
@@ -27,10 +28,26 @@ const Post = ({
   liked,
   triggerLike,
   heartButtonStyle,
+  comments=[]
  }) => {
-  const postIds= postId;
+
+    const postDetail = {
+        userAvatar,
+        userFullName,
+        userParty,
+        postTimePosted,
+        postContent,
+        postTags,
+        postLikes,
+        postComments
+    };
+
+    const commentList = comments.length === 0
+        ? [postDetail]
+        : [...comments]
+
   return (
-    <View key={postIds}>
+    <View key={postId}>
       <Card transparent style={styles.card}>
         <View style={styles.row}>
           <Image
@@ -77,7 +94,7 @@ const Post = ({
                   userParty,
                   postTimePosted,
                   userPosition,
-                  postIds,
+                    postId,
                   postTitle,
                   postContent,
                   postTags,
@@ -85,6 +102,22 @@ const Post = ({
                   postComments
                 })}>{postComments} Comments</Text>
             </View>
+              {
+                  postComments === 0?
+                      <Text/>
+                      :
+                      <FlatList
+                          data={commentList}
+                          renderItem={({ item, index }) => (
+                              <View>
+                                  <Comment item={item} />
+                                  <HorizontalLine />
+                              </View>
+                          )}
+                          keyExtractor={item => item.id || postId}
+                      />
+              }
+
           </View>
         </View>
       </Card>

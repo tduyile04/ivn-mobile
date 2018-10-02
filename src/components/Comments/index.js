@@ -45,7 +45,7 @@ class Comments extends Component {
       postContent,
       postTags,
       postLikes,
-      postComments 
+      postComments
     } = this.props;
 
     const postDetail = {
