@@ -84,6 +84,9 @@ class Feed extends Component {
             liked={post.liked}
             triggerLike={this.triggerLike}
             comments={post.comments}
+            onAddNewComment={async()=>{
+                await this.props.getPosts(this.props.page, this.props.limit)
+            }}
         />
           {/*<CommentBox*/}
               {/*comments={post.comments}*/}

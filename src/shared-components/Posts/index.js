@@ -7,6 +7,7 @@ import { Heart } from '../../shared-components/Buttons';
 import HorizontalLine from '../HorizontalLine';
 import defaultPicture from '../../../assets/images/placeholder.png';
 import Comment from '../../components/Comments/comment';
+import CommentTextBox from '../CommentTextBox';
 
 const setAvatar = userAvatar => userAvatar ? { uri: userAvatar } : defaultPicture;
 
@@ -36,7 +37,8 @@ const Post = ({
   liked,
   triggerLike,
   heartButtonStyle,
-  comments=[]
+  comments=[],
+  onAddNewComment=null
  }) => {
 
 
@@ -78,19 +80,27 @@ const Post = ({
             <Text style={styles.description}>{postContent}</Text>
             <View style={styles.row}>
               <View style={styles.tagSection}>
-                  <Item rounded style={styles.comment}>
-                      <Input
-                          placeholder='Write a comment'
-                          placeholderTextColor="#C7C7CB"
-                          multiline
-                          style={styles.input}
-                          value={state.comments}
-                          onChangeText={(comment) => handleComment(comment)}
-                      />
-                  </Item>
-                  <Button style={styles.button} onPress={()=>{alert(state.comments)}}>
-                      <Icon name='send' />
-                  </Button>
+                  <CommentTextBox
+                      postId={postId}
+                      onFinish={(res)=>{
+                          if(onAddNewComment!=null){
+                              onAddNewComment(res)
+                          }
+                      }}
+                  />
+                  {/*<Item rounded style={styles.comment}>*/}
+                      {/*<Input*/}
+                          {/*placeholder='Write a comment'*/}
+                          {/*placeholderTextColor="#C7C7CB"*/}
+                          {/*multiline*/}
+                          {/*style={styles.input}*/}
+                          {/*value={state.comments}*/}
+                          {/*onChangeText={(comment) => handleComment(comment)}*/}
+                      {/*/>*/}
+                  {/*</Item>*/}
+                  {/*<Button style={styles.button} onPress={()=>{alert(state.comments)}}>*/}
+                      {/*<Icon name='send' />*/}
+                  {/*</Button>*/}
                 {/*{ postTags.length > 0 && postTags.map(tag => {*/}
                   {/*return (*/}
                     {/*<Button bordered small rounded style={styles.tagBtn} key={tag}>*/}
