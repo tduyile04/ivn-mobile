@@ -6,14 +6,14 @@ import { Button, Text, View, Icon } from 'native-base';
 
 export const UnfollowButton = ({buttonStyle, unfollowUser, id}) => 
   <View>
-    <Button bordered style={[styles.unfollowButton, buttonStyle]} onPress={() => unfollowUser(id)}>
+    <Button bordered small rounded style={[styles.unfollowButton, buttonStyle]} onPress={() => unfollowUser(id)}>
       <Text style={styles.unfollowText}>Unfollow</Text>
     </Button>
   </View>
 
 export const FollowButton = ({buttonStyle, followUser, id}) => 
   <View>
-    <Button iconLeft style={[styles.followButton, buttonStyle]} onPress={() => followUser(id)}>
+    <Button iconLeft bordered small rounded style={[styles.followButton, buttonStyle]} onPress={() => followUser(id)}>
       <Icon type="Feather" name='user-plus' style={styles.userIcon} />
       <Text style={styles.followText}>Follow</Text>
     </Button>
@@ -27,7 +27,7 @@ export const Heart = ({ filled, style, ...props}) =>
 
 export const DownloadButton = ({buttonStyle, downloadLink, link}) =>
     <View>
-        <Button iconLeft style={[styles.followButton, buttonStyle]} onPress={() => downloadLink(link)}>
+        <Button iconLeft bordered small rounded style={[styles.followButton, buttonStyle]} onPress={() => downloadLink(link)}>
             <Icon type="Feather" name='download' style={styles.userIcon} />
             <Text style={styles.followText}>Download</Text>
         </Button>
