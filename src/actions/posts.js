@@ -26,6 +26,10 @@ const GET_USER_POSTS_PENDING = 'GET_USER_POSTS_PENDING'
 const GET_USER_POSTS_SUCCESS = 'GET_USER_POSTS_SUCCESS'
 const GET_USER_POSTS_FAILURE = 'GET_USER_POSTS_FAILURE'
 
+const GET_CandidateOfTheWeek_PENDING = 'GET_CandidateOfTheWeek_PENDING'
+const GET_CandidateOfTheWeek_SUCCESS = 'GET_CandidateOfTheWeek_SUCCESS'
+const GET_CandidateOfTheWeek_FAILURE = 'GET_CandidateOfTheWeek_FAILURE'
+
 
 export const getPostsPending = createAction(GET_POSTS_PENDING);
 export const getPostsSuccess = createAction(GET_POSTS_SUCCESS);
@@ -34,6 +38,10 @@ export const getPostsFailure = createAction(GET_POSTS_FAILURE);
 export const getUserPostsPending = createAction(GET_USER_POSTS_PENDING)
 export const getUserPostsSuccess = createAction(GET_USER_POSTS_SUCCESS)
 export const getUserPostsFailure = createAction(GET_USER_POSTS_FAILURE)
+
+export const getCandidateOfTheWeekPending = createAction(GET_CandidateOfTheWeek_PENDING)
+export const getCandidateOfTheWeekSuccess = createAction(GET_CandidateOfTheWeek_SUCCESS)
+export const getCandidateOfTheWeekFailure = createAction(GET_CandidateOfTheWeek_FAILURE)
 
 export const getPostPending = createAction(GET_POST_PENDING);
 export const getPostSuccess = createAction(GET_POST_SUCCESS);
@@ -119,5 +127,23 @@ export const getUserPosts = userId => async dispatch => {
   } catch ({ response: { data } }) {
     const errorMessage = data && data.error ? data.error.message : 'Please try again';
     return dispatch(getUserPostsFailure(errorMessage))
+  }
+}
+
+export const getCandidateOfTheWeek = userId => async dispatch => {
+  dispatch(getUserPostsPending())
+
+  try {
+    const token = await get("token");
+    const response = await axios(token).get(`/api/v1/feature/candidates`,{
+        candidate: userId,
+        type: 'week'
+    });
+
+    return dispatch(getCandidateOfTheWeekSuccess(response.data.data))
+  } catch ({ response: { data } }) {
+    const errorMessage = data && data.error ? data.error.message : 'Please try again';
+      console.log(errorMessage)
+    return dispatch(getCandidateOfTheWeekFailure(errorMessage))
   }
 }
