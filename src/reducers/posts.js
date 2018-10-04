@@ -33,7 +33,8 @@ const defaultState = {
   userPostLoading: false,
   error: '',
   page: 1,
-  limit: 3
+  limit: 3,
+    candidateWeek:null
 };
 
 export default handleActions({
@@ -182,10 +183,11 @@ export default handleActions({
       error: payload
     }
   },
-    [getCandidateOfTheWeekSuccess](state = defaultState, { payload: { posts } }) {
+    [getCandidateOfTheWeekSuccess](state = defaultState, { payload }) {
+
     return {
       ...state,
-      candidateWeek: posts,
+      candidateWeek: payload,
       userPostLoading: false,
       error: ''
     }

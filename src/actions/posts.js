@@ -139,7 +139,7 @@ export const getCandidateOfTheWeek = userId => async dispatch => {
         candidate: userId,
         type: 'week'
     });
-    console.log(response.data.data)
+
     return dispatch(getCandidateOfTheWeekSuccess(response.data.data))
   } catch ({ response: { data } }) {
     const errorMessage = data && data.error ? data.error.message : 'Please try again';
