@@ -17,7 +17,9 @@ import {
   likePostFailure,
   getUserPostsPending,
   getUserPostsSuccess,
-  getUserPostsFailure
+  getUserPostsFailure,
+  getCandidateOfTheWeekFailure,
+  getCandidateOfTheWeekSuccess
 } from '../actions';
 
 const defaultState = {
@@ -174,6 +176,21 @@ export default handleActions({
     }
   },
   [getUserPostsFailure](state = defaultState, { payload }) {
+    return {
+      ...state,
+      userPostLoading: false,
+      error: payload
+    }
+  },
+    [getCandidateOfTheWeekSuccess](state = defaultState, { payload: { posts } }) {
+    return {
+      ...state,
+      candidateWeek: posts,
+      userPostLoading: false,
+      error: ''
+    }
+  },
+  [getCandidateOfTheWeekFailure](state = defaultState, { payload }) {
     return {
       ...state,
       userPostLoading: false,

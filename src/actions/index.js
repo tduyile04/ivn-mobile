@@ -51,6 +51,8 @@ export {
   getUserPostsPending,
   getUserPostsSuccess,
   getUserPostsFailure,
+  getCandidateOfTheWeekSuccess,
+  getCandidateOfTheWeekFailure,
   getUserPosts
 } from './posts';
 

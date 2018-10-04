@@ -27,6 +27,7 @@ class SideBar extends Component {
       user = JSON.stringify(this.props.user.user);
       mapSet([{user}]);
     }
+    console.log(user)
     this.setState({user, loading: false});
   }
 

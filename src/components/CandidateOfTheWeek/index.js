@@ -1,13 +1,27 @@
 import React, { Component } from 'react'
 import { Text, View, Container, Button, Icon, Content } from 'native-base';
+import { connect } from 'react-redux';
 import { StyleSheet, Image, Alert } from 'react-native';
 import Header from '../../shared-components/Header'
+import { getCandidateOfTheWeek } from '../../actions/posts';
+import { get } from '../../modules/cache'
 
 const paragraph = props => <View><Text></Text></View>
 class CandidateOfTheWeek extends Component {
   state = {
     clicked: false
   }
+
+  async componentDidMount(){
+    let user = await get('user');
+    console.log(user.id,"user")
+    await this.props.getCandidateOfTheWeek(user.id)
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps.candidateWeek)
+  }
+
   render() {
     return (
       <Container>
@@ -78,4 +92,13 @@ const styles = StyleSheet.create({
   },
 })
 
-export default CandidateOfTheWeek
+const mapStateToProps = state => ({
+    candidateWeek: state.post.candidateWeek,
+    loading: state.post.userPostLoading,
+})
+
+const mapDispatchToProps = dispatch => ({
+    getCandidateOfTheWeek: userId=> dispatch(getCandidateOfTheWeek(userId))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CandidateOfTheWeek);
