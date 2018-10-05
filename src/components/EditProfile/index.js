@@ -10,6 +10,7 @@ import { getUserDetails,
     unfollowUser,
 } from '../../actions/user';
 import EditableUserProfile from './UserProfile/EditableUserProfile';
+import FooterTabs from '../../shared-components/Footer';
 import Header from '../../shared-components/Header';
 import { get, remove } from '../../../src/modules/cache';
 
@@ -53,7 +54,23 @@ class EditProfile extends Component {
     return (
         <Container>
             <Content>
-                <Header back />
+              {/* <Header back /> */}
+              <Image
+                style={styles.coverImageStyle}
+                source={require('../../../assets/images/backdrop.png')}
+                resizeMode='cover'
+              />
+              <EditableUserProfile
+                user={user}
+                candidate={candidate}
+                id={user.id}
+                endorseUser={endorseUser}
+                withdrawEndorsement={withdrawEndorsement}
+                followUser={followUser}
+                unfollowUser={unfollowUser}
+                endorsed={endorsed}
+                following={following}
+              />
             </Content>
         </Container>
     );

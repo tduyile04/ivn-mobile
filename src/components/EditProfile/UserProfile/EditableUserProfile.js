@@ -1,6 +1,6 @@
 import React from 'react';
-import {Image, StyleSheet} from 'react-native';
-import {Text, View, Button, Icon} from 'native-base';
+import {Image, StyleSheet, scroll} from 'react-native';
+import {Text, View, Button, Icon, Form, Item, Label, Input, Textarea} from 'native-base';
 
 import {FollowButton, UnfollowButton} from '../../../shared-components/Buttons';
 import defaultPicture from '../../../../assets/images/placeholder.png';
@@ -26,44 +26,58 @@ const EditableUserProfile = ({
                         source={avatar}
                     />
                 </View>
-                <View style={styles.actionSection}>
-                    {
-                        candidate && ( endorsed ?
-                            <Button transparent dark style={styles.endorseBtn} onPress={() => withdrawEndorsement(id)}>
-                                <Text style={styles.text}>Unendorse</Text>
-                            </Button>
-                            :
-                            <Button transparent dark style={styles.endorseBtn} onPress={() => endorseUser(id)}>
-                                <Icon type="MaterialCommunityIcons" name='checkbox-marked-circle-outline'
-                                      style={styles.verified}/>
-                                <Text style={[styles.text, styles.endorse]}>Endorse</Text>
-                            </Button> )
-                    }
-                    {following ? <UnfollowButton unfollowUser={unfollowUser} id={id}/> :
-                        <FollowButton followUser={followUser} id={id}/>}
+                <View style={styles.center}>
+                  <View style={styles.secondaryInfo}>
+                    <View style={styles.center}>
+                      <Text>
+                        <Text style={styles.count}>12,345</Text>
+                        <Text style={styles.title}> Followers</Text>
+                      </Text>
+                    </View>
+                    <View style={styles.center}>
+                      <Text>
+                        <Text style={styles.count}>3,456</Text>
+                        <Text style={styles.title}> Followers</Text>
+                      </Text>
+                    </View>
+                  </View>
                 </View>
             </View>
-            <View style={styles.center}>
-                <Text style={styles.name}>{`${user.firstName} ${user.lastName}`}</Text>
-                <View style={styles.userDetailsSection}>
-                    <Text style={styles.username}>{user.email}</Text>
-                    {/* <View style={styles.partyDetails}>
-            <View>
-              <Image
-                style={styles.partyFlag}
-                source={{ uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif' }}
-                resizeMode="contain"
-              />
-            </View>
-            <View style={styles.partyInfo}>
-              <Text style={styles.member}>
-                member of
-                <Text style={styles.partyName}> People's Democratic Party</Text>
-              </Text>
-            </View>
-          </View> */}
+            <Form style={styles.form}>
+              <View style={styles.column}>
+                <View style={styles.formItem}>
+                  <Item stackedLabel>
+                    <Label style={styles.labelColor}>Full Name</Label>
+                    <Input value="" placeholder=""/>
+                  </Item>
                 </View>
-            </View>
+                <View style={styles.formItem}>
+                  <Item stackedLabel>
+                    <Label style={styles.labelColor}>Email</Label>
+                    <Input value="" placeholder=""/>
+                  </Item>
+                </View>
+                <View style={styles.formItem}>
+                  <Item stackedLabel>
+                    <Label style={styles.labelColor}>Phone</Label>
+                    <Input value="" placeholder=""/>
+                  </Item>
+                </View>
+                <View style={styles.formItem}>
+                  <Item stackedLabel>
+                    <Label style={styles.labelColor}>Bio</Label>
+                    <Textarea
+                      rowSpan={5}
+                      value=""
+                      placeholder=""
+                      style={{width:"100%"}}/>
+                  </Item>
+                </View>
+              </View>
+            </Form>
+            <Button block info>
+              <Text>Save</Text>
+            </Button>
         </View>
     );
 }
@@ -74,8 +88,20 @@ const styles = StyleSheet.create({
         paddingLeft: 25,
         paddingRight: 25,
     },
+    form:{
+      top:'7%',
+    },
+    formItem:{
+
+    },
     row: {
         flexDirection: 'row'
+    },
+    column:{
+      flexDirection:'column'
+    },
+    labelColor:{
+      color:'#97A1B3'
     },
     profileImage: {
         width: 68,
@@ -83,69 +109,24 @@ const styles = StyleSheet.create({
         borderRadius: 33,
         marginTop: -25,
     },
-    name: {
-        fontSize: 25,
-        fontWeight: 'bold',
-        fontFamily: 'raleway-bold',
-        color: "#3F3F3F",
-        marginTop: 10,
+    secondaryInfo: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: '80%'
     },
-    username: {
-        fontSize: 13,
-        color: "#3F3F3F",
-        fontFamily: "raleway-regular",
-        marginBottom: 30
+    count: {
+      fontSize: 14,
+      fontFamily: 'raleway-bold',
+      color: "#3F3F3F",
     },
-    partyDetails: {
-        flexDirection: 'row',
-        marginTop: 10,
+    title: {
+      fontSize: 14,
+      fontFamily: 'raleway-regular',
+      color: "#3F3F3F",
     },
-    partyFlag: {
-        width: 39,
-        height: 26,
-    },
-    partyInfo: {
-        marginLeft: 7,
-        marginBottom: 20,
-    },
-    partyName: {
-        fontSize: 11,
-        lineHeight: 13,
-        fontFamily: 'raleway-bold',
-        color: "#000000",
-    },
-    member: {
-        fontSize: 11,
-        marginTop: 6,
-        lineHeight: 13,
-        fontFamily: 'raleway-regular',
-        color: "#3F3F3F",
-    },
-    button: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderColor: '#E5E5E5'
-    },
-    text: {
-        fontFamily: 'raleway-bold',
-        color: '#4F5764',
-        fontSize: 13,
-        textAlign: 'center'
-    },
-    actionSection: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        marginLeft: 29,
-    },
-    endorseBtn: {
-        marginTop: 5,
-    },
-    endorse: {
-        marginLeft: -28,
-    },
-    verified: {
-        color: '#ff6277',
+    center: {
+      alignItems: 'center',
+      marginTop:'3%'
     }
 });
 
