@@ -1,71 +1,122 @@
-import React from 'react';
-import {Image, StyleSheet} from 'react-native';
-import {Text, View, Button, Icon} from 'native-base';
-
+import React,{Component} from 'react';
+import {Image, StyleSheet, scroll,Alert} from 'react-native';
+import {Text, View, Button, Icon, Form, Item, Label, Input, Textarea} from 'native-base';
+import { connect } from 'react-redux';
+import { userEditProfile } from '../../../actions/user';
+import { get } from '../../../modules/cache'
 import {FollowButton, UnfollowButton} from '../../../shared-components/Buttons';
 import defaultPicture from '../../../../assets/images/placeholder.png';
 
-const EditableUserProfile = ({
-                                 id,
-                                 user,
-                                 endorseUser,
-                                 withdrawEndorsement,
-                                 endorsed,
-                                 following,
-                                 unfollowUser,
-                                 followUser,
-                                 candidate,
-                             }) => {
-    const avatar = user && user.avatar ? {uri: user.avatar} : defaultPicture;
-    return (
-        <View style={styles.content}>
-            <View style={styles.row}>
-                <View style={styles.profileImageSection}>
-                    <Image
-                        style={styles.profileImage}
-                        source={avatar}
-                    />
+class EditableUserProfile extends Component{
+
+    constructor(props){
+        super(props);
+        this.state={
+            firstName:'',
+            lastName:'',
+            email:'',
+            phone:'',
+            bio:'',
+        }
+    }
+
+    componentDidMount(){
+        const { user } = this.props;
+
+        this.setState({
+            firstName:user.firstName,
+            lastName:user.lastName,
+            email:user.email,
+            bio:user.bio,
+        })
+    }
+
+    componentWillReceiveProps(nextProps){
+        const { user } = nextProps;
+
+        this.setState({
+            firstName:user.firstName,
+            lastName:user.lastName,
+            email:user.email,
+            bio:user.bio,
+        })
+    }
+
+    onSave=()=>{
+        console.log(this.state)
+        Alert.alert('Save','Profile Edit Success!')
+    }
+
+    render(){
+
+        const { user } = this.props;
+
+        const avatar = user && user.avatar ? {uri: user.avatar} : defaultPicture;
+
+        return (
+            <View style={styles.content}>
+                <View style={styles.row}>
+                    <View style={styles.profileImageSection}>
+                        <Image
+                            style={styles.profileImage}
+                            source={avatar}
+                        />
+                    </View>
+                    <View style={styles.center}>
+                        <View style={styles.secondaryInfo}>
+                            <View style={styles.center}>
+                                <Text>
+                                    <Text style={styles.count}>{this.props.followers}</Text>
+                                    <Text style={styles.title}> Followers</Text>
+                                </Text>
+                            </View>
+                            <View style={styles.center}>
+                                <Text>
+                                    <Text style={styles.count}>{this.props.followings}</Text>
+                                    <Text style={styles.title}> Followings</Text>
+                                </Text>
+                            </View>
+                        </View>
+                    </View>
                 </View>
-                <View style={styles.actionSection}>
-                    {
-                        candidate && ( endorsed ?
-                            <Button transparent dark style={styles.endorseBtn} onPress={() => withdrawEndorsement(id)}>
-                                <Text style={styles.text}>Unendorse</Text>
-                            </Button>
-                            :
-                            <Button transparent dark style={styles.endorseBtn} onPress={() => endorseUser(id)}>
-                                <Icon type="MaterialCommunityIcons" name='checkbox-marked-circle-outline'
-                                      style={styles.verified}/>
-                                <Text style={[styles.text, styles.endorse]}>Endorse</Text>
-                            </Button> )
-                    }
-                    {following ? <UnfollowButton unfollowUser={unfollowUser} id={id}/> :
-                        <FollowButton followUser={followUser} id={id}/>}
-                </View>
+                <Form style={styles.form}>
+                    <View style={styles.column}>
+                        <View style={styles.formItem}>
+                            <Item stackedLabel>
+                                <Label style={styles.labelColor}>Full Name</Label>
+                                <Input value={this.state.firstName+' '+this.state.lastName} placeholder=""/>
+                            </Item>
+                        </View>
+                        <View style={styles.formItem}>
+                            <Item stackedLabel>
+                                <Label style={styles.labelColor}>Email</Label>
+                                <Input value={this.state.email} placeholder=""/>
+                            </Item>
+                        </View>
+                        <View style={styles.formItem}>
+                            <Item stackedLabel>
+                                <Label style={styles.labelColor}>Phone</Label>
+                                <Input value={this.state.phone} placeholder=""/>
+                            </Item>
+                        </View>
+                        <View style={styles.formItem}>
+                            <Item stackedLabel>
+                                <Label style={styles.labelColor}>Bio</Label>
+                                <Textarea
+                                    rowSpan={5}
+                                    value={this.state.bio}
+                                    placeholder=""
+                                    style={{width:"100%"}}/>
+                            </Item>
+                        </View>
+                    </View>
+                </Form>
+                <Button block info onPress={()=>{this.onSave()}}>
+                    <Text>Save</Text>
+                </Button>
             </View>
-            <View style={styles.center}>
-                <Text style={styles.name}>{`${user.firstName} ${user.lastName}`}</Text>
-                <View style={styles.userDetailsSection}>
-                    <Text style={styles.username}>{user.email}</Text>
-                    {/* <View style={styles.partyDetails}>
-            <View>
-              <Image
-                style={styles.partyFlag}
-                source={{ uri: 'https://www.crwflags.com/fotw/images/g/gy%7Dppp.gif' }}
-                resizeMode="contain"
-              />
-            </View>
-            <View style={styles.partyInfo}>
-              <Text style={styles.member}>
-                member of
-                <Text style={styles.partyName}> People's Democratic Party</Text>
-              </Text>
-            </View>
-          </View> */}
-                </View>
-            </View>
-        </View>
-    );
+        );
+    }
 }
 
 const styles = StyleSheet.create({
@@ -74,8 +125,20 @@ const styles = StyleSheet.create({
         paddingLeft: 25,
         paddingRight: 25,
     },
+    form:{
+      top:'7%',
+    },
+    formItem:{
+
+    },
     row: {
         flexDirection: 'row'
+    },
+    column:{
+      flexDirection:'column'
+    },
+    labelColor:{
+      color:'#97A1B3'
     },
     profileImage: {
         width: 68,
@@ -83,70 +146,35 @@ const styles = StyleSheet.create({
         borderRadius: 33,
         marginTop: -25,
     },
-    name: {
-        fontSize: 25,
-        fontWeight: 'bold',
-        fontFamily: 'raleway-bold',
-        color: "#3F3F3F",
-        marginTop: 10,
+    secondaryInfo: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: '80%'
     },
-    username: {
-        fontSize: 13,
-        color: "#3F3F3F",
-        fontFamily: "raleway-regular",
-        marginBottom: 30
+    count: {
+      fontSize: 14,
+      fontFamily: 'raleway-bold',
+      color: "#3F3F3F",
     },
-    partyDetails: {
-        flexDirection: 'row',
-        marginTop: 10,
+    title: {
+      fontSize: 14,
+      fontFamily: 'raleway-regular',
+      color: "#3F3F3F",
     },
-    partyFlag: {
-        width: 39,
-        height: 26,
-    },
-    partyInfo: {
-        marginLeft: 7,
-        marginBottom: 20,
-    },
-    partyName: {
-        fontSize: 11,
-        lineHeight: 13,
-        fontFamily: 'raleway-bold',
-        color: "#000000",
-    },
-    member: {
-        fontSize: 11,
-        marginTop: 6,
-        lineHeight: 13,
-        fontFamily: 'raleway-regular',
-        color: "#3F3F3F",
-    },
-    button: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderColor: '#E5E5E5'
-    },
-    text: {
-        fontFamily: 'raleway-bold',
-        color: '#4F5764',
-        fontSize: 13,
-        textAlign: 'center'
-    },
-    actionSection: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        marginLeft: 29,
-    },
-    endorseBtn: {
-        marginTop: 5,
-    },
-    endorse: {
-        marginLeft: -28,
-    },
-    verified: {
-        color: '#ff6277',
+    center: {
+      alignItems: 'center',
+      marginTop:'3%'
     }
 });
 
-export default EditableUserProfile;
+const mapStateToProps = state => ({
+    candidateWeek: state.post.candidateWeek,
+    error: state.post.error,
+    loading: state.post.loading
+})
+
+const mapDispatchToProps = dispatch => ({
+    userEditProfile: data=> dispatch(userEditProfile(data))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditableUserProfile);

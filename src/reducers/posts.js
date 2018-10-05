@@ -19,7 +19,10 @@ import {
   getUserPostsSuccess,
   getUserPostsFailure,
   getCandidateOfTheWeekFailure,
-  getCandidateOfTheWeekSuccess
+  getCandidateOfTheWeekSuccess,
+  getCandidateThoughtsSuccess,
+  getCandidateThoughtsFailure,
+  getCandidateOfTheWeekPending
 } from '../actions';
 
 const defaultState = {
@@ -34,7 +37,8 @@ const defaultState = {
   error: '',
   page: 1,
   limit: 3,
-    candidateWeek:null
+  candidateWeek:null,
+  thoughts:null
 };
 
 export default handleActions({
@@ -193,6 +197,22 @@ export default handleActions({
     }
   },
   [getCandidateOfTheWeekFailure](state = defaultState, { payload }) {
+    return {
+      ...state,
+      userPostLoading: false,
+      error: payload
+    }
+  },
+    [getCandidateThoughtsSuccess](state = defaultState, { payload }) {
+
+    return {
+      ...state,
+      thoughts: payload,
+      userPostLoading: false,
+      error: ''
+    }
+  },
+  [getCandidateThoughtsFailure](state = defaultState, { payload }) {
     return {
       ...state,
       userPostLoading: false,

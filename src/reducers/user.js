@@ -13,7 +13,10 @@ import { getUserPending,
         followUserFailure,
         unfollowUserPending,
         unfollowUserSuccess,
-        unfollowUserFailure
+        unfollowUserFailure,
+        userEditProfilePending,
+        userEditProfileSuccess,
+        userEditProfileFailure
 } from '../actions';
 
 const defaultState = {
@@ -122,6 +125,27 @@ export default handleActions({
     }
   },
   [unfollowUserFailure](state = defaultState, { payload: { message } }) {
+    return {
+      ...state,
+      loading: false,
+      error: true,
+      message
+    }
+  },
+  [userEditProfilePending](state = defaultState) {
+    return {
+      ...state,
+      loading: true
+    }
+  },
+  [userEditProfileSuccess](state = defaultState, { payload: { message } }) {
+    return {
+      ...state,
+      loading: false,
+      message,
+    }
+  },
+  [userEditProfileFailure](state = defaultState, { payload: { message } }) {
     return {
       ...state,
       loading: false,

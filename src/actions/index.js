@@ -25,6 +25,9 @@ export {
   unfollowUserPending,
   unfollowUserSuccess,
   unfollowUserFailure,
+  userEditProfileFailure,
+  userEditProfileSuccess,
+  userEditProfilePending
 } from './user';
 
 export {
@@ -53,6 +56,9 @@ export {
   getUserPostsFailure,
   getCandidateOfTheWeekSuccess,
   getCandidateOfTheWeekFailure,
+  getCandidateThoughtsFailure,
+  getCandidateThoughtsSuccess,
+  getCandidateOfTheWeekPending,
   getUserPosts
 } from './posts';
 
