@@ -49,12 +49,13 @@ class EditProfile extends Component {
       const following = this.exist(followers, userId);
       const candidate  = this.hasRole(roles, 'candidate');
 
+
       if(loading) return <Spinner color='black' style={styles.container} />;
 
     return (
         <Container>
             <Content>
-              {/* <Header back /> */}
+               <Header back />
               <Image
                 style={styles.coverImageStyle}
                 source={require('../../../assets/images/backdrop.png')}
@@ -69,7 +70,8 @@ class EditProfile extends Component {
                 followUser={followUser}
                 unfollowUser={unfollowUser}
                 endorsed={endorsed}
-                following={following}
+                followers={followers.length}
+                following={followings.length}
               />
             </Content>
         </Container>

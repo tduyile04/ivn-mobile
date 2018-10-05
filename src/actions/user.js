@@ -17,6 +17,9 @@ const FOLLOW_USER_FAILURE = 'FOLLOW_USER_FAILURE';
 const UNFOLLOW_USER_PENDING = 'UNFOLLOW_USER_PENDING';
 const UNFOLLOW_USER_SUCCESS ='UNFOLLOW_USER_SUCCESS';
 const UNFOLLOW_USER_FAILURE = 'UNFOLLOW_USER_FAILURE';
+const EDIT_USER_PENDING = 'EDIT_USER_PENDING';
+const EDIT_USER_SUCCESS ='EDIT_USER_SUCCESS';
+const EDIT_USER_FAILURE = 'EDIT_USER_FAILURE';
 
 export const getUserPending = createAction(GET_USER_PENDING)
 export const getUserSuccess = createAction(GET_USER_SUCCESS)
@@ -33,6 +36,10 @@ export const followUserFailure = createAction(FOLLOW_USER_FAILURE)
 export const unfollowUserPending = createAction(UNFOLLOW_USER_PENDING)
 export const unfollowUserSuccess = createAction(UNFOLLOW_USER_SUCCESS)
 export const unfollowUserFailure = createAction(UNFOLLOW_USER_FAILURE)
+
+export const userEditProfilePending = createAction(EDIT_USER_PENDING)
+export const userEditProfileSuccess = createAction(EDIT_USER_SUCCESS)
+export const userEditProfileFailure = createAction(EDIT_USER_FAILURE)
 
 
 export const getUserDetails = userId => async (dispatch) => {
@@ -87,5 +94,16 @@ export const unfollowUser = userId => async (dispatch) => {
     dispatch(unfollowUserSuccess(response.data.data));
   } catch (error) {
     dispatch(unfollowUserFailure(error.response.data.error));
+  }
+}
+
+export const userEditProfile = data => async (dispatch) => {
+  dispatch(userEditProfilePending());
+  try {
+    const token = await get("token");
+    const response = await axios(token).post(`/api/v1/user/${userId}/unfollow`,data);
+    dispatch(userEditProfileSuccess(response.data.data));
+  } catch (error) {
+    dispatch(userEditProfileFailure(error.response.data.error));
   }
 }

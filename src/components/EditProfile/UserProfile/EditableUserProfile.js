@@ -1,85 +1,122 @@
-import React from 'react';
-import {Image, StyleSheet, scroll} from 'react-native';
+import React,{Component} from 'react';
+import {Image, StyleSheet, scroll,Alert} from 'react-native';
 import {Text, View, Button, Icon, Form, Item, Label, Input, Textarea} from 'native-base';
-
+import { connect } from 'react-redux';
+import { userEditProfile } from '../../../actions/user';
+import { get } from '../../../modules/cache'
 import {FollowButton, UnfollowButton} from '../../../shared-components/Buttons';
 import defaultPicture from '../../../../assets/images/placeholder.png';
 
-const EditableUserProfile = ({
-                                 id,
-                                 user,
-                                 endorseUser,
-                                 withdrawEndorsement,
-                                 endorsed,
-                                 following,
-                                 unfollowUser,
-                                 followUser,
-                                 candidate,
-                             }) => {
-    const avatar = user && user.avatar ? {uri: user.avatar} : defaultPicture;
-    return (
-        <View style={styles.content}>
-            <View style={styles.row}>
-                <View style={styles.profileImageSection}>
-                    <Image
-                        style={styles.profileImage}
-                        source={avatar}
-                    />
-                </View>
-                <View style={styles.center}>
-                  <View style={styles.secondaryInfo}>
-                    <View style={styles.center}>
-                      <Text>
-                        <Text style={styles.count}>12,345</Text>
-                        <Text style={styles.title}> Followers</Text>
-                      </Text>
+class EditableUserProfile extends Component{
+
+    constructor(props){
+        super(props);
+        this.state={
+            firstName:'',
+            lastName:'',
+            email:'',
+            phone:'',
+            bio:'',
+        }
+    }
+
+    componentDidMount(){
+        const { user } = this.props;
+
+        this.setState({
+            firstName:user.firstName,
+            lastName:user.lastName,
+            email:user.email,
+            bio:user.bio,
+        })
+    }
+
+    componentWillReceiveProps(nextProps){
+        const { user } = nextProps;
+
+        this.setState({
+            firstName:user.firstName,
+            lastName:user.lastName,
+            email:user.email,
+            bio:user.bio,
+        })
+    }
+
+    onSave=()=>{
+        console.log(this.state)
+        Alert.alert('Save','Profile Edit Success!')
+    }
+
+    render(){
+
+        const { user } = this.props;
+
+        const avatar = user && user.avatar ? {uri: user.avatar} : defaultPicture;
+
+        return (
+            <View style={styles.content}>
+                <View style={styles.row}>
+                    <View style={styles.profileImageSection}>
+                        <Image
+                            style={styles.profileImage}
+                            source={avatar}
+                        />
                     </View>
                     <View style={styles.center}>
-                      <Text>
-                        <Text style={styles.count}>3,456</Text>
-                        <Text style={styles.title}> Followers</Text>
-                      </Text>
+                        <View style={styles.secondaryInfo}>
+                            <View style={styles.center}>
+                                <Text>
+                                    <Text style={styles.count}>{this.props.followers}</Text>
+                                    <Text style={styles.title}> Followers</Text>
+                                </Text>
+                            </View>
+                            <View style={styles.center}>
+                                <Text>
+                                    <Text style={styles.count}>{this.props.followings}</Text>
+                                    <Text style={styles.title}> Followings</Text>
+                                </Text>
+                            </View>
+                        </View>
                     </View>
-                  </View>
                 </View>
+                <Form style={styles.form}>
+                    <View style={styles.column}>
+                        <View style={styles.formItem}>
+                            <Item stackedLabel>
+                                <Label style={styles.labelColor}>Full Name</Label>
+                                <Input value={this.state.firstName+' '+this.state.lastName} placeholder=""/>
+                            </Item>
+                        </View>
+                        <View style={styles.formItem}>
+                            <Item stackedLabel>
+                                <Label style={styles.labelColor}>Email</Label>
+                                <Input value={this.state.email} placeholder=""/>
+                            </Item>
+                        </View>
+                        <View style={styles.formItem}>
+                            <Item stackedLabel>
+                                <Label style={styles.labelColor}>Phone</Label>
+                                <Input value={this.state.phone} placeholder=""/>
+                            </Item>
+                        </View>
+                        <View style={styles.formItem}>
+                            <Item stackedLabel>
+                                <Label style={styles.labelColor}>Bio</Label>
+                                <Textarea
+                                    rowSpan={5}
+                                    value={this.state.bio}
+                                    placeholder=""
+                                    style={{width:"100%"}}/>
+                            </Item>
+                        </View>
+                    </View>
+                </Form>
+                <Button block info onPress={()=>{this.onSave()}}>
+                    <Text>Save</Text>
+                </Button>
             </View>
-            <Form style={styles.form}>
-              <View style={styles.column}>
-                <View style={styles.formItem}>
-                  <Item stackedLabel>
-                    <Label style={styles.labelColor}>Full Name</Label>
-                    <Input value="" placeholder=""/>
-                  </Item>
-                </View>
-                <View style={styles.formItem}>
-                  <Item stackedLabel>
-                    <Label style={styles.labelColor}>Email</Label>
-                    <Input value="" placeholder=""/>
-                  </Item>
-                </View>
-                <View style={styles.formItem}>
-                  <Item stackedLabel>
-                    <Label style={styles.labelColor}>Phone</Label>
-                    <Input value="" placeholder=""/>
-                  </Item>
-                </View>
-                <View style={styles.formItem}>
-                  <Item stackedLabel>
-                    <Label style={styles.labelColor}>Bio</Label>
-                    <Textarea
-                      rowSpan={5}
-                      value=""
-                      placeholder=""
-                      style={{width:"100%"}}/>
-                  </Item>
-                </View>
-              </View>
-            </Form>
-            <Button block info>
-              <Text>Save</Text>
-            </Button>
-        </View>
-    );
+        );
+    }
 }
 
 const styles = StyleSheet.create({
@@ -130,4 +167,14 @@ const styles = StyleSheet.create({
     }
 });
 
-export default EditableUserProfile;
+const mapStateToProps = state => ({
+    candidateWeek: state.post.candidateWeek,
+    error: state.post.error,
+    loading: state.post.loading
+})
+
+const mapDispatchToProps = dispatch => ({
+    userEditProfile: data=> dispatch(userEditProfile(data))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditableUserProfile);
