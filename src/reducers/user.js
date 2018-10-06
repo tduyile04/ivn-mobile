@@ -135,20 +135,20 @@ export default handleActions({
   [userEditProfilePending](state = defaultState) {
     return {
       ...state,
-      loading: true
+        userloading: true
     }
   },
   [userEditProfileSuccess](state = defaultState, { payload: { message } }) {
     return {
       ...state,
-      loading: false,
+      userloading: false,
       message,
     }
   },
   [userEditProfileFailure](state = defaultState, { payload: { message } }) {
     return {
       ...state,
-      loading: false,
+        userloading: false,
       error: true,
       message
     }

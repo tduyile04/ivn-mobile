@@ -25,14 +25,15 @@ class EditProfile extends Component {
         const id = this.props.id; // Id of user which page you are viewing
         const userId = await get('user_id'); // Logged-in user ID
         // if(id === userId) Actions.myProfile();
-        await this.props.getUserDetails(id);
+        await this.props.getUserDetails(userId);
         this.setState({loading: false, userId});
     }
 
     async componentDidUpdate(prevProps) {
         // if(this.props.id === this.state.userId) Actions.myProfile();
         if (this.props.id !== prevProps.id || this.props.user.message !== prevProps.user.message) {
-            await this.props.getUserDetails(this.props.id);
+            const userId = await get('user_id'); // Logged-in user ID
+            await this.props.getUserDetails(userId);
         }
     }
 

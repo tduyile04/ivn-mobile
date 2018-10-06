@@ -9,6 +9,7 @@ import { Heart } from '../../shared-components/Buttons';
 import defaultPicture from '../../../assets/images/placeholder.png'
 import HorizontalLine from '../../shared-components/HorizontalLine'
 import Header from '../../shared-components/Header';
+import {get} from "../../modules/cache";
 
 const setAvatar = userAvatar => userAvatar ? userAvatar : defaultPicture;
 class QuestionList extends Component {
@@ -27,7 +28,8 @@ class QuestionList extends Component {
   }
 
   async componentDidMount() {
-    await this.props.getQuestions(user.id)
+      const userId = await get('user_id'); // Logged-in user ID
+    await this.props.getQuestions(userId)
   }
 
   triggerLike = async (postId) => {
