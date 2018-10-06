@@ -42,6 +42,10 @@ console.log(user)
         })
     }
 
+    handleName=(value)=>{
+        this.setState({firstName:value})
+    }
+
      onSave=async()=>{
          const userId = await get('user_id');
         let data={
@@ -92,13 +96,15 @@ console.log(user)
                         <View style={styles.formItem}>
                             <Item stackedLabel>
                                 <Label style={styles.labelColor}>Full Name</Label>
-                                <Input value={this.state.firstName+' '+this.state.lastName} placeholder=""/>
+                                <Input value={this.state.firstName+' '+this.state.lastName} placeholder="" onChangeText={(text) =>{
+                                    this.handleName(text)
+                                }
+                                }>
                             </Item>
-                        </View>
                         <View style={styles.formItem}>
                             <Item stackedLabel>
                                 <Label style={styles.labelColor}>Email</Label>
-                                <Input value={this.state.email} placeholder=""/>
+                                <Input value={this.state.email} placeholder="" onChangeText={(text)=>this.setState({email:text})}/>
                             </Item>
                         </View>
                         <View style={styles.formItem}>
