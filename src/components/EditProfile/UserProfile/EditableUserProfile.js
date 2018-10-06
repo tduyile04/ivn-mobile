@@ -22,7 +22,7 @@ class EditableUserProfile extends Component{
 
     componentDidMount(){
         const { user } = this.props;
-
+console.log(user)
         this.setState({
             firstName:user.firstName,
             lastName:user.lastName,
@@ -33,7 +33,7 @@ class EditableUserProfile extends Component{
 
     componentWillReceiveProps(nextProps){
         const { user } = nextProps;
-
+        console.log(user)
         this.setState({
             firstName:user.firstName,
             lastName:user.lastName,
@@ -42,8 +42,16 @@ class EditableUserProfile extends Component{
         })
     }
 
-    onSave=()=>{
-        console.log(this.state)
+     onSave=async()=>{
+         const userId = await get('user_id');
+        let data={
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            bio: this.state.bio,
+            phoneNumber: this.state.phone
+        };
+       await this.props.userEditProfile(data,userId)
         Alert.alert('Save','Profile Edit Success!')
     }
 
@@ -96,7 +104,7 @@ class EditableUserProfile extends Component{
                         <View style={styles.formItem}>
                             <Item stackedLabel>
                                 <Label style={styles.labelColor}>Phone</Label>
-                                <Input value={this.state.phone} placeholder=""/>
+                                <Input value={this.state.phone} placeholder="" onChangeText={(text) => this.setState({phone:text})}/>
                             </Item>
                         </View>
                         <View style={styles.formItem}>
@@ -106,6 +114,7 @@ class EditableUserProfile extends Component{
                                     rowSpan={5}
                                     value={this.state.bio}
                                     placeholder=""
+                                    onChangeText={(text) => this.setState({bio:text})}
                                     style={{width:"100%"}}/>
                             </Item>
                         </View>
@@ -168,13 +177,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-    candidateWeek: state.post.candidateWeek,
-    error: state.post.error,
-    loading: state.post.loading
+    userloading: state.user.userloading,
 })
 
 const mapDispatchToProps = dispatch => ({
-    userEditProfile: data=> dispatch(userEditProfile(data))
+    userEditProfile: (data,userId)=> dispatch(userEditProfile(data,userId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditableUserProfile);
