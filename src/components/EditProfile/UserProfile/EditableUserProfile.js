@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Image, StyleSheet, scroll,Alert} from 'react-native';
+import {Image, StyleSheet, scroll,Alert,TextInput} from 'react-native';
 import {Text, View, Button, Icon, Form, Item, Label, Input, Textarea} from 'native-base';
 import { connect } from 'react-redux';
 import { userEditProfile } from '../../../actions/user';
@@ -48,6 +48,7 @@ console.log(user)
 
      onSave=async()=>{
          const userId = await get('user_id');
+         console.log(this.state)
         let data={
             firstName: this.state.firstName,
             lastName: this.state.lastName,
@@ -56,7 +57,10 @@ console.log(user)
             phoneNumber: this.state.phone
         };
        await this.props.userEditProfile(data,userId)
-        Alert.alert('Save','Profile Edit Success!')
+         if(this.props.message){
+             alert(this.props.message)
+         }
+
     }
 
     render(){
@@ -96,20 +100,22 @@ console.log(user)
                         <View style={styles.formItem}>
                             <Item stackedLabel>
                                 <Label style={styles.labelColor}>Full Name</Label>
-                                <Input value={this.state.firstName+' '+this.state.lastName} placeholder=""
+                                <TextInput value={this.state.firstName} placeholder=""
+                                           editable = {true}
                                        onChangeText={(text) =>this.handleName(text)
-                                }>
+                                }/>
                             </Item>
+                        </View>
                         <View style={styles.formItem}>
                             <Item stackedLabel>
                                 <Label style={styles.labelColor}>Email</Label>
-                                <Input value={this.state.email} placeholder="" onChangeText={(text)=>this.setState({email:text})}/>
+                                <TextInput value={this.state.email} editable = {true} placeholder="" onChangeText={(text)=>this.setState({email:text})}/>
                             </Item>
                         </View>
                         <View style={styles.formItem}>
                             <Item stackedLabel>
                                 <Label style={styles.labelColor}>Phone</Label>
-                                <Input value={this.state.phone} placeholder="" onChangeText={(text) => this.setState({phone:text})}/>
+                                <TextInput value={this.state.phone} placeholder="" onChangeText={(text) => this.setState({phone:text})}/>
                             </Item>
                         </View>
                         <View style={styles.formItem}>
@@ -183,6 +189,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
     userloading: state.user.userloading,
+    message: state.user.message,
 })
 
 const mapDispatchToProps = dispatch => ({
