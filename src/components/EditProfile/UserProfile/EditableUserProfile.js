@@ -96,9 +96,8 @@ console.log(user)
                         <View style={styles.formItem}>
                             <Item stackedLabel>
                                 <Label style={styles.labelColor}>Full Name</Label>
-                                <Input value={this.state.firstName+' '+this.state.lastName} placeholder="" onChangeText={(text) =>{
-                                    this.handleName(text)
-                                }
+                                <Input value={this.state.firstName+' '+this.state.lastName} placeholder=""
+                                       onChangeText={(text) =>this.handleName(text)
                                 }>
                             </Item>
                         <View style={styles.formItem}>
