@@ -68,7 +68,6 @@ export const followUserByParty = (id) => async (dispatch) => {
     try {
         const token = await get("token");
         const response = await axios(token).post(`/api/v1/party/${id}/follow`);
-        console.log(response.data.data)
         dispatch(getPartyFollowSuccess(response.data.data));
     } catch ({ response: { data } }) {
         const errorMessage = data && data.error ? data.error.message : 'Please try again';
@@ -81,7 +80,6 @@ export const unfollowUserByParty = (id) => async (dispatch) => {
     try {
         const token = await get("token");
         const response = await axios(token).post(`/api/v1/party/${id}/unfollow`);
-        console.log(response.data.data)
         dispatch(getPartyUnFollowSuccess(response.data.data));
     } catch ({ response: { data } }) {
         const errorMessage = data && data.error ? data.error.message : 'Please try again';

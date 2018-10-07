@@ -7,7 +7,6 @@ import defaultPicture from '../../../../assets/images/placeholder.png';
 const setAvatar = userAvatar => userAvatar ? { uri: userAvatar } : defaultPicture;
 
 const UserDetails = ({user, editProfileButton}) => {
-  console.log(user)
   const avatar = setAvatar(user.avatar);
   return (
     <View style={styles.content}>

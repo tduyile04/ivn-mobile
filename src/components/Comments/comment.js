@@ -19,8 +19,6 @@ const Comment = ({ item }) =>
         <View style={styles.info}>
           <Text style={styles.name}>{item.user && item.user.firstName} {item.user && item.user.lastName}</Text>
           <Icon name='dot-single' type='Entypo' style={styles.dots} />
-          <Text style={[styles.text, styles.blueText]} onPress={() => Actions.partyProfile()}>PDP</Text>
-          <Icon name='dot-single' type='Entypo' style={styles.dots} />
           <Text style={[styles.text, styles.blueText]}>{moment(item.createdAt).fromNow()}</Text>
         </View>
         <Text style={styles.description}>{item.comment}</Text>

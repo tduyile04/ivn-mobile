@@ -22,7 +22,6 @@ class EditableUserProfile extends Component{
 
     componentDidMount(){
         const { user } = this.props;
-console.log(user)
         this.setState({
             firstName:user.firstName,
             lastName:user.lastName,
@@ -33,7 +32,6 @@ console.log(user)
 
     componentWillReceiveProps(nextProps){
         const { user } = nextProps;
-        console.log(user)
         this.setState({
             firstName:user.firstName,
             lastName:user.lastName,
@@ -48,8 +46,7 @@ console.log(user)
 
      onSave=async()=>{
          const userId = await get('user_id');
-         console.log(this.state)
-        let data={
+        let data = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             email: this.state.email,

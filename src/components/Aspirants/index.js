@@ -53,6 +53,7 @@ class Aspirants extends Component {
       <Button 
         style={[ styles.cardStyle, cardColor ]}
         onPress={() => this.renderCategory(index)}
+        onLongPress={() => this.handleLongPress(index)}
       >
         <Text style={styles.cardTextHeaderStyle}>{item.level}</Text>
         {index === 1  && <Text style={styles.cardTextHeaderStyle}>Nigeria</Text>}
@@ -97,6 +98,16 @@ class Aspirants extends Component {
       viewLocalGovernment: true, 
       localGovernmentCategories 
     })
+  }
+
+  handleLongPress = index => {
+    if (index === 1) {
+      return;
+    } else if (index === 2) {
+      this.handleStatePickerClick()
+    } else if (index === 3) {
+      this.handleLocalGovtPickerClick()
+    }
   }
 
   render() {
