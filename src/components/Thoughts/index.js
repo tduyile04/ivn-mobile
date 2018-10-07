@@ -15,70 +15,65 @@ import {getCandidateThoughts} from '../../actions/posts';
 import {get} from '../../modules/cache'
 
 class Thoughts extends Component {
-
 		state = {
-				clicked: false,
-				thoughts: [],
-				loading: false,
-				userId: null
+			clicked: false,
+			thoughts: [],
+			loading: false,
+			userId: null
 		}
 
 		async componentDidMount() {
-				let userId = await get('user_id');
-				if (userId) {
-						this.setState({loading: true})
-						await this
-								.props
-								.getCandidateThoughts(userId)
-				}
+			let userId = await get('user_id');
+			if (userId) {
+				this.setState({loading: true})
+				await this.props.getCandidateThoughts(userId)
+			}
 		}
 
 		componentWillReceiveProps(nextProps) {
-				if (nextProps.thoughts != null) {
-						this.setState({loading: false, thoughts: nextProps.thoughts})
-				}
+			if (nextProps.thoughts != null) {
+				this.setState({loading: false, thoughts: nextProps.thoughts})
+			}
 		}
 
 		handleRefresh = () => null
 		fetchMorePosts = () => null
 
 		render() {
+			if (this.state.loading) {
+				return (<Spinner size="small" color="#000"/>)
+			}
 
-				if (this.state.loading) {
-						return (<Spinner size="small" color="#000"/>)
-				}
-
-				return (
-						<Container>
-								<Header title='Daily Thoughts' menu/>
-								<Content style={styles.textViewStyle}>
-										<FlatList
-												data={this.state.thoughts}
-												renderItem={({item}) => {
-												return (
-														<React.Fragment>
-																<Text
-																		style={[
-																		styles.textStyle, {
-																				fontFamily: "raleway-bold",
-																				textAlign: "center",
-																				fontSize: 18,
-																				color: '#628AFF'
-																		}
-																]}>{item.title}</Text>
-																<Text style={styles.textStyle}>
-																		{item.content}
-																</Text>
-														</React.Fragment>
-												)
-										}}
-												keyExtractor={item => item.id}
-												refreshing={this.state.refreshing}
-												onEndReachedThreshold={0.5}/>
-
-								</Content>
-						</Container>
-				)
+			return (
+				<Container>
+					<Header title='Daily Thoughts' menu/>
+					<Content style={styles.textViewStyle}>
+						<FlatList
+							data={this.state.thoughts}
+							renderItem={({item}) => {
+							return (
+								<React.Fragment>
+									<Text
+										style={[
+										styles.textStyle, {
+												fontFamily: "raleway-bold",
+												textAlign: "center",
+												fontSize: 18,
+												color: '#628AFF'
+										}
+									]}>{item.title}</Text>
+									<Text style={styles.textStyle}>
+										{item.content}
+									</Text>
+								</React.Fragment>
+							)
+						}}
+						keyExtractor={item => item.id}
+						refreshing={this.state.refreshing}
+						onEndReachedThreshold={0.5}/>
+					</Content>
+				</Container>
+			)
 		}
 }
 
