@@ -94,8 +94,8 @@ class App extends React.Component {
                   <Tabs
                     key='tabs'
                     tabBarComponent={Footer}
+                    tabBarPosition='bottom'
                   >
-
                     <Scene
                         key='home'
                         component={Home}

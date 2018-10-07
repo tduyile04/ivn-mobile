@@ -68,7 +68,7 @@ class Feed extends Component {
       }
     return(
         <React.Fragment>
-        <Post
+          <Post
             key={post.id}
             userId={post.author.id}
             userAvatar={post.author && post.author.avatar}
@@ -84,22 +84,10 @@ class Feed extends Component {
             liked={post.liked}
             triggerLike={this.triggerLike}
             comments={post.comments}
-            onAddNewComment={async()=>{
-                await this.props.getPosts(this.props.page, this.props.limit)
+            onAddNewComment={async () => {
+              await this.props.getPosts(this.props.page, this.props.limit)
             }}
-        />
-          {/*<CommentBox*/}
-              {/*comments={post.comments}*/}
-            {/*postId={post.id}*/}
-            {/*userAvatar={post.author && post.author.avatar}*/}
-            {/*userFullName={`${post.author && post.author.firstName} ${post.author && post.author.lastName}`}*/}
-            {/*userParty={'APC'}*/}
-            {/*postTimePosted={post.created_at}*/}
-            {/*postContent={post.content}*/}
-            {/*postTags={['Change2019', 'RealChange']}*/}
-            {/*postLikes={post.likes && post.likes.length}*/}
-            {/*postComments={post.comments && post.comments.length}*/}
-        {/*/>*/}
+          />
         </React.Fragment>
     )
   }

@@ -10,21 +10,21 @@ import { createComments } from '../../actions';
 class CommentTextBox extends Component{
 
     constructor(props){
-        super(props)
-        this.state = {
-            comment: '',
-            loading:false
-        }
+			super(props)
+			this.state = {
+				comment: '',
+				loading:false
+			}
     }
 
     handleComment = async () => {
-        this.setState({
-            loading:true
-        },async()=>{
-            await this.props.createComments(this.state.comment, this.props.postId)
-            this.setState({ comment: '',loading:false })
-            this.props.onFinish(this.props.postId)
-        })
+			this.setState({
+				loading:true
+			}, async () => {
+				await this.props.createComments(this.state.comment, this.props.postId)
+				this.setState({ comment: '',loading:false })
+				this.props.onFinish(this.props.postId)
+			})
     }
 
     render(){

@@ -3,18 +3,20 @@
     "name": "iVoteNaija",
     "slug": "i-vote-naija",
     "icon": "./assets/images/ivote.png",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "sdkVersion": "27.0.0",
     "ios": {
       "bundleIdentifier": "com.politics.iVoteNaija"
     },
     "android": {
-      "package": "com.politics.iVoteNaija"
+      "package": "com.politics.iVoteNaija",
+      "versionCode": 3
     },
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#FFF"
-    }
+    },
+    "description": ""
   }
 }

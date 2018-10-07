@@ -25,7 +25,6 @@ class CandidateOfTheWeek extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    // console.log(nextProps.candidateWeek)
       if(nextProps.candidateWeek != null){
         this.setState({
             candidateWeek:nextProps.candidateWeek.candidates

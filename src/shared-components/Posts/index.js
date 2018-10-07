@@ -11,11 +11,12 @@ import CommentTextBox from '../CommentTextBox';
 
 const setAvatar = userAvatar => userAvatar ? { uri: userAvatar } : defaultPicture;
 
-let state={
-    comments: 'test'
+const state = {
+  comments: 'test',
+  commentViewLimit: 2
 }
 
-const handleComment=(comment)=>{
+const handleComment= comment => {
   state.comments = comment;
 }
 
@@ -38,25 +39,22 @@ const Post = ({
   triggerLike,
   heartButtonStyle,
   comments=[],
-  onAddNewComment=null
+  onAddNewComment = null
  }) => {
+  const postDetail = {
+      userAvatar,
+      userFullName,
+      userParty,
+      postTimePosted,
+      postContent,
+      postTags,
+      postLikes,
+      postComments
+  };
 
-
-
-    const postDetail = {
-        userAvatar,
-        userFullName,
-        userParty,
-        postTimePosted,
-        postContent,
-        postTags,
-        postLikes,
-        postComments
-    };
-
-    const commentList = comments.length === 0
-        ? [postDetail]
-        : [...comments]
+  const commentList = comments.length === 0
+    ? [postDetail]
+    : [...comments]
 
   return (
     <View key={postId}>
@@ -69,8 +67,6 @@ const Post = ({
           <View style={styles.items}>
             <View style={styles.info}>
               <Text style={styles.name} onPress={() => Actions.userProfile({id: userId})}>{userFullName}</Text>
-              {/* <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text style={styles.blueText}>{userParty}</Text> */}
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>{moment(postTimePosted).fromNow()}</Text>
             </View>
@@ -80,77 +76,56 @@ const Post = ({
             <Text style={styles.description}>{postContent}</Text>
             <View style={styles.row}>
               <View style={styles.tagSection}>
-                  <CommentTextBox
-                      postId={postId}
-                      onFinish={(res)=>{
-                          if(onAddNewComment!=null){
-                              onAddNewComment(res)
-                          }
-                      }}
-                  />
-                  {/*<Item rounded style={styles.comment}>*/}
-                      {/*<Input*/}
-                          {/*placeholder='Write a comment'*/}
-                          {/*placeholderTextColor="#C7C7CB"*/}
-                          {/*multiline*/}
-                          {/*style={styles.input}*/}
-                          {/*value={state.comments}*/}
-                          {/*onChangeText={(comment) => handleComment(comment)}*/}
-                      {/*/>*/}
-                  {/*</Item>*/}
-                  {/*<Button style={styles.button} onPress={()=>{alert(state.comments)}}>*/}
-                      {/*<Icon name='send' />*/}
-                  {/*</Button>*/}
-                {/*{ postTags.length > 0 && postTags.map(tag => {*/}
-                  {/*return (*/}
-                    {/*<Button bordered small rounded style={styles.tagBtn} key={tag}>*/}
-                      {/*<Text style={styles.tagText}>{tag}</Text>*/}
-                    {/*</Button>*/}
-                  {/*)*/}
-                {/*})}*/}
+                <CommentTextBox
+                  postId={postId}
+                  onFinish={(res)=>{
+                    if(onAddNewComment != null){
+                        onAddNewComment(res)
+                    }
+                  }}
+                />
               </View>
 
             </View>
             <View style={styles.postInfo}>
-                <Button transparent onPress={() => triggerLike(postId)}>
-                    <Animated.View style={heartButtonStyle}>
-                        <Heart filled={liked} />
-                    </Animated.View>
-                </Button>
+              <Button transparent onPress={() => triggerLike(postId)}>
+                <Animated.View style={heartButtonStyle}>
+                    <Heart filled={liked} />
+                </Animated.View>
+              </Button>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>{postLikes} Likes</Text>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
-              <Text
-                style={styles.blueText}
-                onPress={() => Actions.comments({
-                  userAvatar,
-                  userFullName,
-                  userParty,
-                  postTimePosted,
-                  userPosition,
-                    postId,
-                  postTitle,
-                  postContent,
-                  postTags,
-                  postLikes,
-                  postComments
-                })}>{postComments} Comments</Text>
+              <Text style={styles.blueText}>{postComments} Comments</Text>
             </View>
-              {
-                  postComments === 0?
-                      <Text/>
-                      :
-                      <FlatList
-                          data={commentList}
-                          renderItem={({ item, index }) => (
-                              <View>
-                                  <Comment item={item} />
-                                  <HorizontalLine />
-                              </View>
-                          )}
-                          keyExtractor={item => item.id || postId}
-                      />
-              }
+            {postComments > 0 &&
+              <FlatList
+                  data={commentList}
+                  renderItem={({ item, index }) => (
+                    <View>
+                      {(index > state.commentViewLimit - 3 && index < state.commentViewLimit) && <Comment item={item} />}
+                      {(index < state.commentViewLimit - 1 && commentList.length - 1 > state.commentViewLimit - 1) && <HorizontalLine />}
+                      {(index >= 2 && index === commentList.length - 1) && 
+                        <Text style={[styles.blueText]} onPress={() => Actions.comments({
+                          userAvatar,
+                          userFullName,
+                          userParty,
+                          postTimePosted,
+                          userPosition,
+                          postId,
+                          postTitle,
+                          postContent,
+                          postTags,
+                          postLikes,
+                          postComments
+                        })}>
+                          View all {postComments} comments
+                        </Text>}
+                    </View>
+                  )}
+                  keyExtractor={item => item.id || postId}
+              />
+            }
 
           </View>
         </View>
@@ -256,24 +231,24 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignItems: 'center',
   },
-    comment: {
-        width: '75%',
-        backgroundColor: 'white',
-        height: 40
-    },
-    button: {
-        width: '21%',
-        backgroundColor: '#628AFF',
-        borderRadius: 5,
-        height: 40
-    },
-    input: {
-        color:"#3F3F3F",
-        fontFamily:"museosans-500",
-        fontSize: 13,
-        paddingLeft: 18,
-        marginTop: -10
-    },
+  comment: {
+      width: '75%',
+      backgroundColor: 'white',
+      height: 40
+  },
+  button: {
+      width: '21%',
+      backgroundColor: '#628AFF',
+      borderRadius: 5,
+      height: 40
+  },
+  input: {
+      color:"#3F3F3F",
+      fontFamily:"museosans-500",
+      fontSize: 13,
+      paddingLeft: 18,
+      marginTop: -10
+  }
 });
 
 export default Post;

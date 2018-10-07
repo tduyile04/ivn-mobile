@@ -103,10 +103,8 @@ export const userEditProfile = (data,userId) => async (dispatch) => {
     const token = await get("token");
 
     const response = await axios(token).put(`/api/v1/user/${userId}`,data);
-    console.log(response.data.data)
     dispatch(userEditProfileSuccess(response.data.data));
   } catch (error) {
-      console.log(error.response.data.error)
     dispatch(userEditProfileFailure(error.response.data.error));
   }
 }
