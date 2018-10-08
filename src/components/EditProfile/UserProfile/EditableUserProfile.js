@@ -1,197 +1,136 @@
-import React,{Component} from 'react';
-import {Image, StyleSheet, scroll,Alert,TextInput} from 'react-native';
-import {Text, View, Button, Icon, Form, Item, Label, Input, Textarea} from 'native-base';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import { StyleSheet, View, Image } from 'react-native';
+import { Container, Form, Item, Label, Input, Textarea, Button, Text, Icon } from 'native-base';
 import { userEditProfile } from '../../../actions/user';
 import { get } from '../../../modules/cache'
-import {FollowButton, UnfollowButton} from '../../../shared-components/Buttons';
 import defaultPicture from '../../../../assets/images/placeholder.png';
+import HorizontalLine from '../../../shared-components/HorizontalLine';
 
 class EditableUserProfile extends Component{
-
-    constructor(props){
-        super(props);
-        this.state={
-            firstName:'',
-            lastName:'',
-            // email:'',
-            phone:'',
-            bio:'',
-        }
-    }
-
-    componentWillReceiveProps(){
-			const { user } = this.props;
-			this.setState({
-					firstName: user.firstName,
-					lastName: user.lastName,
-					// email:user.email,
-					bio: user.bio,
-			})
-    }
-
-    componentDidUpdate(nextProps){
-			const { user } = nextProps;
-			this.setState({
-				firstName: user.firstName,
-				lastName: user.lastName,
-				// email:user.email,
-				bio: user.bio,
-			})
-    }
-
-    handleName=(value)=>{
-      this.setState({ firstName:value })
-    }
-
-     onSave = async () => {
-			const userId = await get('user_id');
-			let data = {
-				firstName: this.state.firstName,
-				lastName: this.state.lastName,
-				// email: this.state.email,
-				bio: this.state.bio,
-				phoneNumber: this.state.phone
-			};
-			await this.props.userEditProfile(data,userId)
-			if(this.props.message) {
-				alert(this.props.message)
-			}
-    }
-
-    render(){
-			const { user } = this.props;
-			const avatar = user && user.avatar ? {uri: user.avatar} : defaultPicture;
-			return (
-				<View style={styles.content}>
-					<View style={styles.row}>
-						<View style={styles.profileImageSection}>
-							<Image
-								style={styles.profileImage}
-								source={avatar}
-							/>
-						</View>
-						<View style={styles.center}>
-							<View style={styles.secondaryInfo}>
-								<View style={styles.center}>
-									<Text>
-										<Text style={styles.count}>{this.props.followers}</Text>
-										<Text style={styles.title}> Followers</Text>
-									</Text>
-								</View>
-								<View style={styles.center}>
-									<Text>
-										<Text style={styles.count}>{this.props.followings}</Text>
-										<Text style={styles.title}> Followings</Text>
-									</Text>
-								</View>
-							</View>
-						</View>
-					</View>
-					<Form style={styles.form}>
-						<View style={styles.column}>
-							<View style={styles.formItem}>
-								<Item stackedLabel>
-										<Label style={styles.labelColor}>Full Name</Label>
-										<TextInput 
-											value={this.state.firstName} 
-											placeholder=""
-											editable = {true}
-											onChangeText={(text) =>this.handleName(text)} />
-								</Item>
-							</View>
-							{/* <View style={styles.formItem}>
-								<Item stackedLabel>
-									<Label style={styles.labelColor}>Email</Label>
-									<TextInput 
-										value={this.state.email} 
-										editable = {true} 
-										placeholder="" 
-										onChangeText={(text)=>this.setState({email:text})} />
-								</Item>
-							</View> */}
-							<View style={styles.formItem}>
-								<Item stackedLabel>
-									<Label style={styles.labelColor}>Phone</Label>
-									<TextInput value={this.state.phone} placeholder="" onChangeText={(text) => this.setState({phone:text})}/>
-								</Item>
-							</View>
-							<View style={styles.formItem}>
-								<Item stackedLabel>
-									<Label style={styles.labelColor}>Bio</Label>
-									<Textarea
-										rowSpan={5}
-										value={this.state.bio}
-										placeholder=""
-										onChangeText={(text) => this.setState({ bio:text })}
-										style={{width:"100%"}}/>
-								</Item>
-							</View>
-						</View>
-					</Form>
-					<Button block info onPress={() => this.onSave()}>
-						<Text>Save</Text>
-					</Button>
-				</View>
-			);
-    }
+  
+  render() {
+    const { user } = this.props;
+    const avatar = user && user.avatar ? {uri: user.avatar} : defaultPicture;
+    return (
+      <View>  
+        <View style={[styles.row, styles.padding]}> 
+          <View style={styles.row}>
+              <Image
+                style={styles.profileImage}
+                source={avatar}
+              />
+               <Icon name='circle-with-plus' type='Entypo' style={styles.icon}/>
+          </View>
+          <View style={[styles.row, styles.listing]}>
+            <Text style={styles.text}>
+              <Text style={styles.bold}>21,098</Text> Followers
+            </Text>
+            <Text style={styles.text}>
+              <Text style={styles.bold}>15,210</Text> Following
+            </Text>
+          </View>
+        </View>
+        <Form style={styles.form}>
+          <View style={styles.padding}>
+            <Label style={styles.label}>Full Name</Label>
+            <Input style={styles.inputText} />
+          </View>
+          <HorizontalLine lineStyle={styles.line}/>
+          <View style={styles.padding}>
+            <Label style={styles.label}>Email</Label>
+            <Input  style={styles.inputText} />
+          </View>
+          <HorizontalLine lineStyle={styles.line} />
+          <View style={styles.padding}>
+            <Label style={styles.label}>Phone</Label>
+            <Input  style={styles.inputText} />
+          </View>
+          <HorizontalLine lineStyle={styles.line} />
+          <View style={styles.padding}>
+            <Label style={styles.label}>Bio</Label> 
+            <Textarea 
+              rowSpan={4} 
+              placeholder=""
+              onChangeText={() => null}
+              style={styles.inputText}
+              />
+          </View>
+          <HorizontalLine lineStyle={styles.line} />
+          <Button block primary style={styles.saveBtn}>
+            <Text style={styles.saveBtnText}>SAVE</Text>
+          </Button>
+        </Form>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
-    content: {
-        flex: 1,
-        paddingLeft: 25,
-        paddingRight: 25,
-    },
-    form:{
-      top:'7%',
-    },
-    formItem:{
-
-    },
-    row: {
-        flexDirection: 'row'
-    },
-    column:{
-      flexDirection:'column'
-    },
-    labelColor:{
-      color:'#97A1B3'
-    },
-    profileImage: {
-        width: 68,
-        height: 68,
-        borderRadius: 33,
-        marginTop: -25,
-    },
-    secondaryInfo: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      width: '80%'
-    },
-    count: {
-      fontSize: 14,
-      fontFamily: 'raleway-bold',
-      color: "#3F3F3F",
-    },
-    title: {
-      fontSize: 14,
-      fontFamily: 'raleway-regular',
-      color: "#3F3F3F",
-    },
-    center: {
-      alignItems: 'center',
-      marginTop:'3%'
-    }
-});
-
-const mapStateToProps = state => ({
-    userloading: state.user.userloading,
-    message: state.user.message,
+  padding: {
+    paddingLeft: 25,
+    paddingRight: 25,
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  saveBtn: {
+    height: 60,
+    backgroundColor: '#628AFF',
+    borderRadius: 4,
+    marginLeft: 40,
+    marginRight: 40,
+  },
+  saveBtnText: {
+    fontFamily: 'raleway-bold',
+    fontSize: 16,
+    color: '#FFFFFF'
+  },
+  icon: {
+    fontSize: 20, 
+    color: '#628AFF',
+    marginTop: 25,
+    marginLeft: -12,
+  },
+  profileImage: {
+    width: 68,
+    height: 68,
+    borderRadius: 34,
+    marginTop: -25,
+  },
+  userDetailsSection: {
+    marginLeft: 29,
+    marginTop: 10,
+  },
+  form: {
+    marginTop: 30
+  },
+  inputText: {
+    fontFamily: 'raleway-regular',
+    fontSize: 16,
+    color: '#000',
+  },
+  label: {
+    fontFamily: 'raleway-SemiBold',
+    fontSize: 12,
+    color: "#97A1B3",
+  },
+  line: {
+    marginTop: -5,
+    marginBottom: 20
+  },
+  bold: {
+    fontFamily: 'raleway-bold',
+  },
+  text: {
+    fontFamily: 'raleway-regular',
+    fontSize: 14,
+    color: '#000000',
+    lineHeight: 16,
+    marginLeft: 10,
+    marginRight: 5,
+  },
+  listing: {
+    marginTop: 10
+  }
 })
-
-const mapDispatchToProps = dispatch => ({
-    userEditProfile: (data,userId)=> dispatch(userEditProfile(data,userId))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditableUserProfile);
+export default EditableUserProfile;

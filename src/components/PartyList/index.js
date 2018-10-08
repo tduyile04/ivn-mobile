@@ -5,10 +5,10 @@ import { StyleSheet, Image, FlatList,Linking } from 'react-native';
 
 import Header from '../../shared-components/Header';
 
-import { getParties, getParty, unSelectParty,followUserByParty,unfollowUserByParty } from '../../actions/party';
+import { getParties, getParty, unSelectParty, followUserByParty, unfollowUserByParty } from '../../actions/party';
 import { Actions } from 'react-native-router-flux';
 import HorizontalLine from '../../shared-components/HorizontalLine';
-import { UnfollowButton, FollowButton,DownloadButton } from '../../shared-components/Buttons';
+import { UnfollowButton, FollowButton, DownloadButton } from '../../shared-components/Buttons';
 import {get} from "../../modules/cache";
 
 class PartyList extends React.Component {
@@ -26,34 +26,31 @@ class PartyList extends React.Component {
     return Actions.partyProfile(item.id);
   }
 
-  download=(item)=>{
-
-    if(!item){
-
-      return false;
-    }
-
-    Linking.openURL(item)
-
+  download = (item) => {
+    if(!item) return false;
+    Linking.openURL(item);
   }
 
   handleRefresh = () => null
   fetchMorePosts = () =>  null
 
-    followUser=async (id)=>{
-        this.setState({refreshing: true});
-        await this.props.followUserByParty(id)
-        this.setState({refreshing: false});
-        await alert('Follow...')
-        return Actions.partyList()
-    }
-    unfollowUser=async (id)=>{
-        this.setState({refreshing: true});
-        await this.props.unfollowUserByParty(id)
-        this.setState({refreshing: false});
-       await alert('UnFollow ...')
-        return Actions.partyList()
-    }
+  exist = (list, userId) => list.some(element => element.id === userId);
+
+  followUser=async (id)=>{
+      this.setState({refreshing: true});
+      await this.props.followUserByParty(id)
+      this.setState({refreshing: false});
+      await alert('Follow...')
+      return Actions.partyList()
+  }
+  
+  unfollowUser=async (id)=>{
+      this.setState({refreshing: true});
+      await this.props.unfollowUserByParty(id)
+      this.setState({refreshing: false});
+      await alert('UnFollow ...') 
+      return Actions.partyList()
+  }
 
   render () {
     return (
@@ -63,7 +60,6 @@ class PartyList extends React.Component {
           <FlatList
             data={this.props.parties}
             renderItem={({ item }) =>  {
-
               return (
               <Card transparent style={styles.partyCard}>
                 <View style={styles.card}>
@@ -72,19 +68,19 @@ class PartyList extends React.Component {
                       {item.name + " "}
                       {item.abbr && item.abbr.length ? `(${item.abbr})`: ""}
                     </Text>
-                      { item.motto && item.motto.length ? <Text style={styles.motto}>{`"${item.motto}"`}</Text> :<Text></Text>  }
+                      { item.motto && item.motto.length ? <Text style={styles.motto}>{`"${item.motto}"`}</Text> : null }
                     <Text style={styles.followed}>
                       <Text style={styles.bold}>Followed </Text>
-                      by {item.members.length} people
+                      by {item.followers.length} people
                     </Text>
-                      <UnfollowButton id={item.id} unfollowUser={(id)=>this.unfollowUser(item.id)} />
-                      <FollowButton id={item.id} followUser={(id)=>this.followUser(item.id)} />
+                    <View style={[styles.buttons, item.about && styles.evenSpacing]}>
+                      {/* <UnfollowButton id={item.id} unfollowUser={(id)=>this.unfollowUser(item.id)} /> */}
+                      {/* <FollowButton id={item.id} followUser={(id)=>this.followUser(item.id)} /> */}
+                      { this.exist(item.followers, item.userId) ? <UnfollowButton unfollowUser={(id)=>this.unfollowUser(item.id)} /> : <FollowButton followUser={(id)=>this.followUser(item.id)} /> }
                       {
-                          item.about?
-                              <DownloadButton link={item.about} downloadLink={(link)=>this.download(link)} />
-                              :
-                              <Text/>
+                        item.about && <DownloadButton link={item.about} downloadLink={(link)=>this.download(link)} />
                       }
+                    </View>
 
                   </View>
                 </View>
@@ -123,40 +119,13 @@ const styles = StyleSheet.create({
   items: {
     marginLeft: 17
   },
-  userIcon: {
-    fontSize: 14,
-    color: '#FFFFFF'
+  buttons: {
+    flex: 1,
+    width: '100%',
+    flexDirection: 'row',
   },
-  followText: {
-    fontFamily: 'raleway-bold',
-    fontSize: 13,
-    color: '#FFFFFF',
-    marginLeft: -5
-  },
-  followButton: {
-    height: 30,
-    width: 114,
-    backgroundColor: '#628AFF',
-    borderRadius: 3,
-    paddingLeft: 10,
-    paddingRight: 10,
-    alignItems: 'center',
-    marginTop: 13,
-  },
-  unfollowText: {
-    fontFamily: 'raleway-bold',
-    fontSize: 13,
-    color: '#4F5764',
-    textAlign: 'center'
-  },
-  unfollowButton: {
-    height: 30,
-    width: 114,
-    borderWidth: 1,
-    borderColor: '#E5E5E5',
-    justifyContent: 'center',
-    borderRadius: 3,
-    marginTop: 13,
+  evenSpacing: {
+    justifyContent: 'space-evenly',
   },
   title: {
     fontFamily: 'raleway-bold',

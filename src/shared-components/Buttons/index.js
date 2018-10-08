@@ -29,7 +29,7 @@ export const DownloadButton = ({buttonStyle, downloadLink, link}) =>
     <View>
         <Button iconLeft bordered small rounded style={[styles.followButton, buttonStyle]} onPress={() => downloadLink(link)}>
             <Icon type="Feather" name='download' style={styles.userIcon} />
-            <Text style={styles.followText}>Download</Text>
+            <Text style={styles.followText}>Manifesto</Text>
         </Button>
     </View>
    
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   unfollowButton: {
     height: 30,
-    width: 114,
+    width: 140,
     borderWidth: 1,
     borderColor: '#628AFF',
     justifyContent: 'center',
@@ -61,12 +61,12 @@ const styles = StyleSheet.create({
   },
   followButton: {
     height: 30,
-    width: 114,
+    width: 140,
     backgroundColor: '#628AFF',
     borderRadius: 3,
     paddingLeft: 10,
     paddingRight: 10,
-    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 13,
   },
   heartView:{
