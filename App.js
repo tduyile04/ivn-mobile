@@ -169,6 +169,7 @@ class App extends React.Component {
                       key='thoughts'
                       component={Thoughts}
                       hideNavBar
+                      hideTabBar
                     />
                   </Tabs>
                 </Drawer>

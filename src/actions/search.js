@@ -10,8 +10,6 @@ const GET_SEARCH_PARTY_PENDING = 'GET_SEARCH_PARTY_PENDING';
 const GET_SEARCH_PARTY_SUCCESS ='GET_SEARCH_PARTY_SUCCESS';
 const GET_SEARCH_PARTY_FAILURE = 'GET_SEARCH_PARTY_FAILURE';
 
-
-
 export const searchUserPending = createAction(GET_SEARCH_USER_PENDING)
 export const searchUserSuccess = createAction(GET_SEARCH_USER_SUCCESS)
 export const searchUserFailure = createAction(GET_SEARCH_USER_FAILURE)

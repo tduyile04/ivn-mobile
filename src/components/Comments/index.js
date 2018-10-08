@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Content, Spinner } from 'native-base';
-import { StyleSheet, FlatList, View } from 'react-native';
+import { StyleSheet, FlatList, View, KeyboardAvoidingView } from 'react-native';
 
 import ActivePost from './activePost';
 import Header from '../../shared-components/Header';
@@ -79,7 +79,9 @@ class Comments extends Component {
               keyExtractor={item => item.id || postId}
             />
           </Content>
-        <CommentTab postId={postId} />
+          <KeyboardAvoidingView behavior="padding" enabled>
+            <CommentTab postId={postId} comments />
+          </KeyboardAvoidingView>
       </Container>
     );
   }

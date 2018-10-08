@@ -3,16 +3,31 @@ import { connect } from 'react-redux';
 import { Footer, FooterTab, Text, Button, Icon, Item, Input, rounded, View, Content } from 'native-base';
 import { StyleSheet } from 'react-native';
 
-import { createComments } from '../../actions';
+import { createComments, createThoughtsComments } from '../../actions';
 
 class CommentTab extends Component {
   state = {
     comment: ''
   }
 
+  componentDidMount() {
+    this.isMounted = true;
+  }
+
+  componentWillUnmount() {
+    this.isMounted = false;
+  }
+
   handleComment = async () => {
-    await this.props.createComments(this.state.comment, this.props.postId)
-    this.setState({ comment: '' })
+    if (this.props.thoughts) {
+      await this.props.createThoughtsComments(this.state.comment, this.props.thoughtId)
+    }
+    if (this.props.comments) {
+      await this.props.createComments(this.state.comment, this.props.postId)
+    }
+    if (this.isMounted) {
+      this.setState(() => ({ comment: '' }))
+    }
   }
 
   render() {
@@ -77,7 +92,8 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createComments: (comment, postId) => dispatch(createComments(comment, postId))
+  createComments: (comment, postId) => dispatch(createComments(comment, postId)),
+  createThoughtsComments: (comment, thoughtId) => dispatch(createThoughtsComments(comment, thoughtId))
 })
 
 export default connect(null, mapDispatchToProps)(CommentTab);

@@ -8,6 +8,7 @@ import searchReducer from './search';
 import notificationReducer from './notification';
 import aspirantsReducer from './aspirants';
 import questionReducer from './questions'
+import thoughtReducer from './thoughts';
 
 export default combineReducers({
   auth: authReducer,
@@ -17,5 +18,6 @@ export default combineReducers({
   party: partyReducer,
   search: searchReducer,
   notification: notificationReducer,
-  question: questionReducer
+  question: questionReducer,
+  thought: thoughtReducer
 });

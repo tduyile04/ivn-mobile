@@ -51,9 +51,9 @@ export const getCandidateOfTheWeekSuccess = createAction(GET_CandidateOfTheWeek_
 export const getCandidateOfTheWeekFailure = createAction(GET_CandidateOfTheWeek_FAILURE)
 
 //* Should be removed from the posts page
-export const getCandidateThoughtsPending = createAction(GET_CandidateThoughts_PENDING)
-export const getCandidateThoughtsSuccess = createAction(GET_CandidateThoughts_SUCCESS)
-export const getCandidateThoughtsFailure = createAction(GET_CandidateThoughts_FAILURE)
+// export const getCandidateThoughtsPending = createAction(GET_CandidateThoughts_PENDING)
+// export const getCandidateThoughtsSuccess = createAction(GET_CandidateThoughts_SUCCESS)
+// export const getCandidateThoughtsFailure = createAction(GET_CandidateThoughts_FAILURE)
 
 export const getPostPending = createAction(GET_POST_PENDING);
 export const getPostSuccess = createAction(GET_POST_SUCCESS);
@@ -157,14 +157,14 @@ export const getCandidateOfTheWeek = userId => async dispatch => {
   }
 }
 
-export const getCandidateThoughts = userId => async dispatch => {
-  dispatch(getUserPostsPending())
-  try {
-    const token = await get("token");
-    const response = await axios(token).get(`/api/v1/thoughts/?types=week`);
-    return dispatch(getCandidateThoughtsSuccess(response.data.data.thoughts))
-  } catch ({ response: { data } }) {
-    const errorMessage = data && data.error ? data.error.message : 'Please try again';
-    return dispatch(getCandidateThoughtsFailure(errorMessage))
-  }
-}
+// export const getCandidateThoughts = userId => async dispatch => {
+//   dispatch(getUserPostsPending())
+//   try {
+//     const token = await get("token");
+//     const response = await axios(token).get(`/api/v1/thoughts/?types=week`);
+//     return dispatch(getCandidateThoughtsSuccess(response.data.data.thoughts))
+//   } catch ({ response: { data } }) {
+//     const errorMessage = data && data.error ? data.error.message : 'Please try again';
+//     return dispatch(getCandidateThoughtsFailure(errorMessage))
+//   }
+// }
