@@ -56,9 +56,6 @@ export {
   getUserPostsFailure,
   getCandidateOfTheWeekSuccess,
   getCandidateOfTheWeekFailure,
-  getCandidateThoughtsFailure,
-  getCandidateThoughtsSuccess,
-  getCandidateOfTheWeekPending,
   getUserPosts
 } from './posts';
 
@@ -125,3 +122,14 @@ export {
   getQuestionsFailure,
   getQuestions
 } from './questions'
+
+export {
+  getCandidateThoughtsFailure,
+  getCandidateThoughtsSuccess,
+  getCandidateOfTheWeekPending,
+  getCandidateThoughts,
+  createThoughtsCommentsPending,
+  createThoughtsCommentsSuccess,
+  createThoughtsCommentsFailure,
+  createThoughtsComments
+} from './thoughts'

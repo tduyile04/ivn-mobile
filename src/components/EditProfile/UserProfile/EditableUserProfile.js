@@ -14,125 +14,126 @@ class EditableUserProfile extends Component{
         this.state={
             firstName:'',
             lastName:'',
-            email:'',
+            // email:'',
             phone:'',
             bio:'',
         }
     }
 
-    componentDidMount(){
-        const { user } = this.props;
-        this.setState({
-            firstName:user.firstName,
-            lastName:user.lastName,
-            email:user.email,
-            bio:user.bio,
-        })
+    componentWillReceiveProps(){
+			const { user } = this.props;
+			this.setState({
+					firstName: user.firstName,
+					lastName: user.lastName,
+					// email:user.email,
+					bio: user.bio,
+			})
     }
 
-    componentWillReceiveProps(nextProps){
-        const { user } = nextProps;
-        this.setState({
-            firstName:user.firstName,
-            lastName:user.lastName,
-            email:user.email,
-            bio:user.bio,
-        })
+    componentDidUpdate(nextProps){
+			const { user } = nextProps;
+			this.setState({
+				firstName: user.firstName,
+				lastName: user.lastName,
+				// email:user.email,
+				bio: user.bio,
+			})
     }
 
     handleName=(value)=>{
-        this.setState({firstName:value})
+      this.setState({ firstName:value })
     }
 
-     onSave=async()=>{
-         const userId = await get('user_id');
-        let data = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            email: this.state.email,
-            bio: this.state.bio,
-            phoneNumber: this.state.phone
-        };
-       await this.props.userEditProfile(data,userId)
-         if(this.props.message){
-             alert(this.props.message)
-         }
-
+     onSave = async () => {
+			const userId = await get('user_id');
+			let data = {
+				firstName: this.state.firstName,
+				lastName: this.state.lastName,
+				// email: this.state.email,
+				bio: this.state.bio,
+				phoneNumber: this.state.phone
+			};
+			await this.props.userEditProfile(data,userId)
+			if(this.props.message) {
+				alert(this.props.message)
+			}
     }
 
     render(){
-
-        const { user } = this.props;
-
-        const avatar = user && user.avatar ? {uri: user.avatar} : defaultPicture;
-
-        return (
-            <View style={styles.content}>
-                <View style={styles.row}>
-                    <View style={styles.profileImageSection}>
-                        <Image
-                            style={styles.profileImage}
-                            source={avatar}
-                        />
-                    </View>
-                    <View style={styles.center}>
-                        <View style={styles.secondaryInfo}>
-                            <View style={styles.center}>
-                                <Text>
-                                    <Text style={styles.count}>{this.props.followers}</Text>
-                                    <Text style={styles.title}> Followers</Text>
-                                </Text>
-                            </View>
-                            <View style={styles.center}>
-                                <Text>
-                                    <Text style={styles.count}>{this.props.followings}</Text>
-                                    <Text style={styles.title}> Followings</Text>
-                                </Text>
-                            </View>
-                        </View>
-                    </View>
-                </View>
-                <Form style={styles.form}>
-                    <View style={styles.column}>
-                        <View style={styles.formItem}>
-                            <Item stackedLabel>
-                                <Label style={styles.labelColor}>Full Name</Label>
-                                <TextInput value={this.state.firstName} placeholder=""
-                                           editable = {true}
-                                       onChangeText={(text) =>this.handleName(text)
-                                }/>
-                            </Item>
-                        </View>
-                        <View style={styles.formItem}>
-                            <Item stackedLabel>
-                                <Label style={styles.labelColor}>Email</Label>
-                                <TextInput value={this.state.email} editable = {true} placeholder="" onChangeText={(text)=>this.setState({email:text})}/>
-                            </Item>
-                        </View>
-                        <View style={styles.formItem}>
-                            <Item stackedLabel>
-                                <Label style={styles.labelColor}>Phone</Label>
-                                <TextInput value={this.state.phone} placeholder="" onChangeText={(text) => this.setState({phone:text})}/>
-                            </Item>
-                        </View>
-                        <View style={styles.formItem}>
-                            <Item stackedLabel>
-                                <Label style={styles.labelColor}>Bio</Label>
-                                <Textarea
-                                    rowSpan={5}
-                                    value={this.state.bio}
-                                    placeholder=""
-                                    onChangeText={(text) => this.setState({bio:text})}
-                                    style={{width:"100%"}}/>
-                            </Item>
-                        </View>
-                    </View>
-                </Form>
-                <Button block info onPress={()=>{this.onSave()}}>
-                    <Text>Save</Text>
-                </Button>
-            </View>
-        );
+			const { user } = this.props;
+			const avatar = user && user.avatar ? {uri: user.avatar} : defaultPicture;
+			return (
+				<View style={styles.content}>
+					<View style={styles.row}>
+						<View style={styles.profileImageSection}>
+							<Image
+								style={styles.profileImage}
+								source={avatar}
+							/>
+						</View>
+						<View style={styles.center}>
+							<View style={styles.secondaryInfo}>
+								<View style={styles.center}>
+									<Text>
+										<Text style={styles.count}>{this.props.followers}</Text>
+										<Text style={styles.title}> Followers</Text>
+									</Text>
+								</View>
+								<View style={styles.center}>
+									<Text>
+										<Text style={styles.count}>{this.props.followings}</Text>
+										<Text style={styles.title}> Followings</Text>
+									</Text>
+								</View>
+							</View>
+						</View>
+					</View>
+					<Form style={styles.form}>
+						<View style={styles.column}>
+							<View style={styles.formItem}>
+								<Item stackedLabel>
+										<Label style={styles.labelColor}>Full Name</Label>
+										<TextInput 
+											value={this.state.firstName} 
+											placeholder=""
+											editable = {true}
+											onChangeText={(text) =>this.handleName(text)} />
+								</Item>
+							</View>
+							{/* <View style={styles.formItem}>
+								<Item stackedLabel>
+									<Label style={styles.labelColor}>Email</Label>
+									<TextInput 
+										value={this.state.email} 
+										editable = {true} 
+										placeholder="" 
+										onChangeText={(text)=>this.setState({email:text})} />
+								</Item>
+							</View> */}
+							<View style={styles.formItem}>
+								<Item stackedLabel>
+									<Label style={styles.labelColor}>Phone</Label>
+									<TextInput value={this.state.phone} placeholder="" onChangeText={(text) => this.setState({phone:text})}/>
+								</Item>
+							</View>
+							<View style={styles.formItem}>
+								<Item stackedLabel>
+									<Label style={styles.labelColor}>Bio</Label>
+									<Textarea
+										rowSpan={5}
+										value={this.state.bio}
+										placeholder=""
+										onChangeText={(text) => this.setState({ bio:text })}
+										style={{width:"100%"}}/>
+								</Item>
+							</View>
+						</View>
+					</Form>
+					<Button block info onPress={() => this.onSave()}>
+						<Text>Save</Text>
+					</Button>
+				</View>
+			);
     }
 }
 

@@ -20,8 +20,6 @@ import {
   getUserPostsFailure,
   getCandidateOfTheWeekFailure,
   getCandidateOfTheWeekSuccess,
-  getCandidateThoughtsSuccess,
-  getCandidateThoughtsFailure,
   getCandidateOfTheWeekPending
 } from '../actions';
 
@@ -187,8 +185,14 @@ export default handleActions({
       error: payload
     }
   },
-    [getCandidateOfTheWeekSuccess](state = defaultState, { payload }) {
-
+  [getCandidateOfTheWeekPending](state = defaultState, { payload }) {
+    return {
+      ...state,
+      userPostLoading: false,
+      error: ''
+    }
+  },
+  [getCandidateOfTheWeekSuccess](state = defaultState, { payload }) {
     return {
       ...state,
       candidateWeek: payload,
@@ -202,21 +206,5 @@ export default handleActions({
       userPostLoading: false,
       error: payload
     }
-  },
-    [getCandidateThoughtsSuccess](state = defaultState, { payload }) {
-
-    return {
-      ...state,
-      thoughts: payload,
-      userPostLoading: false,
-      error: ''
-    }
-  },
-  [getCandidateThoughtsFailure](state = defaultState, { payload }) {
-    return {
-      ...state,
-      userPostLoading: false,
-      error: payload
-    }
-  },
+  }
 }, defaultState);
