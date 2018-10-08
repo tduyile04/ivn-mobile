@@ -10,8 +10,6 @@ import { getUserDetails,
     unfollowUser,
 } from '../../actions/user';
 import EditableUserProfile from './UserProfile/EditableUserProfile';
-import FooterTabs from '../../shared-components/Footer';
-import Header from '../../shared-components/Header';
 import { get, remove } from '../../../src/modules/cache';
 
 class EditProfile extends Component {
@@ -37,9 +35,9 @@ class EditProfile extends Component {
         }
     }
 
-    exist = (list, userId) => list.some(element => element.id === userId);
+  exist = (list, userId) => list.some(element => element.id === userId);
 
-    hasRole = (roles, name) => roles.some(role => role.name === name);
+  hasRole = (roles, name) => roles.some(role => role.name === name);
 
   render() {
 
@@ -51,12 +49,11 @@ class EditProfile extends Component {
       const candidate  = this.hasRole(roles, 'candidate');
 
 
-      if(loading) return <Spinner color='black' style={styles.container} />;
+    if(loading) return <Spinner color='black' style={styles.container} />;
 
     return (
         <Container>
             <Content>
-               <Header back />
               <Image
                 style={styles.coverImageStyle}
                 source={require('../../../assets/images/backdrop.png')}

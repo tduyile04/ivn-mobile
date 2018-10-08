@@ -43,6 +43,7 @@ class App extends React.Component {
       'raleway-regular': require('./assets/fonts/Raleway-Regular.ttf'),
       'raleway-medium': require('./assets/fonts/Raleway-Regular.ttf'),
       'raleway-italic': require('./assets/fonts/Raleway-Italic.ttf'),
+      'raleway-SemiBold': require('./assets/fonts/Raleway-SemiBold.ttf'),
       'museosans-500': require('./assets/fonts/MuseoSans_500.ttf'),
       'SFProText-regular': require('./assets/fonts/SF-Pro-Text-Regular.ttf'),
       'SFProText-SemiBold': require('./assets/fonts/SFProText-SemiBold.ttf'),
@@ -122,7 +123,6 @@ class App extends React.Component {
                       key='editProfile'
                       component={EditProfile}
                       hideNavBar
-                      hideTabBar
                     />
                     <Scene
                       key='comments'
