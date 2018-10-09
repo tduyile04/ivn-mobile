@@ -12,12 +12,12 @@ import { UnfollowButton, FollowButton, DownloadButton } from '../../shared-compo
 import {get} from "../../modules/cache";
 
 class PartyList extends React.Component {
-  state = { refreshing:  false,userId:null }
+  state = { refreshing:  false, userId:null }
 
-    async componentDidMount () {
-      const userId = await get('user_id'); // Logged-in user ID
-      this.setState({userId:userId})
-       this.props.getParties();
+  async componentDidMount () {
+    const userId = await get('user_id'); // Logged-in user ID
+    this.setState({userId:userId})
+    this.props.getParties();
   }
 
   handleSelectParty = (item) => {
@@ -25,7 +25,6 @@ class PartyList extends React.Component {
     this.props.getParty(item.id);
     return Actions.partyProfile(item.id);
   }
-
   download = (item) => {
     if(!item) return false;
     Linking.openURL(item);
@@ -36,20 +35,20 @@ class PartyList extends React.Component {
 
   exist = (list, userId) => list.some(element => element.id === userId);
 
-  followUser=async (id)=>{
-      this.setState({refreshing: true});
-      await this.props.followUserByParty(id)
-      this.setState({refreshing: false});
-      await alert('Follow...')
-      return Actions.partyList()
+  followUser = async (id) => {
+    this.setState({refreshing: true});
+    await this.props.followUserByParty(id)
+    this.setState({refreshing: false});
+    await alert('Follow...')
+    return Actions.partyList()
   }
   
-  unfollowUser=async (id)=>{
-      this.setState({refreshing: true});
-      await this.props.unfollowUserByParty(id)
-      this.setState({refreshing: false});
-      await alert('UnFollow ...') 
-      return Actions.partyList()
+  unfollowUser = async (id) => {
+    this.setState({refreshing: true});
+    await this.props.unfollowUserByParty(id)
+    this.setState({refreshing: false});
+    await alert('UnFollow ...') 
+    return Actions.partyList()
   }
 
   render () {
@@ -78,7 +77,7 @@ class PartyList extends React.Component {
                       {/* <FollowButton id={item.id} followUser={(id)=>this.followUser(item.id)} /> */}
                       { this.exist(item.followers, item.userId) ? <UnfollowButton unfollowUser={(id)=>this.unfollowUser(item.id)} /> : <FollowButton followUser={(id)=>this.followUser(item.id)} /> }
                       {
-                        item.about && <DownloadButton link={item.about} downloadLink={(link)=>this.download(link)} />
+                        item.about ? <DownloadButton link={item.about} downloadLink={(link) => this.download(link)} /> : null
                       }
                     </View>
 

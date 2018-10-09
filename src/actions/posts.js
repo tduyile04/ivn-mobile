@@ -31,12 +31,6 @@ const GET_CandidateOfTheWeek_PENDING = 'GET_CandidateOfTheWeek_PENDING'
 const GET_CandidateOfTheWeek_SUCCESS = 'GET_CandidateOfTheWeek_SUCCESS'
 const GET_CandidateOfTheWeek_FAILURE = 'GET_CandidateOfTheWeek_FAILURE'
 
-//* Should be removed from the posts page
-const GET_CandidateThoughts_PENDING = 'GET_CandidateThoughts_PENDING'
-const GET_CandidateThoughts_SUCCESS = 'GET_CandidateThoughts_SUCCESS'
-const GET_CandidateThoughts_FAILURE = 'GET_CandidateThoughts_FAILURE'
-
-
 export const getPostsPending = createAction(GET_POSTS_PENDING);
 export const getPostsSuccess = createAction(GET_POSTS_SUCCESS);
 export const getPostsFailure = createAction(GET_POSTS_FAILURE);
@@ -49,11 +43,6 @@ export const getUserPostsFailure = createAction(GET_USER_POSTS_FAILURE)
 export const getCandidateOfTheWeekPending = createAction(GET_CandidateOfTheWeek_PENDING)
 export const getCandidateOfTheWeekSuccess = createAction(GET_CandidateOfTheWeek_SUCCESS)
 export const getCandidateOfTheWeekFailure = createAction(GET_CandidateOfTheWeek_FAILURE)
-
-//* Should be removed from the posts page
-// export const getCandidateThoughtsPending = createAction(GET_CandidateThoughts_PENDING)
-// export const getCandidateThoughtsSuccess = createAction(GET_CandidateThoughts_SUCCESS)
-// export const getCandidateThoughtsFailure = createAction(GET_CandidateThoughts_FAILURE)
 
 export const getPostPending = createAction(GET_POST_PENDING);
 export const getPostSuccess = createAction(GET_POST_SUCCESS);
@@ -156,15 +145,3 @@ export const getCandidateOfTheWeek = userId => async dispatch => {
     return dispatch(getCandidateOfTheWeekFailure(errorMessage))
   }
 }
-
-// export const getCandidateThoughts = userId => async dispatch => {
-//   dispatch(getUserPostsPending())
-//   try {
-//     const token = await get("token");
-//     const response = await axios(token).get(`/api/v1/thoughts/?types=week`);
-//     return dispatch(getCandidateThoughtsSuccess(response.data.data.thoughts))
-//   } catch ({ response: { data } }) {
-//     const errorMessage = data && data.error ? data.error.message : 'Please try again';
-//     return dispatch(getCandidateThoughtsFailure(errorMessage))
-//   }
-// }

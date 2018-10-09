@@ -13,11 +13,11 @@ const Members = (props) => {
     <Container>
       {props.party.members.map(member => {
         return (
-          <View>
+          <View key={member.id}>
             <View style={styles.card}>
               <Image
                 style={styles.profileImage}
-                source={{ uri: setAvatar(member.avatar) }}
+                source={setAvatar(member.avatar)}
               />
               <View style={styles.items}>
                 <Text style={styles.title}>{member.firstName} {member.lastName}</Text>

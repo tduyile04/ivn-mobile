@@ -55,23 +55,11 @@ class SideBar extends Component {
 
     const user = this.state.user && JSON.parse(this.state.user);
     const { loading } = this.state;
-    const { roles = [] } = this.state.user
-    let candidate  = this.hasRole(roles, 'candidate');
+    const { roles = [] } = user
+    const candidate  = this.hasRole(roles, 'candidate');
     const { followings=[], followers=[], endorsements=[] } = user;
     if(loading) return <Spinner color='black' style={styles.container} />;
-
-          if (user.roles.length>0) {
-              if (user.roles instanceof Array) {
-                  user.roles.map((obj,i)=>{
-                    if(obj.name=='candidate'){
-                      candidate = true;
-                    }
-                  })
-              }
-          }
-
-
-
+    
     return (
       <Container style={styles.container}>
         <View style={styles.content}>
@@ -102,7 +90,7 @@ class SideBar extends Component {
             <View style={[styles.rowCenter]}>
               <Button transparent onPress={() => Actions.aspirants()}>
                 <Icon name="user" type='SimpleLineIcons' style={styles.icon} />
-                <Text style={styles.text}>Aspirants</Text>
+                <Text style={styles.text}>Candidates</Text>
               </Button>
             </View>
             <View style={[styles.rowCenter]}>
