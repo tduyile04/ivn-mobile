@@ -90,7 +90,7 @@ const Post = ({
             <View style={styles.postInfo}>
               <Button transparent onPress={() => triggerLike(postId)}>
                 <Animated.View style={heartButtonStyle}>
-                    <Heart filled={liked} />
+                  <Heart filled={liked} />
                 </Animated.View>
               </Button>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
@@ -106,7 +106,7 @@ const Post = ({
                       {(index > state.commentViewLimit - 3 && index < state.commentViewLimit) && <Comment item={item} />}
                       {(index < state.commentViewLimit - 1 && commentList.length - 1 > state.commentViewLimit - 1) && <HorizontalLine />}
                       {(index >= 2 && index === commentList.length - 1) && 
-                        <Text style={[styles.blueText]} onPress={() => Actions.comments({
+                        <Text style={[styles.blueText, { paddingLeft: '10%' }]} onPress={() => Actions.comments({
                           userAvatar,
                           userFullName,
                           userParty,

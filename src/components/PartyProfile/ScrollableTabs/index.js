@@ -14,7 +14,7 @@ const ScrollableTabs = (props) => {
         <Tab heading="About" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle} >
           <About {...props} />
         </Tab>
-        <Tab heading="Maifesto" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle} >
+        <Tab heading="Manifesto" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle} >
           <Manifesto {...props} />
         </Tab>
         <Tab heading="Members" activeTextStyle={styles.activeTextStyle} tabStyle={styles.white} activeTabStyle={styles.white} textStyle={styles.textStyle} >

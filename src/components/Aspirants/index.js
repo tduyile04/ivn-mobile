@@ -113,7 +113,7 @@ class Aspirants extends Component {
   render() {
     return (
       <Container>
-      <Header title='Aspirants' back />
+      <Header title='Candidates' back />
       <Content>
         <View 
           style={styles.container} 
@@ -176,7 +176,7 @@ class Aspirants extends Component {
                     <View>
                       <Text style={styles.aspirantBasicStyle} onPress={() => Actions.userProfile({ id: aspirant.id })}>{aspirant.firstName} {aspirant.lastName}</Text>
                       <Text style={styles.aspirantNormalStyle}>member of</Text>
-                      <Text style={styles.aspirantPartyName}>People Democratic Party</Text>
+                      <Text style={styles.aspirantPartyName}>{aspirant.party_name || '...'}</Text>
                     </View>
                   </View>
                 )

@@ -51,7 +51,7 @@ const selectRightEndpoint = (countryInitial, state, localgovernment, roles, page
   return url
 }
 
-export const getAspirants = (country = "Nigeria", state="", localgovernment="", roles="candidate,politician", page = 1, limit = 20) => async (dispatch) => {
+export const getAspirants = (country = "Nigeria", state="", localgovernment="", roles="candidate,politician", page = 1, limit = 10000000) => async (dispatch) => {
   const url = selectRightEndpoint(country, state, localgovernment, roles, page, limit);
   dispatch(getAspirantsPending())
   try {

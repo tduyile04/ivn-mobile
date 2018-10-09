@@ -33,7 +33,6 @@ class Thoughts extends Component {
 
 		render() {
 			const { comments, commentsLoading, thoughts, loading } = this.props;
-			console.log("the loading -> ", thoughts)
 			return (
 				<Container>
 					<Header title='Daily Thoughts' back />
