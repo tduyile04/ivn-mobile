@@ -77,7 +77,6 @@ class Feed extends Component {
             postId={post.id}
             postTimePosted={post.created_at}
             postContent={post.content}
-            postTags={['Change2019', 'RealChange']}
             postComments={post.comments && post.comments.length}
             postLikes={post.likes && post.likes.length}
             setActive={this.props.setActive}

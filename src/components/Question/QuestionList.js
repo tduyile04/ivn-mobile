@@ -55,7 +55,6 @@ class QuestionList extends Component {
         { scale: bouncyHeart }
       ]
     }
-    const postTags= ['Change2019', 'RealChange']
 
     const { loading, questions } = this.props;
     if (loading) {
@@ -84,15 +83,6 @@ class QuestionList extends Component {
                       { question.imageSrc && <Image style={styles.image} source={{ uri: question.imageSrc }} /> }
                       <Text style={styles.description}>{question.question}</Text>
                       <View style={styles.row}>
-                        <View style={styles.tagSection}>                                
-                          { postTags.length > 0 && postTags.map(tag => {
-                            return (
-                              <Button bordered small rounded style={styles.tagBtn} key={tag}>
-                                <Text style={styles.tagText}>{tag}</Text>
-                              </Button>
-                            )
-                          })}
-                        </View>
                         <Button transparent onPress={() => triggerLike(postId)}>
                           <Animated.View style={heartButtonStyle}>
                             <Heart filled={liked} />
