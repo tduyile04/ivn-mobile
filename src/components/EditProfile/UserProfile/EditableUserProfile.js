@@ -21,13 +21,13 @@ class EditableUserProfile extends Component{
               />
                <Icon name='circle-with-plus' type='Entypo' style={styles.icon}/>
           </View>
-          <View style={[styles.row, styles.listing]}>
-            <Text style={styles.text}>
-              <Text style={styles.bold}>21,098</Text> Followers
-            </Text>
-            <Text style={styles.text}>
-              <Text style={styles.bold}>15,210</Text> Following
-            </Text>
+          <View>
+            <View>
+            <Text style={[styles.bold, styles.name]}>Tom Smith</Text>
+            </View>
+            <View style={[styles.row, styles.listing]}>
+            <Text style={styles.email}>tom.smith@google.com</Text>
+            </View>
           </View>
         </View>
         <Form style={styles.form}>
@@ -129,8 +129,18 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 5,
   },
-  listing: {
+  name: {
+    marginLeft: 29,
+    color: "#3F3F3F",
+    fontSize: 25,
     marginTop: 10
+  },
+  email: {
+    fontSize: 13,
+    color: "#3F3F3F",
+    fontFamily: "raleway-regular",
+    marginBottom: 10,
+    marginLeft: 34,
   }
 })
 export default EditableUserProfile;

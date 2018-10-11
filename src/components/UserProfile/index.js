@@ -59,6 +59,9 @@ class UserProfile extends Component {
             source={require('../../../assets/images/backdrop.png')}
             resizeMode='cover'
           />
+          <Button transparent onPress={() => Actions.pop()} style={styles.backBtn}>
+            <Icon name='chevron-left' type='MaterialCommunityIcons' style={styles.backIcon}/>
+          </Button> 
           <UserDetails 
             user={user} 
             candidate={candidate}
@@ -124,4 +127,13 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginLeft: -20
   },
+  backBtn: {
+    position: 'absolute',
+    top: 5, 
+    left: 10
+  },
+  backIcon: {
+    color: '#fff', 
+    marginLeft: 10
+  }
 });

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Spinner, Content, Container } from 'native-base';
+import { Spinner, Content, Container, Button, Icon } from 'native-base';
 import { StyleSheet, Image } from 'react-native';
 import { connect } from 'react-redux';
 
+import { Actions } from 'react-native-router-flux';
 import { getUserDetails } from '../../actions/user';
 import Listings from '../../shared-components/Listings';
 import CoverImage from '../../shared-components/CoverImage';
@@ -38,6 +39,9 @@ class MyProfile extends Component {
             source={require('../../../assets/images/backdrop.png')}
             resizeMode='cover'
           />
+          <Button transparent onPress={() => Actions.pop()} style={styles.backBtn}>
+            <Icon name='chevron-left' type='MaterialCommunityIcons' style={styles.backIcon}/>
+          </Button> 
           <UserDetails user={user} editProfileButton />
           {
             candidate ?
@@ -71,4 +75,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 76, 
   },
+  backBtn: {
+    position: 'absolute',
+    top: 5, 
+    left: 10
+  },
+  backIcon: {
+    color: '#fff', 
+    marginLeft: 10
+  }
 });

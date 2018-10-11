@@ -19,6 +19,9 @@ class PartyProfile extends React.Component {
             sourceUri='http://www.signalng.com/wp-content/uploads/president-buhari-meets-president-francoise-hollande-at-elysee-1.jpg'
             coverImageStyle={styles.coverImageStyle}
             />
+          <Button transparent onPress={() => Actions.pop()} style={styles.backBtn}>
+            <Icon name='chevron-left' type='MaterialCommunityIcons' style={styles.backIcon}/>
+          </Button> 
           { this.props.selected
             ? (
               <View style={styles.partyDetailsContainer}>
@@ -93,6 +96,15 @@ const styles = StyleSheet.create({
   followActionView: {
     marginTop: 32
   },
+  backBtn: {
+    position: 'absolute',
+    top: 5, 
+    left: 10
+  },
+  backIcon: {
+    color: '#fff', 
+    marginLeft: 10
+  }
 });
 
 

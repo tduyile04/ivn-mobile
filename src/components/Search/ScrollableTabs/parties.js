@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Text, View } from 'native-base';
 import { StyleSheet, Image } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import HorizontalLine from '../../../shared-components/HorizontalLine';
 import { UnfollowButton, FollowButton } from '../../../shared-components/Buttons';
 
@@ -18,7 +19,7 @@ const Parties = (props) => {
               /> */}
               <View style={styles.items}>
                 {party.abbr && party.abbr.length > 0 && <Text style={styles.handle}>@{party.abbr}</Text>}
-                <Text style={styles.title}>{party.name}</Text>
+                <Text style={styles.title} onPress={() => Actions.partyProfile({id: party.id})}>{party.name}</Text>
                 <FollowButton followUser={()=>alert('coming soon')} />
               </View>
             </View>
