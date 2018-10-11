@@ -45,17 +45,6 @@ class ScrollableTabs extends Component {
                             <Text style={styles.blueText}>{moment(post.created_at).fromNow()}</Text>
                           </View>
                           <Text style={styles.description}>{post.content}</Text>
-                          <View style={styles.row}>
-                            <View style={styles.tagSection}>
-                              <Button bordered small rounded style={styles.tagBtn}>
-                                <Text style={styles.tagText}>Change2019</Text>
-                              </Button>
-                              <Button bordered small rounded style={styles.tagBtn}>
-                                <Text style={styles.tagText}>RealChange</Text>
-                              </Button>
-                            </View>
-                            {/* <LikeButton /> */}
-                          </View>
                           <View style={styles.postInfo}>
                             <Icon name='dot-single' type='Entypo' style={styles.dots} />
                             <Text style={styles.blueText}>{post.likes.length} Likes</Text>

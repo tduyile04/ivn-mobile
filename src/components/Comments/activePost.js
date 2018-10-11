@@ -36,14 +36,6 @@ class ActivePost extends Component {
               <Text style={styles.blueText}>{moment(postTimePosted).fromNow()}</Text>
             </View>
             <Text style={styles.description}>{postContent}</Text>
-            <View style={styles.row}>
-              <View style={styles.tagSection}>
-                <Button bordered small rounded style={styles.tagBtn}>
-                  <Text style={styles.tagText}>Change2019</Text>
-                </Button>
-              </View>
-              {/* <LikeButton /> */}
-            </View>
             <View style={styles.postInfo}>
               <Icon name='dot-single' type='Entypo' style={styles.dots} />
               <Text style={styles.blueText}>{postLikes} Likes</Text>

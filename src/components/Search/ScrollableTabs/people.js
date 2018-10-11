@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Text, View, Button, Icon } from 'native-base';
 import { StyleSheet, Image } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import HorizontalLine from '../../../shared-components/HorizontalLine';
 import { UnfollowButton, FollowButton } from '../../../shared-components/Buttons';
 import defaultPicture from '../../../../assets/images/placeholder.png';
@@ -19,7 +20,7 @@ const People = (props) => {
                 source={setAvatar(user.avatar)}
               />
               <View style={styles.items}>
-                <Text style={styles.fullname}>{user.firstName} {user.lastName}</Text>
+                <Text style={[styles.fullname, styles.bold]} onPress={() => Actions.userProfile({id: user.id})}>{user.firstName} {user.lastName}</Text>
                 <Text style={styles.handle}>@{user.firstName}_{user.lastName}</Text>
                 <FollowButton />
               </View>
@@ -51,6 +52,9 @@ const styles = StyleSheet.create({
     fontFamily: 'raleway-bold',
     fontSize: 16,
     color: '#3F3F3F'
+  },
+  bold: {
+    fontFamily: 'raleway-bold',
   },
   handle: {
     fontFamily: 'raleway-regular',

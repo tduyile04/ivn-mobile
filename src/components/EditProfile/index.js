@@ -14,65 +14,37 @@ import { get, remove } from '../../../src/modules/cache';
 
 class EditProfile extends Component {
 
-    state = {
-        loading: true,
-        userId: '',
-    }
+  state = {
+      loading: true,
+      userId: '',
+  }
 
-    async componentDidMount() {
-        const id = this.props.id; // Id of user which page you are viewing
-        const userId = await get('user_id'); // Logged-in user ID
-        // if(id === userId) Actions.myProfile();
-        await this.props.getUserDetails(userId);
-        this.setState({loading: false, userId});
-    }
-
-    async componentDidUpdate(prevProps) {
-        // if(this.props.id === this.state.userId) Actions.myProfile();
-        if (this.props.id !== prevProps.id || this.props.user.message !== prevProps.user.message) {
-            const userId = await get('user_id'); // Logged-in user ID
-            await this.props.getUserDetails(userId);
-        }
-    }
-
-  exist = (list, userId) => list.some(element => element.id === userId);
-
-  hasRole = (roles, name) => roles.some(role => role.name === name);
+  async componentDidMount() {
+    const user = await get("user");
+    this.setState({user, loading: false});
+  }
 
   render() {
-
-      const {endorseUser, followUser, withdrawEndorsement, unfollowUser, user: { user } } = this.props;
-      const { loading, userId } = this.state;
-      const { followings=[], followers=[], endorsements=[], roles=[] } = user;
-      const endorsed = this.exist(endorsements, userId);
-      const following = this.exist(followers, userId);
-      const candidate  = this.hasRole(roles, 'candidate');
-
+    const { loading, user } = this.state;
 
     if(loading) return <Spinner color='black' style={styles.container} />;
 
     return (
-        <Container>
-            <Content>
-              <Image
-                style={styles.coverImageStyle}
-                source={require('../../../assets/images/backdrop.png')}
-                resizeMode='cover'
-              />
-              <EditableUserProfile
-                user={user}
-                candidate={candidate}
-                id={user.id}
-                endorseUser={endorseUser}
-                withdrawEndorsement={withdrawEndorsement}
-                followUser={followUser}
-                unfollowUser={unfollowUser}
-                endorsed={endorsed}
-                followers={followers.length}
-                following={followings.length}
-              />
-            </Content>
-        </Container>
+      <Container>
+          <Content>
+            <Image
+              style={styles.coverImageStyle}
+              source={require('../../../assets/images/backdrop.png')}
+              resizeMode='cover'
+            />
+            <Button transparent onPress={() => Actions.myProfile()} style={styles.backBtn}>
+                <Icon name='chevron-left' type='MaterialCommunityIcons' style={styles.backIcon}/>
+            </Button> 
+            <EditableUserProfile
+              user={user}
+            />
+          </Content>
+      </Container>
     );
   }
 }
@@ -99,6 +71,15 @@ const styles = StyleSheet.create({
         fontSize: 13,
         marginLeft: -20
     },
+    backBtn: {
+      position: 'absolute',
+      top: 5, 
+      left: 10
+    },
+    backIcon: {
+      color: '#fff', 
+      marginLeft: 10
+  }
 });
 
 const mapStateToProps = ({user}) => ({
